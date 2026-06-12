@@ -1,0 +1,312 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import type { ReactNode } from "react";
+import {
+  ConfigureIcon,
+  QuoteIcon,
+  ApproveIcon,
+  DeliveryIcon,
+  BoltIcon,
+  CalendarIcon,
+  StackIcon,
+  SplitIcon,
+  ReceiptIcon,
+  HourglassIcon,
+} from "@/components/icons";
+
+export const metadata: Metadata = {
+  title: "Cómo funciona",
+  description:
+    "Del catálogo a la entrega en 4 pasos: configurar, cotizar, aprobar mockup y producir. Lead times, condiciones comerciales y formas de pago del proceso B2B de BØLG Corporativo.",
+};
+
+/**
+ * /como-funciona — documenta el flujo real del producto en 4 pasos.
+ *
+ * No inventa nada: cada paso refleja lo que el cliente realmente hace en el
+ * sitio (configurar en PDP → enviar carrito → aprobar mockup vía email →
+ * producción + despacho). Condiciones comerciales tomadas de FaqB2B + PDF
+ * de cotización para mantener un solo source of truth.
+ */
+export default function ComoFuncionaPage() {
+  return (
+    <>
+      {/* Header editorial */}
+      <section className="border-b border-rpc-border bg-rpc-bg">
+        <div className="mx-auto max-w-7xl px-6 py-16 lg:px-10 lg:py-28">
+          <p className="text-[10px] uppercase tracking-[0.25em] text-rpc-text/60 sm:text-xs">
+            Cómo funciona
+          </p>
+          <h1 className="mt-4 max-w-4xl text-3xl font-light leading-[1.05] sm:mt-6 sm:text-5xl lg:text-6xl">
+            Del catálogo a la entrega en 4 pasos.
+          </h1>
+          <p className="mt-6 max-w-2xl font-rpc-body text-base normal-case tracking-normal text-rpc-text/75 sm:mt-8 sm:text-lg">
+            Pensado para que tu equipo de marketing o RRHH pueda dejar
+            avanzada una cotización en minutos, con stock real y precios
+            transparentes, sin tener que escribir 5 correos para entender
+            tiempos y condiciones.
+          </p>
+        </div>
+      </section>
+
+      {/* 4 pasos */}
+      <section className="border-b border-rpc-border bg-rpc-bg">
+        <div className="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
+          <Step
+            number="01"
+            title="Configurar"
+            icon={<ConfigureIcon className="h-7 w-7 text-rpc-text" />}
+            body="Explora los 49 productos del catálogo. En cada ficha eliges técnica de impresión (serigrafía, bordado, DTF, grabado láser), cantidad y zona de aplicación del logo. Subes tu archivo y ves un preview real con tu logo aplicado antes de cotizar. El precio por volumen baja a medida que subes la cantidad."
+            highlights={[
+              "Mínimo 10 unidades por producto",
+              "Stock real desde nuestra bodega en tiempo real",
+              "Preview con tu logo antes de cotizar",
+            ]}
+          />
+          <Step
+            number="02"
+            title="Cotizar"
+            icon={<QuoteIcon className="h-7 w-7 text-rpc-text" />}
+            body="Agregas líneas a tu cotización (puedes mezclar productos: por ejemplo 50 mochilas + 100 botellas). Cuando estés listo, completas los datos de tu empresa y enviamos un PDF formal con el detalle a tu correo, listo para que tu equipo de finanzas lo revise."
+            highlights={[
+              "PDF formal por email al instante",
+              "Multi-producto en una sola cotización",
+              "Validez 15 días desde la emisión",
+            ]}
+          />
+          <Step
+            number="03"
+            title="Aprobar mockup"
+            icon={<ApproveIcon className="h-7 w-7 text-rpc-text" />}
+            body="Nuestro equipo te responde el mismo día hábil. Confirmamos stock real por talla y color, lead time exacto según tu fecha objetivo, y te enviamos un mockup digital de cómo se ve el logo aplicado sobre el producto final. Apruebas antes de producir — sin sorpresas."
+            highlights={[
+              "Respuesta el mismo día hábil",
+              "Mockup digital de aprobación",
+              "Sin costo hasta que confirmas",
+            ]}
+          />
+          <Step
+            number="04"
+            title="Producir y despachar"
+            icon={<DeliveryIcon className="h-7 w-7 text-rpc-text" />}
+            body="Apruebas, emitimos factura electrónica a nombre de tu empresa y entramos a producción. La forma de pago habitual es 50% al confirmar la orden y 50% antes del despacho. Despachamos a todo Chile vía partner logístico, con tracking compartido."
+            highlights={[
+              "Factura electrónica con razón social + RUT",
+              "50% al confirmar · 50% antes del despacho",
+              "Despacho a todo Chile",
+            ]}
+            last
+          />
+        </div>
+      </section>
+
+      {/* Lead time según stock */}
+      <section className="border-b border-rpc-border bg-rpc-image-bg-light">
+        <div className="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-24">
+          <p className="text-xs uppercase tracking-[0.25em] text-rpc-text/60">
+            Lead time
+          </p>
+          <h2 className="mt-4 max-w-3xl text-2xl font-light leading-[1.1] sm:text-3xl lg:text-4xl">
+            Dos escenarios según disponibilidad.
+          </h2>
+          <p className="mt-4 max-w-2xl font-rpc-body text-sm normal-case tracking-normal text-rpc-text/70 sm:text-base">
+            La ficha de cada producto calcula automáticamente el timeline real
+            para tu cantidad y fecha objetivo. Aquí está el resumen.
+          </p>
+
+          <div className="mt-12 grid gap-6 lg:grid-cols-2 lg:gap-8">
+            <article className="border border-rpc-border bg-rpc-bg p-8 lg:p-10">
+              <div className="flex h-12 w-12 items-center justify-center rounded-full border border-rpc-text/30 text-rpc-text">
+                <BoltIcon className="h-6 w-6" />
+              </div>
+              <p className="mt-5 text-[10px] uppercase tracking-[0.22em] text-rpc-text/50">
+                Escenario A
+              </p>
+              <h3 className="mt-3 font-rpc-heading text-xl uppercase tracking-[0.08em] text-rpc-text sm:text-2xl">
+                Con stock inmediato
+              </h3>
+              <p className="mt-2 font-rpc-heading text-4xl font-light text-rpc-text sm:text-5xl">
+                7 — 15 días hábiles
+              </p>
+              <p className="mt-4 font-rpc-body text-sm normal-case tracking-normal text-rpc-text/70 sm:text-base">
+                Cuando el producto está disponible en nuestra bodega, sólo
+                pasa por personalización. El tiempo exacto depende de la
+                técnica de impresión (DTF y láser son los más rápidos,
+                bordado y serigrafía full color toman un poco más).
+              </p>
+            </article>
+
+            <article className="border border-rpc-border bg-rpc-bg p-8 lg:p-10">
+              <div className="flex h-12 w-12 items-center justify-center rounded-full border border-rpc-text/30 text-rpc-text">
+                <CalendarIcon className="h-6 w-6" />
+              </div>
+              <p className="mt-5 text-[10px] uppercase tracking-[0.22em] text-rpc-text/50">
+                Escenario B
+              </p>
+              <h3 className="mt-3 font-rpc-heading text-xl uppercase tracking-[0.08em] text-rpc-text sm:text-2xl">
+                Producción desde origen
+              </h3>
+              <p className="mt-2 font-rpc-heading text-4xl font-light text-rpc-text sm:text-5xl">
+                ~150 días desde OC
+              </p>
+              <p className="mt-4 font-rpc-body text-sm normal-case tracking-normal text-rpc-text/70 sm:text-base">
+                Si necesitas más unidades de las que tenemos en bodega,
+                hacemos reposición desde origen. Ideal para volúmenes
+                grandes (300+ unidades) con tiempo de planificación —
+                por ejemplo regalos de fin de año cotizados en julio.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      {/* Condiciones comerciales — grid 4 cards */}
+      <section className="border-b border-rpc-border bg-rpc-bg">
+        <div className="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-24">
+          <p className="text-xs uppercase tracking-[0.25em] text-rpc-text/60">
+            Condiciones comerciales
+          </p>
+          <h2 className="mt-4 max-w-3xl text-2xl font-light leading-[1.1] sm:text-3xl lg:text-4xl">
+            Las reglas del juego, sin letra chica.
+          </h2>
+
+          <dl className="mt-12 grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
+            <TermCard
+              icon={<StackIcon className="h-6 w-6" />}
+              label="Cantidad mínima"
+              value="10 unidades"
+              detail="Por producto. Puedes combinar varios productos distintos en una sola cotización."
+            />
+            <TermCard
+              icon={<SplitIcon className="h-6 w-6" />}
+              label="Formas de pago"
+              value="50 / 50"
+              detail="50% al confirmar la orden, 50% antes del despacho. Vía transferencia electrónica."
+            />
+            <TermCard
+              icon={<ReceiptIcon className="h-6 w-6" />}
+              label="Facturación"
+              value="Electrónica"
+              detail="A nombre de tu empresa. Necesitamos razón social, RUT y giro."
+            />
+            <TermCard
+              icon={<HourglassIcon className="h-6 w-6" />}
+              label="Validez cotización"
+              value="15 días"
+              detail="Desde la emisión del PDF. Después de eso revisamos precios según disponibilidad."
+            />
+          </dl>
+        </div>
+      </section>
+
+      {/* CTA final */}
+      <section className="bg-rpc-announcement text-rpc-button-text">
+        <div className="mx-auto flex max-w-7xl flex-col items-start gap-6 px-6 py-20 lg:flex-row lg:items-center lg:justify-between lg:px-10 lg:py-24">
+          <h2 className="max-w-2xl text-2xl font-light leading-[1.1] sm:text-3xl lg:text-4xl">
+            Listo para configurar tu primera cotización.
+          </h2>
+          <div className="flex flex-col gap-3 sm:flex-row">
+            <Link
+              href="/catalogo"
+              className="inline-flex items-center justify-center gap-2 rounded-rpc-button bg-rpc-bg px-8 py-4 text-xs uppercase tracking-[0.2em] text-rpc-text transition hover:opacity-90"
+            >
+              Ver catálogo
+              <span aria-hidden>→</span>
+            </Link>
+            <Link
+              href="/contacto"
+              className="inline-flex items-center justify-center rounded-rpc-button border border-rpc-button-text px-8 py-4 text-xs uppercase tracking-[0.2em] text-rpc-button-text transition hover:bg-rpc-button-text hover:text-rpc-announcement"
+            >
+              Hablar con un asesor
+            </Link>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
+
+function Step({
+  number,
+  title,
+  icon,
+  body,
+  highlights,
+  last,
+}: {
+  number: string;
+  title: string;
+  icon: ReactNode;
+  body: string;
+  highlights: readonly string[];
+  last?: boolean;
+}) {
+  return (
+    <article
+      className={
+        last
+          ? "grid gap-6 py-12 first:pt-0 lg:grid-cols-[140px_1fr] lg:gap-16 lg:py-20"
+          : "grid gap-6 border-b border-rpc-border py-12 first:pt-0 lg:grid-cols-[140px_1fr] lg:gap-16 lg:py-20"
+      }
+    >
+      <div className="flex items-start gap-4 lg:flex-col lg:gap-5">
+        <p className="font-rpc-heading text-5xl font-light leading-none text-rpc-text/30 sm:text-6xl lg:text-7xl">
+          {number}
+        </p>
+        {/* Icon en círculo: refuerza el tema del paso sin competir con el número */}
+        <div className="flex h-12 w-12 items-center justify-center rounded-full border border-rpc-text/30 lg:h-14 lg:w-14">
+          {icon}
+        </div>
+      </div>
+
+      <div className="max-w-3xl">
+        <h3 className="font-rpc-heading text-2xl uppercase tracking-[0.06em] text-rpc-text sm:text-3xl">
+          {title}
+        </h3>
+        <p className="mt-4 font-rpc-body text-base normal-case tracking-normal text-rpc-text/75 sm:mt-5 sm:text-lg">
+          {body}
+        </p>
+        <ul className="mt-6 space-y-2 sm:mt-8">
+          {highlights.map((h) => (
+            <li
+              key={h}
+              className="flex items-start gap-3 font-rpc-body text-sm normal-case tracking-normal text-rpc-text/85"
+            >
+              <span aria-hidden className="mt-[6px] inline-block h-1 w-3 flex-shrink-0 bg-rpc-text/50" />
+              {h}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </article>
+  );
+}
+
+function TermCard({
+  icon,
+  label,
+  value,
+  detail,
+}: {
+  icon: ReactNode;
+  label: string;
+  value: string;
+  detail: string;
+}) {
+  return (
+    <div className="border-t border-rpc-border pt-5">
+      <div className="flex h-10 w-10 items-center justify-center rounded-full border border-rpc-text/30 text-rpc-text">
+        {icon}
+      </div>
+      <dt className="mt-4 text-[10px] uppercase tracking-[0.22em] text-rpc-text/55">
+        {label}
+      </dt>
+      <dd className="mt-3 font-rpc-heading text-3xl font-light leading-none text-rpc-text sm:text-4xl">
+        {value}
+      </dd>
+      <p className="mt-4 font-rpc-body text-sm normal-case tracking-normal text-rpc-text/70">
+        {detail}
+      </p>
+    </div>
+  );
+}

@@ -1,0 +1,63 @@
+@import "tailwindcss";
+
+/**
+ * Ropa Publicitaria Chile — design tokens.
+ * Sincronizados con lib/brand/rpc-tokens.ts (single source of truth).
+ * Tokens declarados aquí generan utilities de Tailwind v4 automáticamente.
+ * Paleta del logo: coral #f07848 (rombo) + celeste #18c0f0 (banda CHILE).
+ */
+@theme {
+  /* Colors */
+  --color-rpc-bg: #ffffff;
+  --color-rpc-text: #101418;
+  --color-rpc-button: #101418;
+  --color-rpc-button-text: #ffffff;
+  --color-rpc-border: #e6e8ea;
+  --color-rpc-surface: #f6f7f8;
+  --color-rpc-price: #101418;
+  --color-rpc-savings: #0e9fc9;
+  --color-rpc-sale-tag: #f07848;
+  --color-rpc-cart-dot: #f07848;
+  --color-rpc-image-bg-light: #f3f4f5;
+  --color-rpc-image-bg-dark: #101418;
+  --color-rpc-announcement: #101418;
+  --color-rpc-modal-overlay: #e6e6e6;
+  --color-rpc-accent: #f07848;
+  --color-rpc-accent-dark: #d9602f;
+  --color-rpc-info: #18c0f0;
+  --color-rpc-info-dark: #0e9fc9;
+  --color-rpc-error: #e03131;
+
+  /* Fonts — wired up via next/font en app/layout.tsx */
+  --font-rpc-heading: var(--font-archivo), system-ui, sans-serif;
+  --font-rpc-body: var(--font-body), "Inter", system-ui, sans-serif;
+
+  /* Radii */
+  --radius-rpc-button: 10px;
+  --radius-rpc-card: 14px;
+  --radius-rpc-input: 10px;
+}
+
+@layer base {
+  html {
+    color-scheme: light;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-rpc-bg);
+    color: var(--color-rpc-text);
+    font-family: var(--font-rpc-body);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-rpc-heading);
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    line-height: 1.05;
+  }
+}
