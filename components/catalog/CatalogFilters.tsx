@@ -194,6 +194,9 @@ export function applyFilters(
   return out;
 }
 
+// Precio de referencia para ordenar: el piso por volumen (menor unitPriceNet),
+// consistente con el "Desde" que muestra la ProductCard.
 function firstPrice(p: CorporateProduct): number {
-  return p.volumePricing[0]?.unitPriceNet ?? 0;
+  if (p.volumePricing.length === 0) return 0;
+  return Math.min(...p.volumePricing.map((b) => b.unitPriceNet));
 }

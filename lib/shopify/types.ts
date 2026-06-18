@@ -54,6 +54,7 @@ export type PrintTechniqueId =
   | "serigrafia_full"
   | "bordado"
   | "transfer_dtf"
+  | "vinilo"
   | "laser"
   | "sublimacion";
 

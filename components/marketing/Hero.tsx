@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 /**
@@ -68,40 +69,39 @@ export function Hero() {
           </p>
         </div>
 
-        {/* Composición gráfica: rombo coral del logo como protagonista */}
-        <div aria-hidden className="relative mx-auto hidden aspect-square w-full max-w-md lg:block">
-          {/* Disco de superficie de fondo */}
-          <div className="absolute inset-8 rounded-full bg-rpc-surface" />
+        {/* Foto real de producto (prenda en blanco, lista para tu logo) con
+            los motivos de marca: rombo coral 40+ años y chips de técnicas. */}
+        <div className="relative mx-auto hidden w-full max-w-md lg:block">
+          {/* Acentos de marca detrás de la foto */}
+          <div aria-hidden className="absolute -left-6 -top-6 h-28 w-28 rotate-45 rounded-3xl bg-rpc-accent/15" />
+          <div aria-hidden className="absolute -bottom-3 right-6 h-16 w-16 rotate-45 rounded-2xl border-2 border-rpc-info" />
 
-          {/* Rombo outline celeste, atrás a la izquierda */}
-          <div className="absolute left-[8%] top-[14%] h-24 w-24 rotate-45 rounded-2xl border-2 border-rpc-info" />
+          {/* Tarjeta con la foto de estudio */}
+          <div className="relative aspect-square overflow-hidden rounded-[28px] bg-rpc-image-bg-light shadow-xl shadow-rpc-text/10 ring-1 ring-rpc-border">
+            <Image
+              src="/products/polera-pique-cuello-botones-manga-corta.webp"
+              alt="Polera piqué corporativa en blanco, lista para personalizar con tu logo"
+              fill
+              priority
+              sizes="(min-width: 1024px) 28rem, 0px"
+              className="object-cover"
+            />
+          </div>
 
-          {/* Rombo coral central con los 40+ años */}
-          <div className="absolute left-1/2 top-1/2 flex h-52 w-52 -translate-x-1/2 -translate-y-[56%] rotate-45 items-center justify-center rounded-[28px] bg-rpc-accent shadow-xl shadow-rpc-accent/25">
+          {/* Rombo coral con los 40+ años, montado sobre la esquina */}
+          <div className="absolute -bottom-5 -left-5 flex h-24 w-24 rotate-45 items-center justify-center rounded-[20px] bg-rpc-accent shadow-xl shadow-rpc-accent/30">
             <p className="-rotate-45 text-center font-rpc-heading leading-none text-white">
-              <span className="block text-5xl font-bold">40+</span>
-              <span className="mt-2 block text-sm font-semibold">años fabricando</span>
+              <span className="block text-2xl font-bold">40+</span>
+              <span className="mt-1 block text-[10px] font-semibold uppercase tracking-wide">años</span>
             </p>
           </div>
 
-          {/* Banda celeste — guiño a la banda CHILE del logo */}
-          <div className="absolute bottom-[21%] left-1/2 h-3 w-60 -translate-x-1/2 rounded-full bg-rpc-info" />
-
-          {/* Rombo chico relleno, abajo a la derecha */}
-          <div className="absolute bottom-[8%] right-[12%] h-12 w-12 rotate-45 rounded-lg bg-rpc-text" />
-
           {/* Chips flotantes con las técnicas reales */}
-          <span className="absolute right-[2%] top-[10%] rounded-full border border-rpc-border bg-rpc-bg px-4 py-1.5 text-xs font-semibold text-rpc-text shadow-sm">
+          <span className="absolute -right-3 top-[12%] rounded-full border border-rpc-border bg-rpc-bg px-4 py-1.5 text-xs font-semibold text-rpc-text shadow-sm">
             {TECHNIQUES[0]}
           </span>
-          <span className="absolute -left-[2%] top-[52%] rounded-full border border-rpc-border bg-rpc-bg px-4 py-1.5 text-xs font-semibold text-rpc-text shadow-sm">
+          <span className="absolute -left-3 top-[60%] rounded-full border border-rpc-border bg-rpc-bg px-4 py-1.5 text-xs font-semibold text-rpc-text shadow-sm">
             {TECHNIQUES[1]}
-          </span>
-          <span className="absolute right-[0%] top-[48%] rounded-full border border-rpc-border bg-rpc-bg px-4 py-1.5 text-xs font-semibold text-rpc-text shadow-sm">
-            {TECHNIQUES[2]}
-          </span>
-          <span className="absolute bottom-[4%] left-[16%] rounded-full border border-rpc-border bg-rpc-bg px-4 py-1.5 text-xs font-semibold text-rpc-text shadow-sm">
-            {TECHNIQUES[3]}
           </span>
         </div>
       </div>

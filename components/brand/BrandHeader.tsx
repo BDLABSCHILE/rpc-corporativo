@@ -18,9 +18,10 @@ export function BrandHeader() {
         Es una vista previa para el cliente: catálogo y precios son de
         referencia hasta conectar su Shopify real.
       */}
-      <p className="bg-rpc-announcement px-4 py-1.5 text-center text-[11px] leading-snug text-white sm:text-xs">
-        🚧 Vista previa para el cliente — precios y productos de referencia, se
-        cargan los reales al aprobar
+      <p className="flex items-center justify-center gap-2 bg-rpc-announcement px-4 py-1.5 text-center text-[11px] leading-snug text-white sm:text-xs">
+        <span aria-hidden className="inline-block h-1.5 w-1.5 shrink-0 rotate-45 bg-rpc-accent" />
+        Vista previa para el cliente — precios de referencia que se confirman al
+        cotizar
       </p>
 
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-6 lg:px-10">

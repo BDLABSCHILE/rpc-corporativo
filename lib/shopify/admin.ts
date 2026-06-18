@@ -26,6 +26,14 @@ export type InventoryLevel = {
 const RETAIL_RESERVE_RATIO = 0.1;
 
 /**
+ * Disponibilidad "infinita" para modo demo. RPC no mantiene stock propio:
+ * consigue las prendas y las personaliza, así que toda prenda está siempre
+ * disponible. Número alto (no Infinity) para que sume y compare sin romper
+ * formato. Se elimina al conectar el inventario real del cliente.
+ */
+const INFINITE_STOCK = 999_999;
+
+/**
  * Suma "available" de todas las ubicaciones activas del Shopify del cliente.
  * Si en el futuro hay que excluir alguna (ej. tiendas físicas no
  * comprometibles a corporativo), agregamos un filtro acá sin tocar el resto
@@ -96,15 +104,15 @@ export async function getInventoryLevel(
   variantId: string,
 ): Promise<InventoryLevel> {
   if (USE_MOCK_PRODUCTS) {
-    // Mock determinista: variantes terminadas en "high" tienen stock alto.
-    const isHighStock = variantId.includes("high");
-    const available = isHighStock ? 500 : 80;
-    const reservedForRetail = Math.floor(available * RETAIL_RESERVE_RATIO);
+    // RPC no mantiene stock propio: consigue las prendas y las personaliza, así
+    // que para efectos del sitio toda variante tiene disponibilidad "infinita".
+    // El análisis de stock siempre cae en ALL_IN_STOCK (sin reposición/import):
+    // el timeline queda en personalización + despacho, que es su modelo real.
     return {
       variantId,
-      available,
-      reservedForRetail,
-      availableForCorporate: available - reservedForRetail,
+      available: INFINITE_STOCK,
+      reservedForRetail: 0,
+      availableForCorporate: INFINITE_STOCK,
     };
   }
   assertAdminEnv();
@@ -142,12 +150,9 @@ export async function getProductTotalStock(
   variantIds: string[],
 ): Promise<number> {
   if (USE_MOCK_PRODUCTS) {
-    return variantIds.reduce((sum, id) => {
-      const isHighStock = id.includes("high");
-      const available = isHighStock ? 500 : 80;
-      const reservedForRetail = Math.floor(available * RETAIL_RESERVE_RATIO);
-      return sum + Math.max(0, available - reservedForRetail);
-    }, 0);
+    // Disponibilidad "infinita" (ver getInventoryLevel): el catálogo siempre
+    // muestra "Stock inmediato".
+    return variantIds.length === 0 ? 0 : INFINITE_STOCK;
   }
   assertAdminEnv();
   const levels = await Promise.all(variantIds.map((id) => getInventoryLevel(id)));

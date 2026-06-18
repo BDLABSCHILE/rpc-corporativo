@@ -98,6 +98,22 @@ export const TECHNIQUE_INFO: readonly TechniqueDetail[] = [
       "Tacto más plástico que serigrafía (se siente la película). En zonas muy grandes, el tacto es notorio.",
   },
   {
+    matchKeys: ["vinilo", "vinilo textil", "vinilo textil (corte)", "vinilo-textil"],
+    headline: "Vinilo textil (corte)",
+    description:
+      "Lámina de vinilo termoadhesivo que se corta con la forma del diseño y se aplica por calor sobre la tela. Acabado liso y prolijo, muy usado para números, nombres y logos planos en ropa deportiva.",
+    features: [
+      "Colores planos sólidos, bordes nítidos",
+      "Ideal para nombres y números personalizados por prenda",
+      "Sin costo de setup ni fotolito",
+      "Buena resistencia al lavado en prendas deportivas",
+    ],
+    bestFor:
+      "Logos y textos de 1 a 2 colores planos, numeración y nombres. Equipos deportivos y prendas donde cada unidad lleva un dato distinto.",
+    limitations:
+      "No reproduce degradados, fotos ni muchos colores: cada color es una lámina aparte. Para full color conviene DTF.",
+  },
+  {
     matchKeys: ["laser", "grabado-laser", "grabado láser"],
     headline: "Grabado láser",
     description:

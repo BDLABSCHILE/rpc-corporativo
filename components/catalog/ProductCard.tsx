@@ -25,7 +25,13 @@ function stockScenario(stockTotal: number): StockScenario {
 }
 
 export function ProductCard({ product, stockTotal }: Props) {
-  const lowestBreak = product.volumePricing[0];
+  // "Desde" = el precio unitario MÁS BAJO del producto (piso por volumen), no
+  // el de la cantidad mínima. volumePricing va asc por minQty (= desc por
+  // precio), así que tomamos el menor unitPriceNet de la tabla.
+  const cheapestUnit = product.volumePricing.reduce<number | null>(
+    (min, b) => (min === null ? b.unitPriceNet : Math.min(min, b.unitPriceNet)),
+    null,
+  );
   const scenario = stockScenario(stockTotal);
 
   return (
@@ -62,7 +68,7 @@ export function ProductCard({ product, stockTotal }: Props) {
           <p className="font-rpc-body text-xs normal-case tracking-normal text-rpc-text/80 sm:text-sm">
             Desde{" "}
             <span className="font-medium text-rpc-text">
-              {lowestBreak ? formatCLP(lowestBreak.unitPriceNet) : "—"}
+              {cheapestUnit !== null ? formatCLP(cheapestUnit) : "—"}
             </span>
             <span className="text-rpc-text/60"> / u</span>
           </p>
