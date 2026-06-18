@@ -18,7 +18,13 @@ export const SHOPIFY_ENV = {
   apiVersion: process.env.SHOPIFY_API_VERSION ?? "2026-04",
 } as const;
 
-export const USE_MOCK_PRODUCTS = process.env.USE_MOCK_PRODUCTS === "true";
+/**
+ * Modo demo por defecto: usa el catálogo mock SALVO que se desactive
+ * explícitamente con USE_MOCK_PRODUCTS=false. Así un deploy nuevo (ej. Vercel
+ * sin la env var) nunca queda con el catálogo caído; al conectar el Shopify
+ * real del cliente se setea USE_MOCK_PRODUCTS=false junto con las SHOPIFY_*.
+ */
+export const USE_MOCK_PRODUCTS = process.env.USE_MOCK_PRODUCTS !== "false";
 
 export function assertStorefrontEnv(): void {
   if (USE_MOCK_PRODUCTS) return;
