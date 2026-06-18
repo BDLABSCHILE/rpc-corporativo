@@ -120,3 +120,24 @@ nosotros. Reemplazar por los SKU reales cuando se conecte el sistema/Shopify.
 | Descripciones / copy | parcial | ✅ redactadas por nosotros |
 | Plazos pendientes (#6,#8,#9,#10) | — | ✅ 7 días referencial |
 | SKUs | — | ✅ autogenerados |
+| Logos de clientes | ✅ marcas reales del sitio | ✅ logos sourced online (ver abajo) |
+
+---
+
+## 🟡 Logos del muro de clientes (sourced online)
+
+Se agregaron **22 logos oficiales** al muro "Confían en nosotros", descargados a
+`public/brand/clients/` (mayoría SVG de Wikimedia Commons; Colmena, Red de Salud
+UC, Bosca y Viña Santa Carolina desde el sitio oficial de cada marca). Se
+muestran en escala de grises y pasan a color al hover.
+
+**A confirmar con la marca:**
+- **Bosca** → usé el logo de **bosca.cl (calefacción/estufas)**. El brief sugería
+  "marroquinería/cuero", que sería otra empresa (bosca.com, EE.UU.). **Confirmar
+  cuál Bosca es el cliente real** y, si es otro, enviar el logo correcto.
+- **The Grange School** → su sitio bloquea la descarga automática (anti-bot), así
+  que aparece como **texto**. Enviar el archivo del logo para incorporarlo.
+- **Facultad de Medicina UC** usa el **escudo institucional UC** (no hay marca
+  separada de la facultad); **Universidad Mayor** es el escudo (solo había JPEG).
+- Logos de marcas de terceros mostrados como referencia de clientes reales
+  (uso nominativo). Si algún cliente no autoriza el uso de su logo, se quita.
