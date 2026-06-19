@@ -5,14 +5,16 @@
 > completa y funcional. Antes de lanzar en vivo hay que confirmarla o
 > reemplazarla con la marca. Ordenado por prioridad.
 >
-> Última actualización: 2026-06-17.
+> Última actualización: 2026-06-18 · catálogo completo de **35 productos reales**
+> en 6 categorías (Poleras, Polerones y Polar, Camisas y Blusas, Ropa Técnica y
+> Cortavientos, Jockeys/Gorros/Accesorios, Delantales y Uniformes).
 
 ---
 
 ## 🔴 Prioridad alta — afecta lo que el cliente ve y los precios
 
 ### 1. Fotos de producto (todas generadas con IA)
-Las **17 fotos** del catálogo son **generadas** (prenda en blanco, maniquí
+Las **35 fotos** del catálogo son **generadas** (prenda en blanco, maniquí
 invisible, fondo gris de estudio). Se ven profesionales y consistentes, pero
 **no son las prendas reales** de RPC.
 - **Pedir:** fotos reales de estudio de cada producto. Idealmente frente +
@@ -40,7 +42,7 @@ Eso hace que el **total final quede por sobre el rango** que entregó la marca.
 ### 4. Precios de técnicas incompletos
 La marca dio: Serigrafía $1.000 (mín 20), Bordado $3.000 (mín 10), DTF $3.000
 (mín 10). **Faltan:**
-- **Sublimación**: ofrecida, sin precio ni mínimo → quedó solo en productos demo, referencial.
+- **Sublimación**: ofrecida, sin precio ni mínimo → usada en Bandanas, referencial.
 - **Vinilo textil (corte)**: ofrecida, sin precio → le pusimos **$990 referencial**.
 - **Setup / fotolito / digitalización**: lo dejamos en **$0**. Confirmar si cobran setup.
 - **Recargo por zona extra** (2ª posición): inventado referencial. Confirmar.
@@ -52,12 +54,17 @@ La marca dio: Serigrafía $1.000 (mín 20), Bordado $3.000 (mín 10), DTF $3.000
 ## 🟡 Prioridad media — datos del formulario que quedaron en blanco
 
 ### 5. Campos que la marca dejó pendientes
-- **Polera Oversize (#7)** — material: lo dejamos como *"A confirmar al cotizar"*.
-- **Plazos de entrega pendientes** en: Dry-Fit con botones (#6), Polar manga larga
-  (#8), Polar sin mangas (#9), Polerón polo (#10). Usamos **7 días referencial**.
-- **Polerón Canguro (#11)** — la marca escribió *"70% algodón · 20% poliéster"*
+- **Materiales sin especificar** ("A confirmar al cotizar"): Polera Oversize,
+  Camisa Jeans, Blusa Jeans, los 3 Softshell, Bucket Hat y Gorro Safari.
+- **Plazos pendientes** (usamos un valor referencial): Dry-Fit con botones,
+  Polar sin mangas, Polerón polo, Camisa/Blusa Oxford, Jockey, Gorro de lana.
+- **Polerón Canguro** — la marca escribió *"70% algodón · 20% poliéster"*
   (suma 90%). Posible typo: ¿es 30%? **Confirmar composición.**
-- **Notas** de cada producto: todas venían "(pendiente)".
+- **Gorro Safari** — en el formulario el campo "Colores" decía `10` (dato
+  erróneo). Pusimos **Beige / Verde militar / Negro** de referencia → confirmar.
+- **Camisa/Blusa Jeans** — venían con un único color ("azul jeans"); confirmar si
+  hay más colores.
+- **Notas** de varios productos venían "(pendiente)".
 
 ### 6. Stock infinito (asunción del negocio)
 Pusimos **disponibilidad infinita** en todo el catálogo (siempre "Stock
@@ -67,14 +74,13 @@ stock propio).
 - **Confirmar** que aplica a todo el catálogo, o si hay productos de temporada /
   disponibilidad limitada que deban mostrar plazo distinto.
 
-### 7. Categorías DEMO (productos inventados de referencia)
-La marca solo levantó **Poleras (7)** y **Polerones y Polar (4)** = 11 productos
-reales. Las otras 4 categorías son **inventadas por nosotros** para mostrar el
-alcance del rubro:
-- **Camisas** → Camisa Oxford · **Pantalones y Ropa Técnica** → Pantalón Cargo ·
-  **Jockeys y Gorros** → Jockey + Beanie · **Merchandising** → Bolsa Tote + Tazón.
-- Sus colores, precios y mínimos son **100% inventados**.
-- **Decidir:** pedir el catálogo real de esas categorías, o quitarlas para la v1.
+### 7. Catálogo completo — ya no hay categorías demo
+La marca levantó las **6 categorías completas = 35 productos reales** (Poleras 7,
+Polerones y Polar 5, Camisas y Blusas 6, Ropa Técnica y Cortavientos 4, Jockeys/
+Gorros/Accesorios 6, Delantales y Uniformes 7). Nombres, colores, tallas,
+mínimos, modalidad (stock express vs fabricación a medida), plazos y técnicas son
+los del formulario. Lo único nuestro en estos productos son las **fotos** (punto 1),
+los **tramos de precio** (punto 2) y las **descripciones** (punto 8).
 
 ---
 
@@ -111,14 +117,13 @@ nosotros. Reemplazar por los SKU reales cuando se conecte el sistema/Shopify.
 
 | Dato | Real (marca) | Lo pusimos nosotros |
 |---|---|---|
-| 11 productos Poleras + Polerones | ✅ nombres, colores, tallas, mín, técnicas, materialidad | — |
+| 35 productos (6 categorías) | ✅ nombres, colores, tallas, mín, modalidad, técnicas, materialidad | — |
 | Rangos de precio por unidad | ✅ tope y piso | ⚠️ tramos intermedios derivados |
 | Precio técnicas (Serigrafía/Bordado/DTF) | ✅ base + mínimo | setup, zona extra, vinilo, sublimación |
-| Fotos de producto | — | ✅ 17 generadas con IA |
+| Fotos de producto | — | ✅ 35 generadas con IA |
 | Stock | — | ✅ infinito (según tu indicación) |
-| 6 productos otras 4 categorías | — | ✅ inventados (demo) |
 | Descripciones / copy | parcial | ✅ redactadas por nosotros |
-| Plazos pendientes (#6,#8,#9,#10) | — | ✅ 7 días referencial |
+| Materiales y plazos pendientes (ver punto 5) | parcial | ✅ rellenados de referencia |
 | SKUs | — | ✅ autogenerados |
 | Logos de clientes | ✅ marcas reales del sitio | ✅ logos sourced online (ver abajo) |
 

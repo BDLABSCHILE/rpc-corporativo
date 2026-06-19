@@ -17,7 +17,7 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "Catálogo corporativo",
   description:
-    "Catálogo de Ropa Publicitaria Chile: poleras, polerones, camisas, ropa técnica, jockeys y merchandising. Cotiza con tu logo en bordado, serigrafía, DTF o sublimación.",
+    "Catálogo de Ropa Publicitaria Chile: poleras, polerones, camisas y blusas, ropa técnica, jockeys, gorros y delantales. Personaliza con tu logo en bordado, serigrafía, DTF, vinilo o sublimación.",
 };
 
 export default async function CatalogoPage({
@@ -52,9 +52,9 @@ export default async function CatalogoPage({
           Catálogo corporativo
         </h1>
         <p className="mt-3 max-w-2xl font-rpc-body text-sm normal-case tracking-normal text-rpc-text/70 sm:text-base">
-          Poleras, polerones, camisas, ropa técnica, jockeys y merchandising.
-          Personaliza con tu logo y cotiza sin compromiso — te respondemos en
-          menos de 24 horas.
+          Poleras, polerones, camisas y blusas, ropa técnica, jockeys, gorros,
+          delantales y uniformes. Personaliza con tu logo y cotiza sin
+          compromiso — te respondemos en menos de 24 horas.
         </p>
       </header>
 

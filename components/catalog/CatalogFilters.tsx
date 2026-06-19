@@ -25,10 +25,10 @@ type Props = {
 const RPC_CATEGORY_ORDER = [
   "Poleras",
   "Polerones y Polar",
-  "Camisas",
-  "Pantalones y Ropa Técnica",
-  "Jockeys y Gorros",
-  "Merchandising",
+  "Camisas y Blusas",
+  "Ropa Técnica y Cortavientos",
+  "Jockeys, Gorros y Accesorios",
+  "Delantales y Uniformes",
 ] as const;
 
 function categoryRank(category: string): number {

@@ -17,10 +17,10 @@ import Link from "next/link";
 const CATEGORIES = [
   "Poleras",
   "Polerones y Polar",
-  "Camisas",
-  "Pantalones y Ropa Técnica",
-  "Jockeys y Gorros",
-  "Merchandising",
+  "Camisas y Blusas",
+  "Ropa Técnica y Cortavientos",
+  "Jockeys, Gorros y Accesorios",
+  "Delantales y Uniformes",
 ] as const;
 
 const TECHNIQUES = ["Bordado", "Serigrafía", "Transfer DTF", "Sublimación"] as const;

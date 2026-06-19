@@ -32,7 +32,11 @@ export function ProductCard({ product, stockTotal }: Props) {
     (min, b) => (min === null ? b.unitPriceNet : Math.min(min, b.unitPriceNet)),
     null,
   );
-  const scenario = stockScenario(stockTotal);
+  // Productos de fabricación a medida no son "stock inmediato": muestran
+  // "Bajo pedido · N días" con su plazo. El resto usa el stock (infinito en demo).
+  const scenario = product.tags.includes("fabricacion")
+    ? "on_demand"
+    : stockScenario(stockTotal);
 
   return (
     <Link

@@ -3,32 +3,25 @@ import type { CorporateProduct, PrintArea, PrintTechnique, ShopifyImage } from "
 /**
  * Mock data del catálogo de Ropa Publicitaria Chile.
  *
- * Activado con USE_MOCK_PRODUCTS=true.
- *
- * - Poleras y Polerones y Polar: los 11 productos REALES que la clienta
- *   entregó en el formulario de levantamiento de catálogo (2026-06-17).
- *   Colores, tallas, materialidades, mínimos, plazos y técnicas aplicables
- *   son los que ella declaró. Los `volumePricing` se derivan de los RANGOS
- *   de precio por unidad que entregó (tope a la cantidad mínima, piso sobre
- *   100u, con baja marcada sobre 50u "baja harto el precio").
- * - Camisas, Pantalones y Ropa Técnica, Jockeys y Gorros, Merchandising:
- *   productos DEMO de referencia para mostrar el alcance completo del rubro
- *   hasta que la clienta levante esas categorías. El banner del header avisa
- *   que precios y productos son de referencia.
+ * Activado con USE_MOCK_PRODUCTS=true. Los 35 productos son los REALES del
+ * levantamiento de catálogo de la clienta (2026-06-18): Poleras, Polerones y
+ * Polar, Camisas y Blusas, Ropa Técnica y Cortavientos, Jockeys/Gorros/
+ * Accesorios y Delantales y Uniformes. Colores, tallas, materialidades,
+ * mínimos, plazos, modalidad y técnicas son los que ella declaró. Los
+ * `volumePricing` se derivan de los RANGOS de precio por unidad (helper
+ * rangePricing): tope a la cantidad mínima, piso sobre 100u.
  *
  * FOTOS: estudio generadas (ghost-mannequin, fondo gris claro, prenda en
- * blanco sin logo) en `public/products/<handle>.webp`. Cada producto muestra
- * una sola foto base (el "color hero" = primer color de la lista); las fotos
- * por color individual quedan pendientes de la marca.
+ * blanco sin logo) en public/products/<handle>.webp. Una foto base por
+ * producto (color "hero" = primer color de la lista).
  *
  * Schema idéntico a CorporateProduct para que el switch a datos reales
  * (Shopify o catálogo propio) sea solo en storefront.ts.
  */
 
 // --- Técnicas de personalización ---------------------------------------------
-// Las del rubro textil publicitario. Precios base alineados a lo que la clienta
-// declaró (Serigrafía $1.000, Bordado $3.000, DTF $3.000 por prenda). Los
-// extras por zona/setup son DE REFERENCIA y se confirman al cotizar.
+// Precios base alineados a lo que declaró la clienta (Serigrafía $1.000,
+// Bordado $3.000, DTF $3.000 por prenda). Extras por zona/setup DE REFERENCIA.
 
 const BORDADO: PrintTechnique = {
   id: "bordado",
@@ -51,7 +44,7 @@ const SERIGRAFIA_1C: PrintTechnique = {
   extraPositionPrice: 590,
   setupFee: 0,
   extraLeadDays: 5,
-  availableAreaIds: ["pecho_izq", "pecho_centro", "espalda", "manga", "bolsa_cara"],
+  availableAreaIds: ["pecho_izq", "pecho_centro", "espalda", "manga", "bolsa_cara", "gorro_frente", "gorro_lateral"],
 };
 
 const SERIGRAFIA_FULL: PrintTechnique = {
@@ -75,7 +68,7 @@ const TRANSFER_DTF: PrintTechnique = {
   extraPositionPrice: 790,
   setupFee: 0,
   extraLeadDays: 3,
-  availableAreaIds: ["pecho_izq", "pecho_centro", "espalda", "manga", "bolsa_cara"],
+  availableAreaIds: ["pecho_izq", "pecho_centro", "espalda", "manga", "bolsa_cara", "gorro_frente", "gorro_lateral"],
 };
 
 const VINILO: PrintTechnique = {
@@ -87,14 +80,14 @@ const VINILO: PrintTechnique = {
   extraPositionPrice: 690,
   setupFee: 0,
   extraLeadDays: 3,
-  availableAreaIds: ["pecho_izq", "pecho_centro", "espalda", "manga"],
+  availableAreaIds: ["pecho_izq", "pecho_centro", "espalda", "manga", "gorro_frente", "gorro_lateral"],
 };
 
 const SUBLIMACION: PrintTechnique = {
   id: "sublimacion",
   label: "Sublimación",
   description:
-    "Impresión total integrada a la tela (poliéster claro) o al tazón. Colores vivos que no se despegan.",
+    "Impresión total integrada a la tela (poliéster claro) o al accesorio. Colores vivos que no se despegan.",
   basePriceUnit: 1390,
   extraPositionPrice: 0,
   setupFee: 0,
@@ -109,10 +102,7 @@ function localImage(handle: string, alt: string): ShopifyImage {
   return { url: `/products/${handle}.webp`, altText: alt, width: 1280, height: 1280 };
 }
 
-/**
- * Placeholder neutro. Hoy solo lo usan las zonas de impresión (PrintArea) como
- * imagen de referencia; el catálogo usa fotos reales vía localImage().
- */
+/** Placeholder neutro — hoy solo lo usan las zonas de impresión (PrintArea). */
 function placeholderImage(label: string, width = 1200, height = 1200): ShopifyImage {
   const text = encodeURIComponent(label);
   return {
@@ -124,8 +114,6 @@ function placeholderImage(label: string, width = 1200, height = 1200): ShopifyIm
 }
 
 // --- Zonas de impresión -------------------------------------------------------
-// Polígonos y escalas de referencia sobre imagen 1200×1200; se calibran con
-// las fotos reales de cada producto.
 
 const area = (
   id: string,
@@ -150,8 +138,12 @@ const ESPALDA = area("espalda", "Espalda", [[400, 380], [800, 380], [800, 760], 
 const MANGA = area("manga", "Manga", [[480, 470], [720, 470], [720, 610], [480, 610]], 8, 8, 30);
 const GORRO_FRENTE = area("gorro_frente", "Frente del gorro", [[440, 420], [760, 420], [760, 640], [440, 640]], 12, 6, 30);
 const GORRO_LATERAL = area("gorro_lateral", "Lateral del gorro", [[500, 460], [740, 460], [740, 600], [500, 600]], 7, 4, 32);
-const BOLSA_CARA = area("bolsa_cara", "Cara de la bolsa", [[380, 400], [820, 400], [820, 800], [380, 800]], 26, 30, 24);
-const TAZON_CARA = area("tazon_cara", "Cara del tazón", [[420, 440], [780, 440], [780, 720], [420, 720]], 18, 8, 30);
+
+// Conjuntos de zonas reutilizables
+const AREAS_PRENDA = [PECHO_IZQ, PECHO_CENTRO, ESPALDA, MANGA];
+const AREAS_CAMISA = [PECHO_IZQ, ESPALDA, MANGA];
+const AREAS_GORRO = [GORRO_FRENTE, GORRO_LATERAL];
+const AREAS_DELANTAL = [PECHO_CENTRO, PECHO_IZQ];
 
 // --- Helpers ------------------------------------------------------------------
 
@@ -162,26 +154,18 @@ function makeVariants(
   retailClp: number,
   specs: VariantSpec[],
   handle: string,
-  stockTier: "high" | "low" = "high",
 ) {
   return specs.map(({ color, sku }) => ({
-    id: `rpc_var_${productKey}_${sku.toLowerCase()}_${stockTier}`,
+    id: `rpc_var_${productKey}_${sku.toLowerCase()}`,
     title: color,
     sku,
     selectedOptions: [{ name: "Color", value: color }],
     priceRetail: { amount: retailClp, currencyCode: "CLP" as const },
-    // Foto base del producto (color hero). Las fotos por color quedan pendientes.
     image: localImage(handle, color),
     availableForSale: true,
   }));
 }
 
-/**
- * Genera specs de variante (una por color) con SKU único y estable a partir
- * de la lista de colores REAL que entregó la clienta. El SKU es índice-based
- * para garantizar unicidad aunque dos colores compartan abreviatura. El primer
- * color de la lista es el "hero" (el que aparece en la foto del producto).
- */
 function specsFromColors(prefix: string, colors: string[]): VariantSpec[] {
   return colors.map((color, i) => ({
     color,
@@ -190,15 +174,9 @@ function specsFromColors(prefix: string, colors: string[]): VariantSpec[] {
 }
 
 /**
- * Deriva una tabla de descuentos por volumen a partir del RANGO de precio por
- * unidad que entregó la clienta. La clienta dio dos números (tope/piso) y la
- * regla "sobre 50 unidades baja harto el precio":
- *  - 10u (mínimo)  → tope del rango
- *  - 25u           → interpolado
- *  - 50u           → ya cerca del piso (la baja fuerte)
- *  - 100u          → piso del rango
- * Precios netos, redondeados a la decena. Son de referencia hasta cerrar la
- * cotización (el banner del sitio lo advierte).
+ * Tabla de descuentos por volumen derivada del RANGO de precio por unidad
+ * (tope/piso) que entregó la clienta + "sobre 50 baja harto el precio".
+ * Precios netos de referencia hasta cerrar la cotización.
  */
 function rangePricing(high: number, low: number) {
   const r10 = (n: number) => Math.round(n / 10) * 10;
@@ -210,572 +188,376 @@ function rangePricing(high: number, low: number) {
   ];
 }
 
-/**
- * Arma el HTML de la ficha extendida con los datos reales declarados por la
- * clienta. Mantiene el mínimo (10u) y la modalidad (stock express) fijos —
- * son comunes a todo el catálogo levantado.
- */
 function fichaHtml(
   intro: string,
-  spec: { material: string; tallas: string; plazo: string },
+  spec: { material: string; tallas: string; plazo: string; minimo: number; modalidad: string; nota?: string },
 ): string {
   return (
     `<p>${intro}</p>` +
     `<p><strong>Material:</strong> ${spec.material}<br/>` +
     `<strong>Tallas:</strong> ${spec.tallas}<br/>` +
-    `<strong>Mínimo:</strong> 10 unidades · Stock express<br/>` +
-    `<strong>Plazo de referencia:</strong> ${spec.plazo}</p>`
+    `<strong>Mínimo:</strong> ${spec.minimo} unidades · ${spec.modalidad}<br/>` +
+    `<strong>Plazo de referencia:</strong> ${spec.plazo}</p>` +
+    (spec.nota ? `<p><strong>Nota:</strong> ${spec.nota}</p>` : "")
   );
 }
 
 const VENDOR = "Ropa Publicitaria Chile";
 
-// --- Catálogo -----------------------------------------------------------------
-// Categorías reales del sitio del cliente: Poleras · Polerones y Polar ·
-// Camisas · Pantalones y Ropa Técnica · Jockeys y Gorros · Merchandising.
+type ProductInput = {
+  key: string;
+  handle: string;
+  title: string;
+  category: string;
+  catTag: string;
+  intro: string;
+  material: string;
+  tallas: string;
+  plazo: string;
+  leadDays: number;
+  modalidad: "Stock express" | "Fabricación a medida";
+  colors: string[];
+  priceHigh: number;
+  priceLow: number;
+  techniques: PrintTechnique[];
+  areas: PrintArea[];
+  minimo?: number;
+  nota?: string;
+  baseCostUsd?: number;
+};
+
+function product(o: ProductInput): CorporateProduct {
+  const minimo = o.minimo ?? 10;
+  const modalidadTag = o.modalidad === "Fabricación a medida" ? "fabricacion" : "stock-express";
+  return {
+    id: `rpc_${o.key.toLowerCase()}`,
+    handle: o.handle,
+    title: o.title,
+    vendor: VENDOR,
+    category: o.category,
+    description: o.intro,
+    descriptionHtml: fichaHtml(o.intro, {
+      material: o.material,
+      tallas: o.tallas,
+      plazo: o.plazo,
+      minimo,
+      modalidad: o.modalidad,
+      nota: o.nota,
+    }),
+    featuredImage: localImage(o.handle, o.title),
+    images: [localImage(o.handle, o.title)],
+    variants: makeVariants(o.key, o.priceHigh, specsFromColors(o.key, o.colors), o.handle),
+    minQty: minimo,
+    leadTimeDaysReorder: o.leadDays,
+    baseCostUsd: o.baseCostUsd ?? 6,
+    volumePricing: rangePricing(o.priceHigh, o.priceLow),
+    printAreas: o.areas,
+    printTechniques: o.techniques,
+    tags: ["CORPORATIVO", o.catTag, modalidadTag],
+  };
+}
+
+// --- Catálogo (35 productos reales) ------------------------------------------
 
 export const mockCorporateProducts: CorporateProduct[] = [
-  // ===========================================================================
-  // PRODUCTOS REALES — Poleras (7) y Polerones y Polar (4)
-  // Levantamiento de catálogo de la clienta, 2026-06-17.
-  // ===========================================================================
+  // === Poleras =============================================================
+  product({
+    key: "PIQMC", handle: "polera-pique-cuello-botones-manga-corta",
+    title: "Polera Piqué Cuello y Botones M/C", category: "Poleras", catTag: "poleras",
+    intro: "La clásica polo piqué de uniforme corporativo en manga corta. Cuello y puños tejidos y el lienzo perfecto para tu logo al pecho.",
+    material: "80% algodón · 20% poliéster (piqué)", tallas: "S a 3XL", plazo: "5 a 7 días", leadDays: 7,
+    modalidad: "Stock express", nota: "Elige versión hombre o mujer",
+    colors: ["Azul marino", "Negro", "Rojo", "Blanco", "Azulino", "Gris", "Amarillo", "Naranjo", "Verde"],
+    priceHigh: 12990, priceLow: 9990, techniques: [BORDADO, SERIGRAFIA_1C, TRANSFER_DTF, VINILO], areas: AREAS_PRENDA,
+  }),
+  product({
+    key: "PIQML", handle: "polera-pique-cuello-botones-manga-larga",
+    title: "Polera Piqué Cuello y Botones M/L", category: "Poleras", catTag: "poleras",
+    intro: "La polo piqué de uniforme en manga larga, para climas fríos o un look más formal. Cuello y puños tejidos, lista para tu marca.",
+    material: "80% algodón · 20% poliéster (piqué)", tallas: "S a 3XL", plazo: "5 a 7 días", leadDays: 7,
+    modalidad: "Stock express", nota: "Elige versión hombre o mujer",
+    colors: ["Negro", "Gris", "Blanco", "Azul marino", "Azulino", "Rojo"],
+    priceHigh: 13990, priceLow: 10990, techniques: [BORDADO, SERIGRAFIA_1C, TRANSFER_DTF, VINILO], areas: AREAS_PRENDA,
+  }),
+  product({
+    key: "CRMC", handle: "polera-cuello-redondo-manga-corta",
+    title: "Polera Cuello Redondo M/C", category: "Poleras", catTag: "poleras",
+    intro: "Polera cuello redondo 100% algodón, la prenda más rendidora para eventos, activaciones y equipos — y la que más colores ofrece del catálogo.",
+    material: "100% algodón", tallas: "XS a 3XL", plazo: "3 a 4 días", leadDays: 4, modalidad: "Stock express",
+    colors: ["Blanco", "Negro", "Gris", "Azulino", "Azul marino", "Celeste", "Rojo", "Naranjo", "Rosado", "Fucsia", "Amarillo", "Verde militar", "Verde agua", "Verde manzana", "Café", "Beige"],
+    priceHigh: 12990, priceLow: 6990, techniques: [SERIGRAFIA_1C, BORDADO, TRANSFER_DTF, VINILO], areas: AREAS_PRENDA,
+  }),
+  product({
+    key: "CRML", handle: "polera-cuello-redondo-manga-larga",
+    title: "Polera Cuello Redondo M/L", category: "Poleras", catTag: "poleras",
+    intro: "Polera cuello redondo 100% algodón en manga larga: la misma versatilidad, con más abrigo para el día a día.",
+    material: "100% algodón", tallas: "XS a 3XL", plazo: "3 a 5 días", leadDays: 5, modalidad: "Stock express",
+    colors: ["Azul marino", "Negro", "Blanco", "Azulino", "Gris", "Rojo"],
+    priceHigh: 13500, priceLow: 8500, techniques: [SERIGRAFIA_1C, BORDADO, TRANSFER_DTF, VINILO], areas: AREAS_PRENDA,
+  }),
+  product({
+    key: "DRYF", handle: "polera-dry-fit-cuello-redondo",
+    title: "Polera Dry-Fit Cuello Redondo", category: "Poleras", catTag: "poleras",
+    intro: "Polera deportiva dry fit de secado rápido para corridas, clubes y team building. Poliéster respirable que rinde todo el día.",
+    material: "100% poliéster (dry fit)", tallas: "Talla 8 a 3XL", plazo: "5 a 7 días hábiles", leadDays: 7, modalidad: "Stock express",
+    colors: ["Naranjo", "Negro", "Rojo", "Azul marino", "Azulino", "Blanco", "Gris", "Rosado", "Calypso"],
+    priceHigh: 15990, priceLow: 8990, techniques: [SERIGRAFIA_1C, BORDADO, TRANSFER_DTF], areas: AREAS_PRENDA,
+  }),
+  product({
+    key: "DRYFB", handle: "polera-dry-fit-cuello-botones",
+    title: "Polera Dry-Fit Cuello y Botones", category: "Poleras", catTag: "poleras",
+    intro: "Polo deportiva dry fit con cuello y botones: el punto medio entre lo técnico y lo formal, para terreno y staff en movimiento.",
+    material: "100% poliéster (dry fit)", tallas: "S a 2XL", plazo: "A confirmar al cotizar", leadDays: 7, modalidad: "Stock express",
+    colors: ["Rojo", "Negro", "Gris", "Blanco", "Naranjo", "Calypso", "Azul marino", "Azulino"],
+    priceHigh: 16990, priceLow: 8500, techniques: [SERIGRAFIA_1C, BORDADO, TRANSFER_DTF], areas: AREAS_PRENDA,
+  }),
+  product({
+    key: "OVER", handle: "polera-oversize",
+    title: "Polera Oversize", category: "Poleras", catTag: "poleras",
+    intro: "Polera de corte oversize, el calce urbano que piden los equipos jóvenes. Caída holgada y amplia superficie para estampados grandes.",
+    material: "A confirmar al cotizar", tallas: "XS a 2XL", plazo: "5 a 7 días", leadDays: 7, modalidad: "Stock express",
+    colors: ["Beige", "Negro", "Blanco", "Gris"],
+    priceHigh: 17500, priceLow: 11500, techniques: [SERIGRAFIA_1C, BORDADO, TRANSFER_DTF, VINILO], areas: AREAS_PRENDA,
+  }),
 
-  // #1 — Polera piqué cuello y botones, manga corta
-  {
-    id: "rpc_polera_pique_mc",
-    handle: "polera-pique-cuello-botones-manga-corta",
-    title: "Polera Piqué Cuello y Botones M/C",
-    vendor: VENDOR,
-    category: "Poleras",
-    description:
-      "La clásica polo piqué de uniforme corporativo en manga corta. Cuello y puños tejidos, calce prolijo y el lienzo perfecto para tu logo bordado al pecho.",
-    descriptionHtml: fichaHtml(
-      "La clásica polo piqué de uniforme corporativo en manga corta. Cuello y puños tejidos, calce prolijo y el lienzo perfecto para tu logo bordado al pecho.",
-      { material: "80% algodón · 20% poliéster (piqué)", tallas: "S a 3XL", plazo: "5 a 7 días" },
-    ),
-    featuredImage: localImage("polera-pique-cuello-botones-manga-corta", "Polera Piqué Cuello y Botones M/C"),
-    images: [localImage("polera-pique-cuello-botones-manga-corta", "Polera Piqué Cuello y Botones M/C")],
-    variants: makeVariants(
-      "piqmc",
-      12990,
-      specsFromColors("PIQMC", [
-        "Azul marino", "Negro", "Rojo", "Blanco", "Azulino", "Gris", "Amarillo", "Naranjo", "Verde",
-      ]),
-      "polera-pique-cuello-botones-manga-corta",
-    ),
-    minQty: 10,
-    leadTimeDaysReorder: 7,
-    baseCostUsd: 7,
-    volumePricing: rangePricing(12990, 9990),
-    printAreas: [PECHO_IZQ, PECHO_CENTRO, ESPALDA, MANGA],
-    printTechniques: [BORDADO, SERIGRAFIA_1C, TRANSFER_DTF, VINILO],
-    tags: ["CORPORATIVO", "poleras", "stock-express"],
-  },
+  // === Polerones y Polar ===================================================
+  product({
+    key: "POLARML", handle: "polar-manga-larga",
+    title: "Polar Manga Larga", category: "Polerones y Polar", catTag: "polerones",
+    intro: "Polar micropolar antipilling 300 g con manga larga, pretina ajustable y puños elasticados. Abrigo liviano para faena, oficina y terreno.",
+    material: "100% poliéster · micropolar antipilling 300 g · pretina ajustable y puños elasticados", tallas: "XS a 3XL", plazo: "3 a 7 días", leadDays: 7,
+    modalidad: "Stock express", nota: "Elige versión hombre o mujer", baseCostUsd: 12,
+    colors: ["Azul marino", "Negro", "Azulino", "Rojo", "Beige", "Verde botella", "Gris"],
+    priceHigh: 20500, priceLow: 15500, techniques: [BORDADO], areas: [PECHO_IZQ, PECHO_CENTRO, MANGA],
+  }),
+  product({
+    key: "POLARSM", handle: "polar-sin-manga",
+    title: "Polar Sin Mangas", category: "Polerones y Polar", catTag: "polerones",
+    intro: "Chaleco polar sin mangas, la capa intermedia perfecta para uniformes de invierno. Abriga el torso sin restar movilidad.",
+    material: "100% poliéster", tallas: "XS a 2XL", plazo: "A confirmar al cotizar", leadDays: 7, modalidad: "Stock express", baseCostUsd: 10,
+    colors: ["Verde", "Negro", "Azul marino", "Gris"],
+    priceHigh: 16500, priceLow: 12500, techniques: [BORDADO], areas: [PECHO_IZQ, PECHO_CENTRO],
+  }),
+  product({
+    key: "POLO", handle: "poleron-polo-cuello-redondo",
+    title: "Polerón Polo Cuello Redondo", category: "Polerones y Polar", catTag: "polerones",
+    intro: "Polerón cuello redondo en mezcla algodón-poliéster, suave por dentro y resistente al uso diario. El básico de invierno que une comodidad y marca.",
+    material: "70% algodón · 30% poliéster", tallas: "XS a 3XL", plazo: "A confirmar al cotizar", leadDays: 7, modalidad: "Stock express", baseCostUsd: 10,
+    colors: ["Gris", "Negro", "Azul marino", "Azulino", "Blanco", "Rojo", "Naranjo", "Beige", "Lila", "Rosado", "Verde"],
+    priceHigh: 16990, priceLow: 12500, techniques: [BORDADO, SERIGRAFIA_1C, TRANSFER_DTF, VINILO], areas: AREAS_PRENDA,
+  }),
+  product({
+    key: "CANGURO", handle: "poleron-canguro",
+    title: "Polerón Canguro", category: "Polerones y Polar", catTag: "polerones",
+    intro: "Hoodie con bolsillo canguro y gorro, el favorito de startups, universidades y equipos jóvenes. Amplio lienzo al frente y la espalda para tu logo.",
+    material: "70% algodón · 20% poliéster", tallas: "Talla 6 a 3XL", plazo: "3 a 7 días hábiles", leadDays: 7, modalidad: "Stock express", baseCostUsd: 11,
+    colors: ["Azul marino", "Negro", "Gris", "Blanco", "Azulino", "Celeste", "Rojo", "Morado", "Naranjo", "Amarillo", "Rosado", "Fucsia", "Verde agua", "Verde manzana", "Verde militar", "Beige"],
+    priceHigh: 18990, priceLow: 13990, techniques: [BORDADO, SERIGRAFIA_1C, TRANSFER_DTF, VINILO], areas: AREAS_PRENDA,
+  }),
+  product({
+    key: "CIERRE", handle: "poleron-cierre-gorro",
+    title: "Polerón con Cierre y Gorro", category: "Polerones y Polar", catTag: "polerones",
+    intro: "Polerón con cierre completo y gorro. Versátil para el uniforme diario y cómodo de poner y sacar; bordado al pecho impecable.",
+    material: "70% algodón · 30% poliéster", tallas: "XS a 3XL", plazo: "3 a 5 días", leadDays: 5, modalidad: "Stock express", baseCostUsd: 11,
+    colors: ["Negro", "Azulino", "Azul marino", "Gris", "Rojo"],
+    priceHigh: 19500, priceLow: 14500, techniques: [SERIGRAFIA_1C, BORDADO, TRANSFER_DTF, VINILO], areas: AREAS_PRENDA,
+  }),
 
-  // #2 — Polera piqué cuello y botones, manga larga
-  {
-    id: "rpc_polera_pique_ml",
-    handle: "polera-pique-cuello-botones-manga-larga",
-    title: "Polera Piqué Cuello y Botones M/L",
-    vendor: VENDOR,
-    category: "Poleras",
-    description:
-      "La misma polo piqué de uniforme, en versión manga larga para climas fríos o looks más formales. Cuello y puños tejidos, lista para llevar tu marca al pecho.",
-    descriptionHtml: fichaHtml(
-      "La misma polo piqué de uniforme, en versión manga larga para climas fríos o looks más formales. Cuello y puños tejidos, lista para llevar tu marca al pecho.",
-      { material: "80% algodón · 20% poliéster (piqué)", tallas: "S a 3XL", plazo: "5 a 7 días" },
-    ),
-    featuredImage: localImage("polera-pique-cuello-botones-manga-larga", "Polera Piqué Cuello y Botones M/L"),
-    images: [localImage("polera-pique-cuello-botones-manga-larga", "Polera Piqué Cuello y Botones M/L")],
-    variants: makeVariants(
-      "piqml",
-      13990,
-      specsFromColors("PIQML", [
-        "Negro", "Gris", "Blanco", "Azul marino", "Azulino", "Rojo",
-      ]),
-      "polera-pique-cuello-botones-manga-larga",
-    ),
-    minQty: 10,
-    leadTimeDaysReorder: 7,
-    baseCostUsd: 8,
-    volumePricing: rangePricing(13990, 10990),
-    printAreas: [PECHO_IZQ, PECHO_CENTRO, ESPALDA, MANGA],
-    printTechniques: [BORDADO, SERIGRAFIA_1C, TRANSFER_DTF, VINILO],
-    tags: ["CORPORATIVO", "poleras", "stock-express"],
-  },
+  // === Camisas y Blusas ====================================================
+  product({
+    key: "OXFH", handle: "camisa-oxford",
+    title: "Camisa Oxford", category: "Camisas y Blusas", catTag: "camisas",
+    intro: "Camisa Oxford clásica de uniforme ejecutivo. Acabado prolijo y elegante, ideal para bordar el logo al pecho.",
+    material: "Tela Oxford", tallas: "S a 3XL", plazo: "A confirmar al cotizar", leadDays: 7, modalidad: "Stock express", baseCostUsd: 9,
+    colors: ["Celeste", "Blanco", "Gris", "Negro"],
+    priceHigh: 16990, priceLow: 13990, techniques: [BORDADO, TRANSFER_DTF], areas: AREAS_CAMISA,
+  }),
+  product({
+    key: "OXFM", handle: "blusa-oxford",
+    title: "Blusa Oxford", category: "Camisas y Blusas", catTag: "camisas",
+    intro: "Blusa Oxford de corte femenino, elegante y cómoda para uniforme corporativo. Calce prolijo para la oficina.",
+    material: "Tela Oxford", tallas: "S a 2XL", plazo: "A confirmar al cotizar", leadDays: 7, modalidad: "Stock express", baseCostUsd: 9,
+    colors: ["Celeste", "Blanco", "Rosado", "Negro", "Gris"],
+    priceHigh: 16990, priceLow: 12990, techniques: [SERIGRAFIA_1C, BORDADO, TRANSFER_DTF], areas: AREAS_CAMISA,
+  }),
+  product({
+    key: "JEANSH", handle: "camisa-jeans",
+    title: "Camisa Jeans", category: "Camisas y Blusas", catTag: "camisas",
+    intro: "Camisa de mezclilla (jeans) para un uniforme con onda casual. Resistente y versátil, va con todo.",
+    material: "A confirmar al cotizar", tallas: "S a 2XL", plazo: "3 a 7 días", leadDays: 7, modalidad: "Stock express", baseCostUsd: 9,
+    colors: ["Azul jeans"],
+    priceHigh: 18500, priceLow: 14500, techniques: [SERIGRAFIA_1C, BORDADO, TRANSFER_DTF], areas: AREAS_CAMISA,
+  }),
+  product({
+    key: "JEANSM", handle: "blusa-jeans",
+    title: "Blusa Jeans", category: "Camisas y Blusas", catTag: "camisas",
+    intro: "Blusa de mezclilla (jeans) de corte femenino. Estilo casual y resistente para equipos con personalidad.",
+    material: "A confirmar al cotizar", tallas: "S a 2XL", plazo: "3 a 7 días", leadDays: 7, modalidad: "Stock express", baseCostUsd: 9,
+    colors: ["Azul jeans"],
+    priceHigh: 17990, priceLow: 13990, techniques: [SERIGRAFIA_1C, BORDADO, TRANSFER_DTF], areas: AREAS_CAMISA,
+  }),
+  product({
+    key: "OUTH", handle: "camisa-outdoor",
+    title: "Camisa Outdoor", category: "Camisas y Blusas", catTag: "camisas",
+    intro: "Camisa outdoor en tela ripstop, resistente y liviana para terreno y actividades al aire libre. Bolsillos utilitarios.",
+    material: "Tela ripstop", tallas: "S a 2XL", plazo: "A confirmar al cotizar", leadDays: 7, modalidad: "Stock express", baseCostUsd: 11,
+    colors: ["Beige", "Azul", "Gris", "Blanco", "Negro"],
+    priceHigh: 25990, priceLow: 21990, techniques: [SERIGRAFIA_1C, BORDADO, TRANSFER_DTF], areas: AREAS_CAMISA,
+  }),
+  product({
+    key: "OUTM", handle: "blusa-outdoor",
+    title: "Blusa Outdoor", category: "Camisas y Blusas", catTag: "camisas",
+    intro: "Blusa outdoor en tela ripstop de corte femenino. Liviana y resistente para terreno y outdoor.",
+    material: "Tela ripstop", tallas: "S a 2XL", plazo: "A confirmar al cotizar", leadDays: 7, modalidad: "Stock express", baseCostUsd: 11,
+    colors: ["Gris", "Negro", "Beige", "Azul", "Blanco"],
+    priceHigh: 25990, priceLow: 21990, techniques: [SERIGRAFIA_1C, BORDADO, TRANSFER_DTF], areas: AREAS_CAMISA,
+  }),
 
-  // #3 — Polera cuello redondo manga corta (100% algodón)
-  {
-    id: "rpc_polera_cuello_redondo_mc",
-    handle: "polera-cuello-redondo-manga-corta",
-    title: "Polera Cuello Redondo M/C",
-    vendor: VENDOR,
-    category: "Poleras",
-    description:
-      "Polera cuello redondo 100% algodón, la prenda más rendidora para eventos, activaciones y equipos. La que más colores ofrece del catálogo para calzar con cualquier marca.",
-    descriptionHtml: fichaHtml(
-      "Polera cuello redondo 100% algodón, la prenda más rendidora para eventos, activaciones y equipos. La que más colores ofrece del catálogo para calzar con cualquier marca.",
-      { material: "100% algodón", tallas: "XS a 3XL", plazo: "3 a 4 días" },
-    ),
-    featuredImage: localImage("polera-cuello-redondo-manga-corta", "Polera Cuello Redondo M/C"),
-    images: [localImage("polera-cuello-redondo-manga-corta", "Polera Cuello Redondo M/C")],
-    variants: makeVariants(
-      "crmc",
-      12990,
-      specsFromColors("CRMC", [
-        "Blanco", "Negro", "Gris", "Azulino", "Azul marino", "Celeste", "Rojo", "Naranjo",
-        "Rosado", "Fucsia", "Amarillo", "Verde militar", "Verde agua", "Verde manzana", "Café", "Beige",
-      ]),
-      "polera-cuello-redondo-manga-corta",
-    ),
-    minQty: 10,
-    leadTimeDaysReorder: 4,
-    baseCostUsd: 5,
-    volumePricing: rangePricing(12990, 6990),
-    printAreas: [PECHO_IZQ, PECHO_CENTRO, ESPALDA, MANGA],
-    printTechniques: [SERIGRAFIA_1C, BORDADO, TRANSFER_DTF, VINILO],
-    tags: ["CORPORATIVO", "poleras", "stock-express"],
-  },
+  // === Ropa Técnica y Cortavientos =========================================
+  product({
+    key: "SSHH", handle: "softshell-hombre",
+    title: "Softshell Hombre", category: "Ropa Técnica y Cortavientos", catTag: "tecnica",
+    intro: "Softshell de hombre cortaviento y repelente al agua, con interior abrigado. La chaqueta técnica para gerencia y terreno.",
+    material: "A confirmar al cotizar", tallas: "S a 3XL", plazo: "3 a 7 días", leadDays: 7, modalidad: "Stock express", baseCostUsd: 16,
+    colors: ["Azul marino", "Negro", "Rojo", "Gris"],
+    priceHigh: 28500, priceLow: 22500, techniques: [SERIGRAFIA_1C, BORDADO, TRANSFER_DTF], areas: AREAS_CAMISA,
+  }),
+  product({
+    key: "SSHM", handle: "softshell-mujer",
+    title: "Softshell Mujer", category: "Ropa Técnica y Cortavientos", catTag: "tecnica",
+    intro: "Softshell de mujer cortaviento y repelente al agua, con interior abrigado. Calce femenino para oficina y terreno.",
+    material: "A confirmar al cotizar", tallas: "S a 3XL", plazo: "3 a 7 días", leadDays: 7, modalidad: "Stock express", baseCostUsd: 16,
+    nota: "Disponible hombre y mujer",
+    colors: ["Negro", "Azul", "Rojo", "Gris"],
+    priceHigh: 28990, priceLow: 21990, techniques: [SERIGRAFIA_1C, BORDADO, TRANSFER_DTF], areas: AREAS_CAMISA,
+  }),
+  product({
+    key: "SSSV", handle: "softshell-sin-manga",
+    title: "Softshell Sin Mangas", category: "Ropa Técnica y Cortavientos", catTag: "tecnica",
+    intro: "Softshell sin mangas: abrigo cortaviento para el torso sin restar movilidad. Ideal como capa media del uniforme.",
+    material: "A confirmar al cotizar", tallas: "S a 2XL", plazo: "3 a 5 días", leadDays: 5, modalidad: "Stock express", baseCostUsd: 14,
+    colors: ["Negro", "Rojo", "Azul", "Gris"],
+    priceHigh: 27500, priceLow: 21500, techniques: [SERIGRAFIA_1C, BORDADO, TRANSFER_DTF], areas: [PECHO_IZQ, PECHO_CENTRO, ESPALDA],
+  }),
+  product({
+    key: "CORTAV", handle: "cortavientos",
+    title: "Cortavientos", category: "Ropa Técnica y Cortavientos", catTag: "tecnica",
+    intro: "Cortavientos liviano en tela taslan, perfecto para activaciones, eventos al aire libre y equipos en movimiento.",
+    material: "Taslan", tallas: "XS a 2XL", plazo: "3 a 7 días", leadDays: 7, modalidad: "Stock express", baseCostUsd: 10,
+    nota: "Elige hombre, mujer o unisex",
+    colors: ["Azul marino", "Azulino", "Blanco", "Verde", "Rojo", "Negro"],
+    priceHigh: 22990, priceLow: 13990, techniques: [BORDADO, SERIGRAFIA_1C, TRANSFER_DTF], areas: AREAS_CAMISA,
+  }),
 
-  // #4 — Polera cuello redondo (100% algodón)
-  {
-    id: "rpc_polera_cuello_redondo",
-    handle: "polera-cuello-redondo",
-    title: "Polera Cuello Redondo",
-    vendor: VENDOR,
-    category: "Poleras",
-    description:
-      "Polera cuello redondo 100% algodón en su versión esencial: pocos colores, máxima versatilidad. Ideal para uniformar equipos grandes sin complicarte.",
-    descriptionHtml: fichaHtml(
-      "Polera cuello redondo 100% algodón en su versión esencial: pocos colores, máxima versatilidad. Ideal para uniformar equipos grandes sin complicarte.",
-      { material: "100% algodón", tallas: "XS a 3XL", plazo: "3 a 5 días" },
-    ),
-    featuredImage: localImage("polera-cuello-redondo", "Polera Cuello Redondo"),
-    images: [localImage("polera-cuello-redondo", "Polera Cuello Redondo")],
-    variants: makeVariants(
-      "cr",
-      13500,
-      specsFromColors("CR", [
-        "Azul marino", "Negro", "Blanco", "Azulino", "Gris", "Rojo",
-      ]),
-      "polera-cuello-redondo",
-    ),
-    minQty: 10,
-    leadTimeDaysReorder: 5,
-    baseCostUsd: 6,
-    volumePricing: rangePricing(13500, 8500),
-    printAreas: [PECHO_IZQ, PECHO_CENTRO, ESPALDA, MANGA],
-    printTechniques: [SERIGRAFIA_1C, BORDADO, TRANSFER_DTF, VINILO],
-    tags: ["CORPORATIVO", "poleras", "stock-express"],
-  },
+  // === Jockeys, Gorros y Accesorios ========================================
+  product({
+    key: "JOCKEY", handle: "jockey",
+    title: "Jockey", category: "Jockeys, Gorros y Accesorios", catTag: "gorros",
+    intro: "Jockey de 6 paneles, el merchandising que más circula: tu logo bordado al frente, a la vista todo el día. Varias calidades de tela.",
+    material: "Algodón, denim o gabardina (distintas calidades y precios)", tallas: "Única", plazo: "A confirmar al cotizar", leadDays: 7, modalidad: "Stock express", baseCostUsd: 3,
+    colors: ["Negro", "Rojo", "Gris", "Azul", "Azulino", "Naranjo", "Verde", "Amarillo"],
+    priceHigh: 7990, priceLow: 3990, techniques: [BORDADO, SERIGRAFIA_1C, TRANSFER_DTF], areas: AREAS_GORRO,
+  }),
+  product({
+    key: "GORROL", handle: "gorro-lana",
+    title: "Gorro de Lana", category: "Jockeys, Gorros y Accesorios", catTag: "gorros",
+    intro: "Gorro de lana tejido, infaltable en kits de invierno y marcas outdoor. Cálido y con vuelta para bordar.",
+    material: "100% lana", tallas: "Única", plazo: "A confirmar al cotizar", leadDays: 7, modalidad: "Stock express", baseCostUsd: 2,
+    colors: ["Gris", "Azul", "Azulino", "Negro", "Rojo", "Fucsia", "Rosa"],
+    priceHigh: 6990, priceLow: 3990, techniques: [BORDADO], areas: [GORRO_FRENTE],
+  }),
+  product({
+    key: "BUCKET", handle: "bucket-hat",
+    title: "Bucket Hat", category: "Jockeys, Gorros y Accesorios", catTag: "gorros",
+    intro: "Bucket hat, el accesorio de moda para activaciones y equipos jóvenes. Amplia superficie para tu marca.",
+    material: "A confirmar al cotizar", tallas: "Única", plazo: "3 a 7 días", leadDays: 7, modalidad: "Stock express", baseCostUsd: 3,
+    colors: ["Negro", "Gris", "Azul", "Beige"],
+    priceHigh: 7500, priceLow: 4500, techniques: [SERIGRAFIA_1C, BORDADO, TRANSFER_DTF, VINILO], areas: AREAS_GORRO,
+  }),
+  product({
+    key: "SAFARI", handle: "gorro-safari",
+    title: "Gorro Safari", category: "Jockeys, Gorros y Accesorios", catTag: "gorros",
+    intro: "Gorro safari de ala ancha, ideal para terreno, turismo y outdoor. Protege del sol y luce tu logo.",
+    material: "A confirmar al cotizar", tallas: "Única", plazo: "3 a 7 días", leadDays: 7, modalidad: "Stock express", baseCostUsd: 3,
+    colors: ["Beige", "Verde militar", "Negro"],
+    priceHigh: 8500, priceLow: 4500, techniques: [BORDADO, VINILO, TRANSFER_DTF, SERIGRAFIA_1C], areas: AREAS_GORRO,
+  }),
+  product({
+    key: "GPOLAR", handle: "gorro-polar",
+    title: "Gorro Polar", category: "Jockeys, Gorros y Accesorios", catTag: "gorros",
+    intro: "Gorro polar de poliéster, abrigado y suave para el invierno. Bordado prolijo al frente.",
+    material: "Poliéster polar", tallas: "Única", plazo: "3 a 7 días", leadDays: 7, modalidad: "Stock express", baseCostUsd: 2,
+    colors: ["Negro", "Azulino", "Azul", "Rojo"],
+    priceHigh: 7500, priceLow: 3500, techniques: [BORDADO], areas: [GORRO_FRENTE],
+  }),
+  product({
+    key: "BANDANA", handle: "bandanas",
+    title: "Bandanas", category: "Jockeys, Gorros y Accesorios", catTag: "gorros",
+    intro: "Bandanas confeccionadas a medida con tu logo en sublimación full color. Accesorio versátil para eventos y staff.",
+    material: "A confirmar al cotizar", tallas: "Única", plazo: "7 a 12 días", leadDays: 12, modalidad: "Fabricación a medida", minimo: 30, baseCostUsd: 2,
+    nota: "Se confecciona a medida con tu logo",
+    colors: ["Negro"],
+    priceHigh: 6500, priceLow: 3500, techniques: [SUBLIMACION], areas: [PECHO_CENTRO],
+  }),
 
-  // #5 — Polera dry fit cuello redondo manga corta (100% poliéster)
-  {
-    id: "rpc_polera_dryfit_cuello_redondo",
-    handle: "polera-dry-fit-cuello-redondo",
-    title: "Polera Dry-Fit Cuello Redondo",
-    vendor: VENDOR,
-    category: "Poleras",
-    description:
-      "Polera deportiva dry fit de secado rápido, pensada para corridas, clubes y team building. Poliéster respirable que mantiene al equipo cómodo todo el día.",
-    descriptionHtml: fichaHtml(
-      "Polera deportiva dry fit de secado rápido, pensada para corridas, clubes y team building. Poliéster respirable que mantiene al equipo cómodo todo el día.",
-      { material: "100% poliéster (dry fit)", tallas: "Talla 8 a 3XL", plazo: "5 a 7 días hábiles" },
-    ),
-    featuredImage: localImage("polera-dry-fit-cuello-redondo", "Polera Dry-Fit Cuello Redondo"),
-    images: [localImage("polera-dry-fit-cuello-redondo", "Polera Dry-Fit Cuello Redondo")],
-    variants: makeVariants(
-      "dryf",
-      15990,
-      specsFromColors("DRYF", [
-        "Naranjo", "Negro", "Rojo", "Azul marino", "Azulino", "Blanco", "Gris", "Rosado", "Calypso",
-      ]),
-      "polera-dry-fit-cuello-redondo",
-    ),
-    minQty: 10,
-    leadTimeDaysReorder: 7,
-    baseCostUsd: 6,
-    volumePricing: rangePricing(15990, 8990),
-    printAreas: [PECHO_IZQ, PECHO_CENTRO, ESPALDA, MANGA],
-    printTechniques: [SERIGRAFIA_1C, BORDADO, TRANSFER_DTF],
-    tags: ["CORPORATIVO", "poleras", "stock-express"],
-  },
-
-  // #6 — Polera dry fit con cuello y botones (100% poliéster)
-  {
-    id: "rpc_polera_dryfit_cuello_botones",
-    handle: "polera-dry-fit-cuello-botones",
-    title: "Polera Dry-Fit Cuello y Botones",
-    vendor: VENDOR,
-    category: "Poleras",
-    description:
-      "Polo deportiva dry fit con cuello y botones: el punto medio entre lo técnico y lo formal. Secado rápido para terreno, eventos y staff en movimiento.",
-    descriptionHtml: fichaHtml(
-      "Polo deportiva dry fit con cuello y botones: el punto medio entre lo técnico y lo formal. Secado rápido para terreno, eventos y staff en movimiento.",
-      { material: "100% poliéster (dry fit)", tallas: "S a 2XL", plazo: "A confirmar al cotizar" },
-    ),
-    featuredImage: localImage("polera-dry-fit-cuello-botones", "Polera Dry-Fit Cuello y Botones"),
-    images: [localImage("polera-dry-fit-cuello-botones", "Polera Dry-Fit Cuello y Botones")],
-    variants: makeVariants(
-      "dryfb",
-      16990,
-      specsFromColors("DRYFB", [
-        "Rojo", "Negro", "Gris", "Blanco", "Naranjo", "Calypso", "Azul marino", "Azulino",
-      ]),
-      "polera-dry-fit-cuello-botones",
-    ),
-    minQty: 10,
-    leadTimeDaysReorder: 7,
-    baseCostUsd: 6,
-    volumePricing: rangePricing(16990, 8500),
-    printAreas: [PECHO_IZQ, PECHO_CENTRO, ESPALDA, MANGA],
-    printTechniques: [SERIGRAFIA_1C, BORDADO, TRANSFER_DTF],
-    tags: ["CORPORATIVO", "poleras", "stock-express"],
-  },
-
-  // #7 — Polera oversize
-  {
-    id: "rpc_polera_oversize",
-    handle: "polera-oversize",
-    title: "Polera Oversize",
-    vendor: VENDOR,
-    category: "Poleras",
-    description:
-      "Polera de corte oversize, el calce urbano que piden los equipos jóvenes y las marcas con onda. Caída holgada y amplia superficie para estampados grandes.",
-    descriptionHtml: fichaHtml(
-      "Polera de corte oversize, el calce urbano que piden los equipos jóvenes y las marcas con onda. Caída holgada y amplia superficie para estampados grandes.",
-      { material: "A confirmar al cotizar", tallas: "XS a 2XL", plazo: "5 a 7 días" },
-    ),
-    featuredImage: localImage("polera-oversize", "Polera Oversize"),
-    images: [localImage("polera-oversize", "Polera Oversize")],
-    variants: makeVariants(
-      "over",
-      17500,
-      specsFromColors("OVER", ["Beige", "Negro", "Blanco", "Gris"]),
-      "polera-oversize",
-    ),
-    minQty: 10,
-    leadTimeDaysReorder: 7,
-    baseCostUsd: 8,
-    volumePricing: rangePricing(17500, 11500),
-    printAreas: [PECHO_IZQ, PECHO_CENTRO, ESPALDA, MANGA],
-    printTechniques: [SERIGRAFIA_1C, BORDADO, TRANSFER_DTF, VINILO],
-    tags: ["CORPORATIVO", "poleras", "stock-express"],
-  },
-
-  // #8 — Polar manga larga
-  {
-    id: "rpc_polar_manga_larga",
-    handle: "polar-manga-larga",
-    title: "Polar Manga Larga",
-    vendor: VENDOR,
-    category: "Polerones y Polar",
-    description:
-      "Polar de micropolar antipilling 300 g con manga larga, pretina ajustable y puños elasticados. Abrigo liviano y prolijo para faena, oficina y terreno.",
-    descriptionHtml: fichaHtml(
-      "Polar de micropolar antipilling 300 g con manga larga, pretina ajustable y puños elasticados. Abrigo liviano y prolijo para faena, oficina y terreno.",
-      {
-        material: "100% poliéster · micropolar antipilling 300 g · pretina ajustable y puños elasticados",
-        tallas: "XS a 3XL",
-        plazo: "A confirmar al cotizar",
-      },
-    ),
-    featuredImage: localImage("polar-manga-larga", "Polar Manga Larga"),
-    images: [localImage("polar-manga-larga", "Polar Manga Larga")],
-    variants: makeVariants(
-      "polarml",
-      20500,
-      specsFromColors("POLARML", [
-        "Azul marino", "Negro", "Azulino", "Rojo", "Beige", "Verde botella", "Gris",
-      ]),
-      "polar-manga-larga",
-    ),
-    minQty: 10,
-    leadTimeDaysReorder: 7,
-    baseCostUsd: 12,
-    volumePricing: rangePricing(20500, 15500),
-    printAreas: [PECHO_IZQ, PECHO_CENTRO, MANGA],
-    printTechniques: [BORDADO],
-    tags: ["CORPORATIVO", "polerones", "stock-express"],
-  },
-
-  // #9 — Polar sin mangas
-  {
-    id: "rpc_polar_sin_manga",
-    handle: "polar-sin-manga",
-    title: "Polar Sin Mangas",
-    vendor: VENDOR,
-    category: "Polerones y Polar",
-    description:
-      "Chaleco polar sin mangas, la capa intermedia perfecta para uniformes de invierno. Abriga el torso sin restar movilidad, ideal bajo una chaqueta o sobre la polera.",
-    descriptionHtml: fichaHtml(
-      "Chaleco polar sin mangas, la capa intermedia perfecta para uniformes de invierno. Abriga el torso sin restar movilidad, ideal bajo una chaqueta o sobre la polera.",
-      { material: "100% poliéster", tallas: "XS a 2XL", plazo: "A confirmar al cotizar" },
-    ),
-    featuredImage: localImage("polar-sin-manga", "Polar Sin Mangas"),
-    images: [localImage("polar-sin-manga", "Polar Sin Mangas")],
-    variants: makeVariants(
-      "polarsm",
-      16500,
-      specsFromColors("POLARSM", ["Verde", "Negro", "Azul marino", "Gris"]),
-      "polar-sin-manga",
-    ),
-    minQty: 10,
-    leadTimeDaysReorder: 7,
-    baseCostUsd: 10,
-    volumePricing: rangePricing(16500, 12500),
-    printAreas: [PECHO_IZQ, PECHO_CENTRO],
-    printTechniques: [BORDADO],
-    tags: ["CORPORATIVO", "polerones", "stock-express"],
-  },
-
-  // #10 — Polerón polo cuello redondo
-  {
-    id: "rpc_poleron_polo_cuello_redondo",
-    handle: "poleron-polo-cuello-redondo",
-    title: "Polerón Polo Cuello Redondo",
-    vendor: VENDOR,
-    category: "Polerones y Polar",
-    description:
-      "Polerón cuello redondo en mezcla algodón-poliéster, suave por dentro y resistente al uso diario. El básico de invierno que une comodidad y marca.",
-    descriptionHtml: fichaHtml(
-      "Polerón cuello redondo en mezcla algodón-poliéster, suave por dentro y resistente al uso diario. El básico de invierno que une comodidad y marca.",
-      { material: "70% algodón · 30% poliéster", tallas: "XS a 3XL", plazo: "A confirmar al cotizar" },
-    ),
-    featuredImage: localImage("poleron-polo-cuello-redondo", "Polerón Polo Cuello Redondo"),
-    images: [localImage("poleron-polo-cuello-redondo", "Polerón Polo Cuello Redondo")],
-    variants: makeVariants(
-      "polo",
-      16990,
-      specsFromColors("POLO", [
-        "Gris", "Negro", "Azul marino", "Azulino", "Blanco", "Rojo", "Naranjo", "Beige", "Lila", "Rosado", "Verde",
-      ]),
-      "poleron-polo-cuello-redondo",
-    ),
-    minQty: 10,
-    leadTimeDaysReorder: 7,
-    baseCostUsd: 10,
-    volumePricing: rangePricing(16990, 12500),
-    printAreas: [PECHO_IZQ, PECHO_CENTRO, ESPALDA, MANGA],
-    printTechniques: [BORDADO, SERIGRAFIA_1C, TRANSFER_DTF, VINILO],
-    tags: ["CORPORATIVO", "polerones", "stock-express"],
-  },
-
-  // #11 — Polerón canguro
-  {
-    id: "rpc_poleron_canguro",
-    handle: "poleron-canguro",
-    title: "Polerón Canguro",
-    vendor: VENDOR,
-    category: "Polerones y Polar",
-    description:
-      "Hoodie con bolsillo canguro y gorro, el favorito de startups, universidades y equipos jóvenes. Amplio lienzo al frente y la espalda para tu logo.",
-    descriptionHtml: fichaHtml(
-      "Hoodie con bolsillo canguro y gorro, el favorito de startups, universidades y equipos jóvenes. Amplio lienzo al frente y la espalda para tu logo.",
-      { material: "70% algodón · 20% poliéster", tallas: "Talla 6 a 3XL", plazo: "3 a 7 días hábiles" },
-    ),
-    featuredImage: localImage("poleron-canguro", "Polerón Canguro"),
-    images: [localImage("poleron-canguro", "Polerón Canguro")],
-    variants: makeVariants(
-      "canguro",
-      18990,
-      specsFromColors("CANGURO", [
-        "Azul marino", "Negro", "Gris", "Blanco", "Azulino", "Celeste", "Rojo", "Morado",
-        "Naranjo", "Amarillo", "Rosado", "Fucsia", "Verde agua", "Verde manzana", "Verde militar", "Beige",
-      ]),
-      "poleron-canguro",
-    ),
-    minQty: 10,
-    leadTimeDaysReorder: 7,
-    baseCostUsd: 11,
-    volumePricing: rangePricing(18990, 13990),
-    printAreas: [PECHO_IZQ, PECHO_CENTRO, ESPALDA, MANGA],
-    printTechniques: [BORDADO, SERIGRAFIA_1C, TRANSFER_DTF, VINILO],
-    tags: ["CORPORATIVO", "polerones", "stock-express"],
-  },
-
-  // ===========================================================================
-  // DEMO — categorías aún no levantadas por la clienta. Productos y precios
-  // de referencia para mostrar el alcance del rubro (el banner lo advierte).
-  // ===========================================================================
-  {
-    id: "rpc_camisa_oxford",
-    handle: "camisa-oxford",
-    title: "Camisa Oxford",
-    vendor: VENDOR,
-    category: "Camisas",
-    description:
-      "Camisa Oxford clásica de uniforme ejecutivo. Bordado al pecho con acabado impecable. Versión hombre y mujer.",
-    descriptionHtml:
-      "<p>Camisa Oxford clásica de uniforme ejecutivo. Bordado al pecho con acabado impecable. Versión hombre y mujer.</p>",
-    featuredImage: localImage("camisa-oxford", "Camisa Oxford"),
-    images: [localImage("camisa-oxford", "Camisa Oxford")],
-    variants: makeVariants("oxford", 22990, [
-      { color: "Celeste", sku: "RPC-OXF-CE" },
-      { color: "Blanco", sku: "RPC-OXF-BL" },
-    ], "camisa-oxford", "low"),
-    minQty: 20,
-    leadTimeDaysReorder: 60,
-    baseCostUsd: 9.5,
-    volumePricing: [
-      { minQty: 20, unitPriceNet: 15990 },
-      { minQty: 50, unitPriceNet: 13990 },
-      { minQty: 100, unitPriceNet: 12490 },
-      { minQty: 250, unitPriceNet: 10990 },
-    ],
-    printAreas: [PECHO_IZQ, MANGA],
-    printTechniques: [BORDADO],
-    tags: ["CORPORATIVO", "camisas", "fabricacion"],
-  },
-  {
-    id: "rpc_pantalon_cargo",
-    handle: "pantalon-cargo-tecnico",
-    title: "Pantalón Cargo Técnico",
-    vendor: VENDOR,
-    category: "Pantalones y Ropa Técnica",
-    description:
-      "Gabardina reforzada con bolsillos cargo para faena y terreno. Parte del uniforme completo que fabricamos a medida.",
-    descriptionHtml:
-      "<p>Gabardina reforzada con bolsillos cargo para faena y terreno. Parte del uniforme completo que fabricamos a medida.</p>",
-    featuredImage: localImage("pantalon-cargo-tecnico", "Pantalón Cargo Técnico"),
-    images: [localImage("pantalon-cargo-tecnico", "Pantalón Cargo Técnico")],
-    variants: makeVariants("cargo", 24990, [
-      { color: "Beige", sku: "RPC-CAR-BE" },
-      { color: "Gris Oscuro", sku: "RPC-CAR-GO" },
-      { color: "Negro", sku: "RPC-CAR-NG" },
-    ], "pantalon-cargo-tecnico", "low"),
-    minQty: 25,
-    leadTimeDaysReorder: 70,
-    baseCostUsd: 10.8,
-    volumePricing: [
-      { minQty: 25, unitPriceNet: 17990 },
-      { minQty: 50, unitPriceNet: 15990 },
-      { minQty: 100, unitPriceNet: 14490 },
-      { minQty: 250, unitPriceNet: 12990 },
-    ],
-    printAreas: [MANGA],
-    printTechniques: [BORDADO, TRANSFER_DTF],
-    tags: ["CORPORATIVO", "ropa-tecnica", "fabricacion"],
-  },
-  {
-    id: "rpc_jockey",
-    handle: "jockey-gabardina",
-    title: "Jockey Gabardina",
-    vendor: VENDOR,
-    category: "Jockeys y Gorros",
-    description:
-      "Jockey 6 paneles con cierre regulable. El merchandising que más circula: tu logo bordado al frente, a la vista todo el día.",
-    descriptionHtml:
-      "<p>Jockey 6 paneles con cierre regulable. El merchandising que más circula: tu logo bordado al frente, a la vista todo el día.</p>",
-    featuredImage: localImage("jockey-gabardina", "Jockey Gabardina"),
-    images: [localImage("jockey-gabardina", "Jockey Gabardina")],
-    variants: makeVariants("jockey", 7990, [
-      { color: "Negro", sku: "RPC-JOC-NG" },
-      { color: "Azul Marino", sku: "RPC-JOC-AZ" },
-      { color: "Blanco", sku: "RPC-JOC-BL" },
-      { color: "Rojo", sku: "RPC-JOC-RJ" },
-    ], "jockey-gabardina"),
-    minQty: 50,
-    leadTimeDaysReorder: 45,
-    baseCostUsd: 2.2,
-    volumePricing: [
-      { minQty: 50, unitPriceNet: 4490 },
-      { minQty: 100, unitPriceNet: 3890 },
-      { minQty: 250, unitPriceNet: 3290 },
-      { minQty: 500, unitPriceNet: 2890 },
-    ],
-    printAreas: [GORRO_FRENTE, GORRO_LATERAL],
-    printTechniques: [BORDADO, TRANSFER_DTF],
-    tags: ["CORPORATIVO", "gorros", "stock-express"],
-  },
-  {
-    id: "rpc_gorro_lana",
-    handle: "gorro-lana-beanie",
-    title: "Gorro de Lana (Beanie)",
-    vendor: VENDOR,
-    category: "Jockeys y Gorros",
-    description:
-      "Beanie tejido con vuelta para bordado. Infaltable en kits de invierno y marcas outdoor.",
-    descriptionHtml:
-      "<p>Beanie tejido con vuelta para bordado. Infaltable en kits de invierno y marcas outdoor.</p>",
-    featuredImage: localImage("gorro-lana-beanie", "Gorro de Lana (Beanie)"),
-    images: [localImage("gorro-lana-beanie", "Gorro de Lana (Beanie)")],
-    variants: makeVariants("beanie", 6990, [
-      { color: "Gris", sku: "RPC-BEA-GR" },
-      { color: "Negro", sku: "RPC-BEA-NG" },
-      { color: "Burdeo", sku: "RPC-BEA-BU" },
-    ], "gorro-lana-beanie"),
-    minQty: 50,
-    leadTimeDaysReorder: 50,
-    baseCostUsd: 1.9,
-    volumePricing: [
-      { minQty: 50, unitPriceNet: 3990 },
-      { minQty: 100, unitPriceNet: 3490 },
-      { minQty: 250, unitPriceNet: 2990 },
-      { minQty: 500, unitPriceNet: 2590 },
-    ],
-    printAreas: [GORRO_FRENTE],
-    printTechniques: [BORDADO],
-    tags: ["CORPORATIVO", "gorros", "stock-express"],
-  },
-  {
-    id: "rpc_bolsa_tote",
-    handle: "bolsa-tote-algodon",
-    title: "Bolsa Tote de Algodón",
-    vendor: VENDOR,
-    category: "Merchandising",
-    description:
-      "Tote ecológica de algodón crudo 140 g. El regalo corporativo más pedido para eventos y ferias.",
-    descriptionHtml:
-      "<p>Tote ecológica de algodón crudo 140 g. El regalo corporativo más pedido para eventos y ferias.</p>",
-    featuredImage: localImage("bolsa-tote-algodon", "Bolsa Tote de Algodón"),
-    images: [localImage("bolsa-tote-algodon", "Bolsa Tote de Algodón")],
-    variants: makeVariants("tote", 4990, [
-      { color: "Crudo", sku: "RPC-TOT-CR" },
-      { color: "Negro", sku: "RPC-TOT-NG" },
-    ], "bolsa-tote-algodon"),
-    minQty: 100,
-    leadTimeDaysReorder: 45,
-    baseCostUsd: 1.1,
-    volumePricing: [
-      { minQty: 100, unitPriceNet: 2790 },
-      { minQty: 250, unitPriceNet: 2390 },
-      { minQty: 500, unitPriceNet: 1990 },
-      { minQty: 1000, unitPriceNet: 1690 },
-    ],
-    printAreas: [BOLSA_CARA],
-    printTechniques: [SERIGRAFIA_1C, SERIGRAFIA_FULL, TRANSFER_DTF],
-    tags: ["CORPORATIVO", "merchandising", "stock-express"],
-  },
-  {
-    id: "rpc_tazon",
-    handle: "tazon-ceramica",
-    title: "Tazón Cerámica 330ml",
-    vendor: VENDOR,
-    category: "Merchandising",
-    description:
-      "Tazón de cerámica sublimable a todo color. El clásico de escritorio que mantiene tu marca a la vista cada día.",
-    descriptionHtml:
-      "<p>Tazón de cerámica sublimable a todo color. El clásico de escritorio que mantiene tu marca a la vista cada día.</p>",
-    featuredImage: localImage("tazon-ceramica", "Tazón Cerámica 330ml"),
-    images: [localImage("tazon-ceramica", "Tazón Cerámica 330ml")],
-    variants: makeVariants("tazon", 5990, [
-      { color: "Blanco", sku: "RPC-TAZ-BL" },
-      { color: "Interior Color", sku: "RPC-TAZ-IC" },
-    ], "tazon-ceramica"),
-    minQty: 50,
-    leadTimeDaysReorder: 40,
-    baseCostUsd: 1.4,
-    volumePricing: [
-      { minQty: 50, unitPriceNet: 3490 },
-      { minQty: 100, unitPriceNet: 2990 },
-      { minQty: 250, unitPriceNet: 2590 },
-      { minQty: 500, unitPriceNet: 2190 },
-    ],
-    printAreas: [TAZON_CARA],
-    printTechniques: [SUBLIMACION],
-    tags: ["CORPORATIVO", "merchandising", "stock-express"],
-  },
+  // === Delantales y Uniformes ==============================================
+  product({
+    key: "PECH", handle: "pechera",
+    title: "Pechera", category: "Delantales y Uniformes", catTag: "uniformes",
+    intro: "Pechera de Polycron o gabardina, resistente para cocina, retail y servicio. Se confecciona a medida con tu marca.",
+    material: "Polycron o gabardina", tallas: "Única", plazo: "10 a 12 días (menos si hay stock)", leadDays: 12, modalidad: "Fabricación a medida", baseCostUsd: 5,
+    colors: ["Negro", "Rojo", "Blanco", "Café", "Rosado", "Beige", "Verde"],
+    priceHigh: 15990, priceLow: 9990, techniques: [BORDADO, SERIGRAFIA_1C, TRANSFER_DTF], areas: AREAS_DELANTAL,
+  }),
+  product({
+    key: "PECHB", handle: "pechera-basica",
+    title: "Pechera Básica", category: "Delantales y Uniformes", catTag: "uniformes",
+    intro: "Pechera básica de poliéster, liviana y económica para equipos de servicio y eventos.",
+    material: "100% poliéster", tallas: "Única", plazo: "10 días (3 días si hay stock)", leadDays: 10, modalidad: "Fabricación a medida", baseCostUsd: 3,
+    colors: ["Negro", "Azul", "Azulino", "Blanco", "Rojo", "Beige", "Rosado", "Café"],
+    priceHigh: 9990, priceLow: 6900, techniques: [SERIGRAFIA_1C, BORDADO, TRANSFER_DTF, VINILO], areas: AREAS_DELANTAL,
+  }),
+  product({
+    key: "PECHJ", handle: "pechera-jeans",
+    title: "Pechera Jeans", category: "Delantales y Uniformes", catTag: "uniformes",
+    intro: "Pechera de mezclilla (jeans), resistente y con estilo para cafeterías, baristas y retail.",
+    material: "Jeans (mezclilla)", tallas: "Única", plazo: "3 a 7 días", leadDays: 7, modalidad: "Stock express", baseCostUsd: 5,
+    colors: ["Azul", "Negro"],
+    priceHigh: 16500, priceLow: 12500, techniques: [SERIGRAFIA_1C, BORDADO, TRANSFER_DTF], areas: AREAS_DELANTAL,
+  }),
+  product({
+    key: "CHEF", handle: "chaqueta-chef",
+    title: "Chaqueta de Chef", category: "Delantales y Uniformes", catTag: "uniformes",
+    intro: "Chaqueta de chef en gabardina o Polycron, prolija y resistente para cocinas profesionales. Múltiples combinaciones de color.",
+    material: "Gabardina o Polycron", tallas: "XS a 3XL", plazo: "15 días (menos si hay stock)", leadDays: 15, modalidad: "Fabricación a medida", baseCostUsd: 9,
+    colors: ["Blanco", "Negro", "Café", "Beige"],
+    priceHigh: 25500, priceLow: 18990, techniques: [SERIGRAFIA_1C, BORDADO, TRANSFER_DTF], areas: [PECHO_IZQ, PECHO_CENTRO, MANGA],
+  }),
+  product({
+    key: "MANDB", handle: "mandil-corto-basico",
+    title: "Mandil Corto Básico", category: "Delantales y Uniformes", catTag: "uniformes",
+    intro: "Mandil corto básico de poliéster, liviano para servicio, barismo y atención. Práctico y económico.",
+    material: "Poliéster", tallas: "Única", plazo: "5 a 7 días", leadDays: 7, modalidad: "Stock express", baseCostUsd: 3,
+    colors: ["Negro", "Café", "Rojo"],
+    priceHigh: 8990, priceLow: 5990, techniques: [SERIGRAFIA_1C, BORDADO, TRANSFER_DTF], areas: [PECHO_CENTRO],
+  }),
+  product({
+    key: "MANDG", handle: "mandil-corto-grueso",
+    title: "Mandil Corto Grueso", category: "Delantales y Uniformes", catTag: "uniformes",
+    intro: "Mandil corto en gabardina Polycron, más grueso y resistente para uso intensivo en cocina y servicio.",
+    material: "Gabardina / Polycron", tallas: "Única", plazo: "3 a 5 días (10 a 15 si se confecciona)", leadDays: 5, modalidad: "Stock express", baseCostUsd: 4,
+    colors: ["Negro", "Café", "Rojo"],
+    priceHigh: 9990, priceLow: 6990, techniques: [SERIGRAFIA_1C, BORDADO, TRANSFER_DTF], areas: [PECHO_CENTRO],
+  }),
+  product({
+    key: "MANDL", handle: "mandil-largo",
+    title: "Mandil Largo", category: "Delantales y Uniformes", catTag: "uniformes",
+    intro: "Mandil largo de poliéster o gabardina, cobertura completa para cocina y faena.",
+    material: "Poliéster o gabardina", tallas: "Única", plazo: "3 a 5 días en stock / 10 días confección", leadDays: 10, modalidad: "Fabricación a medida", baseCostUsd: 4,
+    nota: "El precio depende de la tela",
+    colors: ["Negro", "Rojo", "Blanco", "Café", "Verde"],
+    priceHigh: 10990, priceLow: 6990, techniques: [SERIGRAFIA_1C, BORDADO, TRANSFER_DTF], areas: AREAS_DELANTAL,
+  }),
 ];
 
 export function mockProductByHandle(handle: string): CorporateProduct | null {

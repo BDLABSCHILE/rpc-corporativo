@@ -32,33 +32,36 @@
 4. **Fotos reales de los productos.** Las actuales son fotos de estudio generadas
    (prenda en blanco). Ideal: fotos reales, por color, frente y espalda.
 5. **Datos que quedaron en blanco en el formulario:**
-   - Material de la **Polera Oversize**.
-   - Plazos de: Dry-Fit con botones, Polar manga larga, Polar sin mangas, Polerón polo.
-   - Composición del **Polerón Canguro** (dijeron 70% algodón + 20% poliéster = 90%, confirmar).
-6. **Confirmar disponibilidad.** Dejamos todo como "stock inmediato" (ustedes
-   consiguen y estampan). Confirmar que aplica a todo, o si hay productos con plazo distinto.
-7. **Otras categorías.** Camisas, Pantalones/Ropa Técnica, Jockeys/Gorros y
-   Merchandising hoy son **productos de ejemplo**. Enviar el catálogo real de esas
-   categorías, o decidir si se muestran o se quitan para el lanzamiento.
-8. **Descripciones de producto.** Las redactamos nosotros; conviene que las revisen
+   - **Materiales** sin especificar: Polera Oversize, Camisa/Blusa Jeans, los 3
+     Softshell, Bucket Hat y Gorro Safari.
+   - **Plazos** de varios productos (Dry-Fit botones, Polar sin mangas, Polerón
+     polo, Camisa/Blusa Oxford, Jockey, Gorro de lana) — pusimos un valor de referencia.
+   - **Gorro Safari**: el campo "colores" venía con un dato erróneo (`10`); pusimos
+     Beige / Verde militar / Negro de referencia.
+   - **Camisa/Blusa Jeans**: confirmar si hay más colores además de "azul jeans".
+   - Composición del **Polerón Canguro** (70% algodón + 20% poliéster = 90%, confirmar).
+6. **Confirmar disponibilidad.** Dejamos los productos *stock express* como "stock
+   inmediato" y los de *fabricación a medida* como "bajo pedido" con su plazo.
+   Confirmar que la división es correcta.
+7. **Descripciones de producto.** Las redactamos nosotros; conviene que las revisen
    y ajusten.
 
 ---
 
 ## 🟢 3. Marca, legal y a futuro
 
-9. **Logo oficial en alta** (el del header se ve algo apretado), idealmente versión horizontal.
-10. **Logo de The Grange School** (es el único cliente que quedó como texto porque su
-    sitio bloqueó la descarga del logo).
-11. **Confirmar datos de contacto**: email, WhatsApp, dirección, razón social y año de
+8. **Logo oficial en alta** (el del header se ve algo apretado), idealmente versión horizontal.
+9. **Logo de The Grange School** (es el único cliente que quedó como texto porque su
+   sitio bloqueó la descarga del logo).
+10. **Confirmar datos de contacto**: email, WhatsApp, dirección, razón social y año de
     fundación ("desde 1982 / 40+ años").
-12. **Autorización de logos de clientes** — confirmar que todas las marcas mostradas
+11. **Autorización de logos de clientes** — confirmar que todas las marcas mostradas
     están OK con aparecer.
-13. **Tienda Shopify (opcional, a futuro).** Si quieren stock y precios reales
+12. **Tienda Shopify (opcional, a futuro).** Si quieren stock y precios reales
     conectados en vivo, necesitamos las credenciales de su Shopify. Si no, el catálogo
     queda cargado a mano (como está hoy).
-14. **SKUs reales** por producto (hoy son códigos generados), si van a usar Shopify/ERP.
-15. **Políticas** (privacidad / términos) si quieren enlazarlas en el pie.
+13. **SKUs reales** por producto (hoy son códigos generados), si van a usar Shopify/ERP.
+14. **Políticas** (privacidad / términos) si quieren enlazarlas en el pie.
 
 ---
 

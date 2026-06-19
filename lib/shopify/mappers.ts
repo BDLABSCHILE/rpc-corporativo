@@ -132,35 +132,41 @@ export function mapShopifyProductToCorporate(
  * Categoría visible en el catálogo corporativo. Mapea los productos a las
  * 6 categorías reales de Ropa Publicitaria Chile:
  *
- *   Poleras · Polerones y Polar · Camisas · Pantalones y Ropa Técnica ·
- *   Jockeys y Gorros · Merchandising
+ *   Poleras · Polerones y Polar · Camisas y Blusas ·
+ *   Ropa Técnica y Cortavientos · Jockeys, Gorros y Accesorios ·
+ *   Delantales y Uniformes
  *
  * Prioriza el prefijo del handle (consistente en el catálogo RPC) y cae al
- * productType de Shopify como segundo intento. Todo lo que no es vestuario
- * (bolsas, tazones, artículos promocionales) cae en Merchandising.
+ * productType de Shopify como segundo intento.
  */
 function deriveCategory(productType: string, handle: string): string {
   const h = handle.toLowerCase();
   if (h.startsWith("polera-")) return "Poleras";
-  if (h.startsWith("poleron-") || h.startsWith("polar-") || h.startsWith("chaqueta-")) {
-    return "Polerones y Polar";
+  if (h.startsWith("poleron-") || h.startsWith("polar-")) return "Polerones y Polar";
+  if (h.startsWith("camisa-") || h.startsWith("blusa-")) return "Camisas y Blusas";
+  if (h.startsWith("softshell-") || h.startsWith("cortaviento")) return "Ropa Técnica y Cortavientos";
+  if (h.startsWith("jockey") || h.startsWith("gorro-") || h.startsWith("bucket") || h.startsWith("bandana")) {
+    return "Jockeys, Gorros y Accesorios";
   }
-  if (h.startsWith("camisa-")) return "Camisas";
-  if (h.startsWith("pantalon-")) return "Pantalones y Ropa Técnica";
-  if (h.startsWith("jockey-") || h.startsWith("gorro-")) return "Jockeys y Gorros";
+  if (h.startsWith("pechera") || h.startsWith("mandil-") || h.startsWith("chaqueta-chef") || h.startsWith("delantal")) {
+    return "Delantales y Uniformes";
+  }
 
   // Fallback: productType de Shopify normalizado.
   const pt = productType.toLowerCase();
   if (pt.includes("polera")) return "Poleras";
-  if (pt.includes("polerón") || pt.includes("poleron") || pt.includes("polar") || pt.includes("chaqueta")) {
-    return "Polerones y Polar";
+  if (pt.includes("polerón") || pt.includes("poleron") || pt.includes("polar")) return "Polerones y Polar";
+  if (pt.includes("camisa") || pt.includes("blusa")) return "Camisas y Blusas";
+  if (pt.includes("softshell") || pt.includes("cortaviento") || pt.includes("ropa técnica") || pt.includes("ropa tecnica")) {
+    return "Ropa Técnica y Cortavientos";
   }
-  if (pt.includes("camisa")) return "Camisas";
-  if (pt.includes("pantalón") || pt.includes("pantalon") || pt.includes("ropa técnica") || pt.includes("ropa tecnica")) {
-    return "Pantalones y Ropa Técnica";
+  if (pt.includes("jockey") || pt.includes("gorro") || pt.includes("bucket") || pt.includes("bandana") || pt.includes("accesorio")) {
+    return "Jockeys, Gorros y Accesorios";
   }
-  if (pt.includes("jockey") || pt.includes("gorro")) return "Jockeys y Gorros";
-  return "Merchandising";
+  if (pt.includes("pechera") || pt.includes("mandil") || pt.includes("delantal") || pt.includes("chef") || pt.includes("uniforme")) {
+    return "Delantales y Uniformes";
+  }
+  return "Poleras";
 }
 
 function mapVariant(v: RawVariantEdge["node"]): ProductVariant {
