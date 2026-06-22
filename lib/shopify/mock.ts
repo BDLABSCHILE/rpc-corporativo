@@ -589,6 +589,42 @@ export const mockCorporateProducts: CorporateProduct[] = [
     colors: ["Azul marino", "Gris", "Negro"],
     priceHigh: 13900, priceLow: 8990, techniques: [SERIGRAFIA_1C, BORDADO, TRANSFER_DTF], areas: [PECHO_IZQ],
   }),
+  product({
+    key: "JEANS", handle: "pantalon-jeans",
+    title: "Pantalón Jeans", category: "Pantalones", catTag: "pantalones",
+    intro: "Pantalón de mezclilla azul clásica, resistente y versátil. Para staff que necesita aguante con onda casual.",
+    material: "Mezclilla azul", tallas: "Cintura 38 a 60", plazo: "3 a 7 días", leadDays: 7, modalidad: "Stock express", baseCostUsd: 7,
+    nota: "Hombre y mujer (calce distinto)",
+    colors: ["Azul"],
+    priceHigh: 15990, priceLow: 12990, techniques: [SERIGRAFIA_1C, BORDADO, TRANSFER_DTF], areas: [PECHO_IZQ],
+  }),
+  product({
+    key: "POUTDOOR", handle: "pantalon-outdoor",
+    title: "Pantalón Outdoor", category: "Pantalones", catTag: "pantalones",
+    intro: "Pantalón outdoor en ripstop: técnico, liviano y resistente para terreno, expediciones y outdoor. Bolsillos utilitarios.",
+    material: "Tela ripstop", tallas: "Cintura 38 a 60", plazo: "3 a 7 días", leadDays: 7, modalidad: "Stock express", baseCostUsd: 12,
+    nota: "Hombre y mujer separados",
+    colors: ["Beige", "Negro", "Gris"],
+    priceHigh: 26900, priceLow: 23990, techniques: [SERIGRAFIA_1C, BORDADO, TRANSFER_DTF], areas: [PECHO_IZQ],
+  }),
+  product({
+    key: "PGSPANDEX", handle: "pantalon-gabardina-spandex",
+    title: "Pantalón Gabardina Spandex", category: "Pantalones", catTag: "pantalones",
+    intro: "Pantalón gabardina con spandex: el aliado del uniforme femenino que busca caída prolija y libertad de movimiento. Versión hombre también disponible.",
+    material: "97% algodón · 3% spandex", tallas: "Cintura 36 a 58", plazo: "A confirmar al cotizar", leadDays: 7, modalidad: "Stock express", baseCostUsd: 8,
+    nota: "Modelo mujer (versión hombre también disponible)",
+    colors: ["Beige", "Negro", "Azul marino", "Gris"],
+    priceHigh: 17500, priceLow: 14500, techniques: [SERIGRAFIA_1C, BORDADO, TRANSFER_DTF], areas: [PECHO_IZQ],
+  }),
+  product({
+    key: "PPINZA", handle: "pantalon-pinza-hombre",
+    title: "Pantalón Pinza Hombre", category: "Pantalones", catTag: "pantalones",
+    intro: "Pantalón formal de pinzas en algodón, el clásico de oficina y eventos formales. Calce tailored para uniforme ejecutivo.",
+    material: "100% algodón", tallas: "Cintura 40 a 64", plazo: "3 a 7 días", leadDays: 7, modalidad: "Stock express", baseCostUsd: 8,
+    nota: "Modelo hombre",
+    colors: ["Gris", "Negro", "Azul marino", "Beige"],
+    priceHigh: 17500, priceLow: 14500, techniques: [SERIGRAFIA_1C, BORDADO, TRANSFER_DTF], areas: [PECHO_IZQ],
+  }),
 ];
 
 export function mockProductByHandle(handle: string): CorporateProduct | null {

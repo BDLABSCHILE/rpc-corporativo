@@ -5,7 +5,7 @@
 > completa y funcional. Antes de lanzar en vivo hay que confirmarla o
 > reemplazarla con la marca. Ordenado por prioridad.
 >
-> Última actualización: 2026-06-22 · catálogo completo de **38 productos reales**
+> Última actualización: 2026-06-22 · catálogo completo de **42 productos reales**
 > en 7 categorías (Poleras, Polerones y Polar, Camisas y Blusas, **Pantalones**,
 > Ropa Técnica y Cortavientos, Jockeys/Gorros/Accesorios, Delantales y Uniformes).
 
@@ -14,7 +14,7 @@
 ## 🔴 Prioridad alta — afecta lo que el cliente ve y los precios
 
 ### 1. Fotos de producto (todas generadas con IA)
-Las **38 fotos** del catálogo son **generadas** (prenda en blanco, maniquí
+Las **42 fotos** del catálogo son **generadas** (prenda en blanco, maniquí
 invisible, fondo gris de estudio). Se ven profesionales y consistentes, pero
 **no son las prendas reales** de RPC.
 - **Pedir:** fotos reales de estudio de cada producto. Idealmente frente +
@@ -75,8 +75,8 @@ stock propio).
   disponibilidad limitada que deban mostrar plazo distinto.
 
 ### 7. Catálogo completo — ya no hay categorías demo
-La marca levantó **7 categorías completas = 38 productos reales** (Poleras 7,
-Polerones y Polar 5, Camisas y Blusas 6, **Pantalones 3**, Ropa Técnica y
+La marca levantó **7 categorías completas = 42 productos reales** (Poleras 7,
+Polerones y Polar 5, Camisas y Blusas 6, **Pantalones 7**, Ropa Técnica y
 Cortavientos 4, Jockeys/Gorros/Accesorios 6, Delantales y Uniformes 7). Nombres,
 colores, tallas, mínimos, modalidad (stock express vs fabricación a medida),
 plazos y técnicas son los del formulario. Lo único nuestro en estos productos
@@ -120,10 +120,10 @@ nosotros. Reemplazar por los SKU reales cuando se conecte el sistema/Shopify.
 
 | Dato | Real (marca) | Lo pusimos nosotros |
 |---|---|---|
-| 38 productos (7 categorías, incl. Pantalones) | ✅ nombres, colores, tallas, mín, modalidad, técnicas, materialidad | — |
+| 42 productos (7 categorías, incl. Pantalones con 7) | ✅ nombres, colores, tallas, mín, modalidad, técnicas, materialidad | — |
 | Rangos de precio por unidad | ✅ tope y piso | ⚠️ tramos intermedios derivados |
 | Precio técnicas (Serigrafía/Bordado/DTF) | ✅ base + mínimo | setup, zona extra, vinilo, sublimación |
-| Fotos de producto | — | ✅ 38 generadas con IA |
+| Fotos de producto | — | ✅ 42 generadas con IA |
 | Stock | — | ✅ infinito (según tu indicación) |
 | Descripciones / copy | parcial | ✅ redactadas por nosotros |
 | Materiales y plazos pendientes (ver punto 5) | parcial | ✅ rellenados de referencia |
