@@ -4,8 +4,8 @@
  * del muro de clientes. Nada inventado.
  */
 const METRICS = [
-  { value: "40+", label: "años fabricando, desde 1982" },
-  { value: "2 modos", label: "stock express y fabricación a medida" },
+  { value: "40+", label: "años de experiencia, desde 1982" },
+  { value: "2 modos", label: "stock para personalizar y fabricación propia de cocina" },
   { value: "<24 h", label: "tiempo de respuesta a tu cotización" },
   { value: "30+", label: "marcas nos avalan" },
 ] as const;

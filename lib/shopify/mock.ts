@@ -553,8 +553,8 @@ export const mockCorporateProducts: CorporateProduct[] = [
     key: "BANDANA", handle: "bandanas",
     title: "Bandanas", category: "Jockeys, Gorros y Accesorios", catTag: "gorros",
     intro: "Bandanas confeccionadas a medida con tu logo en sublimación full color. Accesorio versátil para eventos y staff.",
-    material: "A confirmar al cotizar", tallas: "Única", plazo: "7 a 12 días", leadDays: 12, modalidad: "Fabricación a medida", minimo: 25, baseCostUsd: 2,
-    nota: "Se confecciona a medida con tu logo · mínimo 25 unidades",
+    material: "A confirmar al cotizar", tallas: "Única", plazo: "7 a 12 días", leadDays: 12, modalidad: "Stock express", minimo: 25, baseCostUsd: 2,
+    nota: "Sublimación full color incluida · mínimo 25 unidades",
     colors: ["Negro"],
     pricing: tramos({ 25: 5500, 50: 4990, 100: 4500, 250: 3990 }), techniques: [SUBLIMACION], areas: [PECHO_CENTRO],
   }),
@@ -665,7 +665,7 @@ export const mockCorporateProducts: CorporateProduct[] = [
     intro: "Pantalón cargo en gabardina, resistente y prolijo para faena, terreno y staff. Bolsillos laterales reforzados con amplia capacidad.",
     material: "Gabardina", tallas: "Cintura 38 a 58", plazo: "3 a 7 días", leadDays: 7, modalidad: "Stock express", baseCostUsd: 8,
     nota: "Versión hombre y mujer · opción sin logo disponible",
-    colors: ["Beige", "Negro", "Azul marino", "Gris"],
+    colors: ["Azul marino", "Negro", "Gris", "Beige"],
     pricing: tramos({ 10: 16500, 25: 15990, 50: 14990, 100: 13990, 250: 12990 }), techniques: [SERIGRAFIA_1C, BORDADO, TRANSFER_DTF], areas: [PECHO_IZQ],
   }),
   product({
@@ -674,7 +674,7 @@ export const mockCorporateProducts: CorporateProduct[] = [
     intro: "Pantalón gabardina de corte recto tipo docker, para uniforme formal/casual. Calce limpio y resistente al uso diario.",
     material: "Gabardina", tallas: "Cintura 38 a 58", plazo: "3 a 7 días", leadDays: 7, modalidad: "Stock express", baseCostUsd: 8,
     nota: "Versión hombre y mujer (calce distinto) · opción sin logo disponible",
-    colors: ["Beige", "Negro", "Gris", "Azul marino"],
+    colors: ["Azul marino", "Negro", "Gris", "Beige"],
     pricing: tramos({ 10: 16990, 25: 15990, 50: 14990, 100: 13990, 250: 12990 }), techniques: [SERIGRAFIA_1C, BORDADO, TRANSFER_DTF], areas: [PECHO_IZQ],
   }),
   product({
@@ -701,7 +701,7 @@ export const mockCorporateProducts: CorporateProduct[] = [
     intro: "Pantalón outdoor en ripstop: técnico, liviano y resistente para terreno, expediciones y outdoor. Bolsillos utilitarios.",
     material: "Tela ripstop", tallas: "Cintura 38 a 60", plazo: "3 a 7 días", leadDays: 7, modalidad: "Stock express", baseCostUsd: 12,
     nota: "Hombre y mujer separados",
-    colors: ["Beige", "Negro", "Gris"],
+    colors: ["Negro", "Gris", "Beige"],
     pricing: tramos({ 10: 25500, 25: 24990, 50: 24500, 100: 23500, 250: 22500 }), techniques: [SERIGRAFIA_1C, BORDADO, TRANSFER_DTF], areas: [PECHO_IZQ],
   }),
   product({
@@ -710,7 +710,7 @@ export const mockCorporateProducts: CorporateProduct[] = [
     intro: "Pantalón gabardina con spandex: el aliado del uniforme femenino que busca caída prolija y libertad de movimiento. Versión hombre también disponible.",
     material: "97% algodón · 3% spandex", tallas: "Cintura 36 a 58", plazo: "A confirmar al cotizar", leadDays: 7, modalidad: "Stock express", baseCostUsd: 8,
     nota: "Modelo mujer (versión hombre también disponible)",
-    colors: ["Beige", "Negro", "Azul marino", "Gris"],
+    colors: ["Azul marino", "Negro", "Gris", "Beige"],
     pricing: tramos({ 10: 16500, 25: 15990, 50: 14990, 100: 13990, 250: 12990 }), techniques: [SERIGRAFIA_1C, BORDADO, TRANSFER_DTF], areas: [PECHO_IZQ],
   }),
   product({
@@ -719,7 +719,7 @@ export const mockCorporateProducts: CorporateProduct[] = [
     intro: "Pantalón formal de pinzas en algodón, el clásico de oficina y eventos formales. Calce tailored para uniforme ejecutivo.",
     material: "100% algodón", tallas: "Cintura 40 a 64", plazo: "3 a 7 días", leadDays: 7, modalidad: "Stock express", baseCostUsd: 8,
     nota: "Modelo hombre",
-    colors: ["Gris", "Negro", "Azul marino", "Beige"],
+    colors: ["Azul marino", "Negro", "Gris", "Beige"],
     pricing: tramos({ 10: 16500, 25: 15990, 50: 14990, 100: 13990, 250: 13500 }), techniques: [SERIGRAFIA_1C, BORDADO, TRANSFER_DTF], areas: [PECHO_IZQ],
   }),
   product({

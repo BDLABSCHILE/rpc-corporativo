@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { CorporateProduct } from "@/lib/shopify/types";
 import { formatCLP } from "@/lib/utils/money";
+import { tintForColor } from "@/lib/brand/color-tints";
 import { StockBadge, type StockScenario } from "./StockBadge";
 import { LogoOverlayBadge } from "./LogoOverlayBadge";
 
@@ -38,12 +39,22 @@ export function ProductCard({ product, stockTotal }: Props) {
     ? "on_demand"
     : stockScenario(stockTotal);
 
+  // Las fotos base son crema/blancas (lienzo para teñir). Para que el catálogo
+  // no se vea "todo beige", teñimos la card con el color REPRESENTATIVO del
+  // producto = su primera variante (mismo que abre el configurador). Multiply
+  // sobre base clara da el color real; la máscara alpha limita el tinte a la
+  // prenda y deja el fondo gris del slot intacto. Igual mecánica que LivePreview.
+  const repColor = product.variants[0]?.selectedOptions.find(
+    (o) => o.name === "Color",
+  )?.value;
+  const tintHex = tintForColor(repColor);
+
   return (
     <Link
       href={`/catalogo/${product.handle}` as never}
       className="group flex flex-col gap-3 sm:gap-4"
     >
-      <div className="relative aspect-square w-full overflow-hidden bg-rpc-image-bg-light">
+      <div className="relative aspect-square w-full overflow-hidden bg-rpc-image-bg-light isolate">
         <Image
           src={product.featuredImage.url}
           alt={product.featuredImage.altText ?? product.title}
@@ -51,6 +62,25 @@ export function ProductCard({ product, stockTotal }: Props) {
           sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 50vw"
           className="object-cover transition duration-500 group-hover:scale-[1.02]"
         />
+        {tintHex && (
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 transition duration-500 group-hover:scale-[1.02]"
+            style={{
+              backgroundColor: tintHex,
+              mixBlendMode: "multiply",
+              WebkitMaskImage: `url("${product.featuredImage.url}")`,
+              maskImage: `url("${product.featuredImage.url}")`,
+              maskMode: "alpha",
+              WebkitMaskSize: "cover",
+              maskSize: "cover",
+              WebkitMaskPosition: "center",
+              maskPosition: "center",
+              WebkitMaskRepeat: "no-repeat",
+              maskRepeat: "no-repeat",
+            }}
+          />
+        )}
         <FlowBadge tags={product.tags} />
         {/* Client island: si el visitante subió su logo, lo muestra aplicado
             sobre la foto. El card completo sigue siendo server component. */}

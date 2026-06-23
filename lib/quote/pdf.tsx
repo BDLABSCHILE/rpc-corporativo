@@ -417,7 +417,7 @@ export function QuotePDF({
               · Antes de producir te enviamos el mockup digital con tu logo aplicado, para tu aprobación.
             </Text>
             <Text style={styles.termItem}>
-              · Plazos de entrega según disponibilidad: stock express en Chile o fabricación a medida. El equipo te confirma el plazo exacto.
+              · Plazos de entrega según disponibilidad: stock en Chile para personalizar o fabricación de la línea de cocina y uniformes. El equipo te confirma el plazo exacto.
             </Text>
             <Text style={styles.termItem}>
               · Costo y plazo de despacho a confirmar según volumen y destino.

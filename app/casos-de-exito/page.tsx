@@ -39,7 +39,7 @@ const CLIENTS: readonly string[] = [
   "Mega",
   "Turbus",
   "Colmena",
-  "Betterfly",
+  "Sodimac",
   "Bosca",
   "Viña Santa Carolina",
   "Red de Salud UC Christus",
@@ -67,8 +67,8 @@ const PROJECT_TYPES: readonly ProjectType[] = [
     icon: <DiamondIcon className="h-6 w-6" />,
   },
   {
-    title: "Producción a medida",
-    body: "Proyectos especiales fabricados desde cero en nuestras fábricas, con asesoría de diseño incluida. Para marcas que necesitan una prenda propia — no un genérico con logo — y planifican con tiempo.",
+    title: "Ropa de cocina y uniformes a medida",
+    body: "Fabricamos nuestra propia línea de cocina y uniformes —delantales, chaquetas de chef, gorros y cofias— a tu medida y con asesoría de diseño. Para equipos que necesitan vestuario propio con su marca.",
     icon: <PencilIcon className="h-6 w-6" />,
   },
 ];

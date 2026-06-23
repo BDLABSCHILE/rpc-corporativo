@@ -97,10 +97,11 @@ export function CatalogFilters({ products, active }: Props) {
       <FilterGroup
         label="Ordenar por"
         items={[
-          // Default: mayor a menor precio para que las prendas ancla (más
-          // caras: chaquetas, polerones) abran el catálogo.
-          { label: "Precio: mayor a menor", value: undefined, active: !active.sort || active.sort === "price_desc" },
+          // Default: orden curado del catálogo (parte por poleras, no por las
+          // prendas más caras como outdoor). Precio queda como opción explícita.
+          { label: "Destacados", value: undefined, active: !active.sort },
           { label: "Precio: menor a mayor", value: "price_asc", active: active.sort === "price_asc" },
+          { label: "Precio: mayor a menor", value: "price_desc", active: active.sort === "price_desc" },
         ]}
         paramKey="sort"
         current={active}
@@ -158,9 +159,9 @@ function buildQuery(p: CatalogSearchParams): string {
   if (p.category) sp.set("category", p.category);
   if (p.technique) sp.set("technique", p.technique);
   if (p.inStock) sp.set("inStock", p.inStock);
-  // Sólo price_asc se persiste en URL: el default (price_desc) queda implícito
-  // como "no sort" para que la URL canónica sea más limpia.
-  if (p.sort === "price_asc") sp.set("sort", p.sort);
+  // El default (Destacados) queda implícito como "no sort"; ambos órdenes de
+  // precio se persisten para que la URL refleje la selección.
+  if (p.sort) sp.set("sort", p.sort);
   return sp.toString();
 }
 
@@ -185,11 +186,12 @@ export function applyFilters(
       (x) => (stockByProductId[x.id] ?? 0) > STOCK_READY_THRESHOLD,
     );
   }
-  // Default: mayor a menor precio (prendas ancla al inicio).
-  // Si el usuario explícitamente elige price_asc, respetamos eso.
+  // Default (sin sort): respeta el orden curado del catálogo (mock array),
+  // que parte por poleras y deja las prendas más caras (outdoor) más abajo.
+  // El usuario puede pedir precio asc/desc explícitamente.
   if (p.sort === "price_asc") {
     out.sort((a, b) => firstPrice(a) - firstPrice(b));
-  } else {
+  } else if (p.sort === "price_desc") {
     out.sort((a, b) => firstPrice(b) - firstPrice(a));
   }
   return out;

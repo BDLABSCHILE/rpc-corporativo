@@ -7,7 +7,7 @@
 const FAQS = [
   {
     q: "¿Cuál es el mínimo de pedido por producto?",
-    a: "Depende del producto y del modo de trabajo. Los productos con stock express en Chile operan con mínimos bajos; los proyectos de fabricación a medida requieren volúmenes mayores porque se producen desde cero. El mínimo concreto lo ves en cada ficha del catálogo, y si tienes dudas el equipo te lo confirma al cotizar.",
+    a: "Depende del producto. La mayoría son productos en stock en Chile que solo se personalizan, así que operan con mínimos bajos. Nuestra línea de ropa de cocina y uniformes, que fabricamos a tu medida, puede pedir un mínimo algo mayor. El mínimo concreto lo ves en cada ficha del catálogo, y si tienes dudas el equipo te lo confirma al cotizar.",
   },
   {
     q: "¿Qué técnica de personalización me conviene?",
@@ -23,7 +23,7 @@ const FAQS = [
   },
   {
     q: "¿Cuáles son los plazos de entrega? ¿Tienen plazo express?",
-    a: "Los pedidos con stock express en Chile salen rápido porque la prenda ya está acá y solo se personaliza; los proyectos de fabricación a medida toman más, porque se producen desde cero. Si necesitas algo realmente urgente, manejamos una opción express de 2 días para volúmenes bajos. El plazo concreto depende del producto, la cantidad y la técnica, y se confirma en la cotización en menos de 24 horas.",
+    a: "La mayoría de los productos están en stock en Chile y salen rápido, porque la prenda ya está acá y solo se personaliza. La ropa de cocina y los uniformes que fabricamos a medida toman algo más. Si necesitas algo realmente urgente, manejamos una opción express de 2 días para volúmenes bajos. El plazo concreto depende del producto, la cantidad y la técnica, y se confirma en la cotización en menos de 24 horas.",
   },
   {
     q: "¿Cómo funciona el descuento por volumen?",

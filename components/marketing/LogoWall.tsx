@@ -30,7 +30,7 @@ const CLIENTS: Client[] = [
   { name: "Mega", logo: "mega.svg" },
   { name: "Tur Bus", logo: "tur-bus.png" },
   { name: "Colmena", logo: "colmena.png" },
-  { name: "Betterfly", logo: "betterfly.svg" },
+  { name: "Sodimac", logo: "sodimac.svg" },
   { name: "Bosca", logo: "bosca.png" },
   { name: "Viña Santa Carolina", logo: "vina-santa-carolina.png" },
   { name: "Red de Salud UC CHRISTUS", logo: "red-salud-uc-christus.svg" },

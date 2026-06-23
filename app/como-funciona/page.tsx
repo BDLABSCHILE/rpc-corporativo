@@ -13,14 +13,14 @@ import {
 export const metadata: Metadata = {
   title: "Cómo funciona",
   description:
-    "Dos caminos para vestir a tu equipo: stock express en Chile o fabricación a medida. Cotiza online, recibe mockup y confirmación en menos de 24 horas, producimos y entregamos.",
+    "Stock en Chile listo para personalizar con tu logo, más fabricación propia de ropa de cocina y uniformes. Cotiza online, recibe mockup y confirmación en menos de 24 horas, y entregamos.",
 };
 
 /**
- * /como-funciona — el modelo dual de Ropa Publicitaria Chile como protagonista.
+ * /como-funciona — el modelo de Ropa Publicitaria Chile como protagonista.
  *
- * No inventa nada: stock express + fabricación a medida es el modelo real del
- * cliente (40+ años fabricando, fábricas propias en Oriente, stock en Chile).
+ * Modelo real del cliente: stock en Chile que se personaliza con tu logo +
+ * fabricación propia de la línea de cocina y uniformes (40+ años de oficio).
  * Sin plazos numéricos: cada ficha del catálogo indica el suyo y el equipo lo
  * confirma al cerrar. Promesa real: respuesta en menos de 24 horas.
  */
@@ -37,10 +37,10 @@ export default function ComoFuncionaPage() {
             Dos caminos, un mismo equipo detrás.
           </h1>
           <p className="mt-6 max-w-2xl font-rpc-body text-base normal-case tracking-normal text-rpc-text/75 sm:mt-8 sm:text-lg">
-            Llevamos más de 40 años fabricando vestuario corporativo y
-            merchandising. Por eso podemos ofrecerte lo mejor de dos mundos:
-            stock listo en Chile para personalizar rápido, o fabricación a tu
-            medida cuando el proyecto pide algo único.
+            Llevamos más de 40 años en vestuario corporativo y merchandising.
+            Por eso podemos ofrecerte lo mejor de dos mundos: stock listo en
+            Chile para personalizar rápido, y fabricación propia de nuestra
+            línea de ropa de cocina y uniformes.
           </p>
         </div>
       </section>
@@ -100,20 +100,19 @@ export default function ComoFuncionaPage() {
                 Camino B
               </p>
               <h3 className="mt-3 font-rpc-heading text-xl text-rpc-text sm:text-2xl">
-                Fabricación a medida
+                Fabricación propia: cocina y uniformes
               </h3>
               <p className="mt-4 font-rpc-body text-sm normal-case tracking-normal text-rpc-text/70 sm:text-base">
-                Para proyectos especiales fabricamos desde cero en nuestras
-                fábricas en Oriente, con asesoría de diseño incluida. Telas,
-                colores, modelos y acabados a tu medida: el resultado es
-                exactamente la prenda que tu marca necesita. El plazo se
-                planifica contigo al cotizar.
+                Fabricamos nuestra propia línea de ropa de cocina y uniformes
+                —delantales, chaquetas de chef, gorros y cofias— a tu medida y
+                con asesoría de diseño. Telas, colores y acabados a elección,
+                con tu marca. El plazo se planifica contigo al cotizar.
               </p>
               <ul className="mt-6 space-y-2">
                 {[
-                  "Más de 40 años de experiencia fabricando",
-                  "Asesoría de diseño para tu proyecto",
-                  "Ideal para volúmenes grandes y prendas únicas",
+                  "Más de 40 años de oficio fabricando uniformes",
+                  "Asesoría de diseño para tu línea",
+                  "Telas, colores y acabados a tu elección",
                 ].map((item) => (
                   <li
                     key={item}
@@ -161,7 +160,7 @@ export default function ComoFuncionaPage() {
             number="03"
             title="Producción"
             icon={<ConfigureIcon className="h-7 w-7 text-rpc-text" />}
-            body="Con tu aprobación, partimos. Si es stock express, tu pedido pasa directo a personalización en Chile. Si es fabricación a medida, la producción corre en nuestras fábricas con seguimiento del equipo de principio a fin."
+            body="Con tu aprobación, partimos. Si es un producto en stock, tu pedido pasa directo a personalización en Chile. Si es ropa de cocina o uniformes que fabricamos a medida, la producción corre en nuestro taller con seguimiento del equipo de principio a fin."
             highlights={[
               "Bordado, serigrafía, transfer DTF y sublimación",
               "Más de 40 años de oficio detrás de cada prenda",

@@ -8,8 +8,8 @@ import {
 
 /**
  * Los 4 pilares de la propuesta RPC: cotización online, preview del logo,
- * stock express y fabricación propia. Copy sin cifras inventadas — solo los
- * claims permitidos (40+ años, modelo dual).
+ * stock express en Chile y fabricación propia de la línea de cocina/uniformes.
+ * Copy sin cifras inventadas — solo los claims permitidos (40+ años).
  */
 const PILLARS: readonly {
   icon: ComponentType<{ className?: string }>;
@@ -33,8 +33,8 @@ const PILLARS: readonly {
   },
   {
     icon: ConfigureIcon,
-    title: "Fabricación propia a medida",
-    body: "Más de 40 años fabricando. Para proyectos especiales producimos a medida en nuestras fábricas en Oriente, con asesoría de diseño incluida.",
+    title: "Fabricación propia de cocina y uniformes",
+    body: "Más de 40 años de oficio. Fabricamos nuestra propia línea de ropa de cocina y uniformes —delantales, chaquetas de chef, gorros y cofias— a tu medida y con asesoría de diseño.",
   },
 ];
 

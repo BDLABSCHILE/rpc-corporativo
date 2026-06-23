@@ -1,13 +1,18 @@
 import Image from "next/image";
 import Link from "next/link";
+import { tintForColor } from "@/lib/brand/color-tints";
+
+// Color con que se muestra el polo del hero: azul marino (su variante por
+// defecto). La foto base es crema; el tinte multiply la lleva al color real.
+const HERO_POLO_IMG = "/products/polera-pique-cuello-botones-manga-corta.webp";
+const HERO_POLO_TINT = tintForColor("Azul marino");
 
 /**
  * Hero de Ropa Publicitaria Chile.
  *
- * Izquierda: titular grande Archivo bold + modelo dual (stock express +
- * fabricación a medida) + CTA dual. Derecha: composición CSS con el rombo
- * coral del logo como motivo gráfico — sin fotos inventadas; cuando el
- * cliente entregue fotografía real de fábrica/productos se reemplaza.
+ * Izquierda: titular grande Archivo bold + propuesta (stock en Chile para
+ * personalizar + fabricación propia de cocina/uniformes) + CTA dual. Derecha:
+ * foto del polo (teñida a azul marino) con motivos de marca.
  *
  * Abajo: strip de categorías reales del cliente linkeando al catálogo.
  */
@@ -43,10 +48,10 @@ export function Hero() {
           </h1>
 
           <p className="mt-6 max-w-xl text-base leading-relaxed text-rpc-text/75 sm:text-lg">
-            Más de 40 años fabricando vestuario corporativo y merchandising.
-            Stock express en Chile para pedidos con poco plazo, y fabricación
-            a medida en nuestras fábricas en Oriente para proyectos especiales,
-            con asesoría de diseño.
+            Más de 40 años en vestuario corporativo y merchandising. Tenemos
+            stock en Chile listo para personalizar con tu logo y entregar con
+            poco plazo, y fabricamos nuestra propia línea de ropa de cocina y
+            uniformes, con asesoría de diseño.
           </p>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -77,16 +82,35 @@ export function Hero() {
           <div aria-hidden className="absolute -left-6 -top-6 h-28 w-28 rotate-45 rounded-3xl bg-rpc-accent/15" />
           <div aria-hidden className="absolute -bottom-3 right-6 h-16 w-16 rotate-45 rounded-2xl border-2 border-rpc-info" />
 
-          {/* Tarjeta con la foto de estudio */}
-          <div className="relative aspect-square overflow-hidden rounded-[28px] bg-rpc-image-bg-light shadow-xl shadow-rpc-text/10 ring-1 ring-rpc-border">
+          {/* Tarjeta con la foto de estudio (polo en azul marino vía tinte) */}
+          <div className="relative aspect-square overflow-hidden rounded-[28px] bg-rpc-image-bg-light shadow-xl shadow-rpc-text/10 ring-1 ring-rpc-border isolate">
             <Image
-              src="/products/polera-pique-cuello-botones-manga-corta.webp"
-              alt="Polera piqué corporativa en blanco, lista para personalizar con tu logo"
+              src={HERO_POLO_IMG}
+              alt="Polera piqué corporativa azul marino, lista para personalizar con tu logo"
               fill
               priority
               sizes="(min-width: 1024px) 28rem, 0px"
               className="object-cover"
             />
+            {HERO_POLO_TINT && (
+              <div
+                aria-hidden
+                className="pointer-events-none absolute inset-0"
+                style={{
+                  backgroundColor: HERO_POLO_TINT,
+                  mixBlendMode: "multiply",
+                  WebkitMaskImage: `url("${HERO_POLO_IMG}")`,
+                  maskImage: `url("${HERO_POLO_IMG}")`,
+                  maskMode: "alpha",
+                  WebkitMaskSize: "cover",
+                  maskSize: "cover",
+                  WebkitMaskPosition: "center",
+                  maskPosition: "center",
+                  WebkitMaskRepeat: "no-repeat",
+                  maskRepeat: "no-repeat",
+                }}
+              />
+            )}
           </div>
 
           {/* Rombo coral con los 40+ años, montado sobre la esquina */}

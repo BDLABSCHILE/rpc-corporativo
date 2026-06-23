@@ -10,9 +10,9 @@ export function BrandFooter() {
         <div className="md:col-span-2">
           <Logo className="h-12 w-auto" />
           <p className="mt-6 max-w-sm text-sm leading-relaxed text-rpc-text/70">
-            Fabricantes de vestuario corporativo y merchandising desde 1982.
-            Stock express en Chile y fabricación a medida en nuestras fábricas,
-            con asesoría de diseño.
+            Vestuario corporativo y merchandising desde 1982. Stock en Chile
+            listo para personalizar con tu logo y fabricación propia de ropa de
+            cocina y uniformes, con asesoría de diseño.
           </p>
           <p className="mt-4 text-sm text-rpc-text/55">{CONTACT.direccion}</p>
         </div>
