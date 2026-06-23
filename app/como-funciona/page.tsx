@@ -64,7 +64,7 @@ export default function ComoFuncionaPage() {
                 Camino A
               </p>
               <h3 className="mt-3 font-rpc-heading text-xl text-rpc-text sm:text-2xl">
-                Stock Express
+                Stock en Chile
               </h3>
               <p className="mt-4 font-rpc-body text-sm normal-case tracking-normal text-rpc-text/70 sm:text-base">
                 Productos en stock en Chile, listos para personalizar con tu

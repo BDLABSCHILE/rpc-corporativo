@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     template: "%s · Ropa Publicitaria Chile",
   },
   description:
-    "Fabricantes con más de 40 años de experiencia. Cotiza poleras, polerones, camisas y merchandising personalizados con tu logo: precios por volumen, stock express en Chile y fabricación a medida.",
+    "Más de 40 años de experiencia. Cotiza poleras, polerones, camisas y merchandising personalizados con tu logo: precios por volumen, stock en Chile listo para personalizar y línea propia de ropa de cocina y uniformes.",
   metadataBase: new URL(
     process.env["NEXT_PUBLIC_SITE_URL"] ?? "https://ropapublicitariachile.cl",
   ),

@@ -8,7 +8,7 @@ import {
 
 /**
  * Los 4 pilares de la propuesta RPC: cotización online, preview del logo,
- * stock express en Chile y fabricación propia de la línea de cocina/uniformes.
+ * stock en Chile y fabricación propia de la línea de cocina/uniformes.
  * Copy sin cifras inventadas — solo los claims permitidos (40+ años).
  */
 const PILLARS: readonly {
@@ -28,7 +28,7 @@ const PILLARS: readonly {
   },
   {
     icon: BoltIcon,
-    title: "Stock express en Chile",
+    title: "Stock en Chile",
     body: "Mantenemos stock listo en Chile para pedidos con poco plazo y mínimos bajos. Respuesta rápida cuando la fecha aprieta.",
   },
   {

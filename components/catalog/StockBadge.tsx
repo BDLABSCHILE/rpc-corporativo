@@ -9,7 +9,7 @@ type Props = {
 };
 
 const COPY: Record<StockScenario, { dot: string; label: string }> = {
-  ready: { dot: "bg-emerald-500", label: "Stock inmediato" },
+  ready: { dot: "bg-emerald-500", label: "Disponible" },
   partial: { dot: "bg-amber-500", label: "Stock parcial" },
   on_demand: { dot: "bg-sky-500", label: "Bajo pedido" },
 };

@@ -88,7 +88,7 @@ export function CatalogFilters({ products, active }: Props) {
         label="Stock"
         items={[
           { label: "Todo", value: undefined, active: !active.inStock },
-          { label: "Solo stock inmediato", value: "ready", active: active.inStock === "ready" },
+          { label: "Solo disponibles", value: "ready", active: active.inStock === "ready" },
         ]}
         paramKey="inStock"
         current={active}

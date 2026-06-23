@@ -63,7 +63,7 @@ const PROJECT_TYPES: readonly ProjectType[] = [
   },
   {
     title: "Merchandising para eventos",
-    body: "Jockeys, gorros, bolsas y artículos promocionales con tu marca para activaciones, ferias y regalos corporativos. El camino stock express permite resolver pedidos con poco tiempo de anticipación.",
+    body: "Jockeys, gorros, bolsas y artículos promocionales con tu marca para activaciones, ferias y regalos corporativos. Tener stock en Chile permite resolver pedidos con poco tiempo de anticipación.",
     icon: <DiamondIcon className="h-6 w-6" />,
   },
   {

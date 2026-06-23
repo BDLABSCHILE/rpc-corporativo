@@ -133,7 +133,7 @@ function FlowBadge({ tags }: { tags: string[] }) {
   if (tags.includes("stock-express")) {
     return (
       <span className="absolute left-2 top-2 rounded-full bg-rpc-info px-2.5 py-1 text-[9px] font-medium uppercase tracking-[0.1em] text-white sm:text-[10px] sm:tracking-[0.12em]">
-        Stock Express
+        Stock
       </span>
     );
   }
