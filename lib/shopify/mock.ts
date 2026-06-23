@@ -660,10 +660,7 @@ export const mockCorporateProducts: CorporateProduct[] = [
     material: "Poplin", tallas: "S a 2XL", plazo: "3 a 7 días", leadDays: 7, modalidad: "Stock express", baseCostUsd: 6,
     nota: "Modelo unisex",
     colors: ["Azul marino", "Gris", "Negro"],
-    // ⚠️ Curva irregular según matriz devuelta 2026-06-23: 25u sube a 12.990
-    // (sobre los $11.990 de 10u y 50u). Mantenemos lo que envió la marca hasta
-    // que aclaren si es typo o cobro real.
-    pricing: tramos({ 10: 11990, 25: 12990, 50: 11990, 100: 10500, 250: 9500 }), techniques: [SERIGRAFIA_1C, BORDADO, TRANSFER_DTF], areas: [PECHO_IZQ],
+    pricing: tramos({ 10: 11990, 25: 11990, 50: 11990, 100: 10500, 250: 9500 }), techniques: [SERIGRAFIA_1C, BORDADO, TRANSFER_DTF], areas: [PECHO_IZQ],
   }),
   product({
     key: "JEANS", handle: "pantalon-jeans",
