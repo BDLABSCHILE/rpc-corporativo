@@ -26,6 +26,10 @@ const FAQS = [
     a: "Los pedidos con stock express en Chile salen rápido porque la prenda ya está acá y solo se personaliza; los proyectos de fabricación a medida toman más, porque se producen desde cero. Si necesitas algo realmente urgente, manejamos una opción express de 2 días para volúmenes bajos. El plazo concreto depende del producto, la cantidad y la técnica, y se confirma en la cotización en menos de 24 horas.",
   },
   {
+    q: "¿Cómo funciona el descuento por volumen?",
+    a: "El descuento se calcula sobre el TOTAL de unidades del pedido, no por cada producto. Si pides 5 poleras y 5 polerones, son 10 unidades en total y ambos entran al tramo de 10 u. Si pides 30 unidades repartidas entre poleras y gorros, los dos productos cotizan en el tramo de 25 u. Mientras más unidades suma el pedido completo, mejor precio unitario en todo lo que va dentro.",
+  },
+  {
     q: "¿Cuánto influye el tamaño del logo en el precio?",
     a: "Manejamos tres tamaños: insignia (5 a 12 cm, típico al pecho), tamaño carta (~28 cm, como una hoja A4) y gigantografía (sobre 33 cm, espalda completa). El precio del estampado sube según el tamaño, y cada logo en una zona extra (pecho + espalda, por ejemplo) se cobra aparte. En la ficha del producto eliges la zona; en la cotización afinamos el tamaño exacto.",
   },

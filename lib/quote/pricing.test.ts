@@ -117,10 +117,11 @@ describe("calculateLinePricing", () => {
       expect(r.nextBreak).not.toBeNull();
       expect(r.nextBreak?.minQty).toBe(100);
       expect(r.nextBreak?.unitPriceNet).toBe(9000);
-      // Subiendo a 100u con el break 9000 vs 10000: ahorro neto = 100 * 1000 = 100.000
-      expect(r.nextBreak?.savings).toBe(100_000);
-      // ahorro bruto = 100.000 × 1.19 = 119.000
-      expect(r.nextBreak?.savingsGross).toBeCloseTo(119_000, 0);
+      // Descuento por total: si el pedido total sube al próximo break, esta
+      // línea (60u) ahorra (10000 - 9000) por unidad = 60 * 1000 = 60.000.
+      expect(r.nextBreak?.savings).toBe(60_000);
+      // ahorro bruto = 60.000 × 1.19 = 71.400
+      expect(r.nextBreak?.savingsGross).toBeCloseTo(71_400, 0);
     });
   });
 
@@ -221,6 +222,34 @@ describe("calculateLinePricing", () => {
       expect(r.savingsVsBaseline).toBe(625_000);
       // ahorro bruto = neto × 1.19 = 743.750
       expect(r.savingsVsBaselineGross).toBeCloseTo(743_750, 0);
+    });
+  });
+
+  describe("cartTotalQty (descuento por total del pedido)", () => {
+    it("usa cartTotalQty (no quantity) para decidir el tramo aplicado", () => {
+      // Esta línea tiene quantity=30 pero el pedido completo es 100u.
+      // Sin cartTotalQty caería al tramo 50u; con él entra al tramo 100u.
+      const r = calculateLinePricing({
+        product: makeProduct(),
+        quantity: 30,
+        technique: TECH_DTF,
+        printPositions: 1,
+        cartTotalQty: 100,
+      });
+      expect(r.appliedBreak.minQty).toBe(100);
+      expect(r.appliedBreak.unitPriceNet).toBe(9000);
+      // Subtotal sigue siendo sobre quantity=30: 30 * (9000 + 1200) = 306.000
+      expect(r.subtotalNet).toBe(306_000);
+    });
+
+    it("sin cartTotalQty mantiene el comportamiento anterior (por quantity)", () => {
+      const r = calculateLinePricing({
+        product: makeProduct(),
+        quantity: 30,
+        technique: TECH_DTF,
+        printPositions: 1,
+      });
+      expect(r.appliedBreak.minQty).toBe(50);
     });
   });
 

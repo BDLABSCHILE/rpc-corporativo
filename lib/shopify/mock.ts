@@ -93,13 +93,13 @@ const VINILO: PrintTechnique = {
 
 const SUBLIMACION: PrintTechnique = {
   id: "sublimacion",
-  label: "Sublimación",
+  label: "Sublimación (incluida)",
   description:
-    "Impresión total integrada a la tela (poliéster claro) o al accesorio. Precio se confirma al cotizar — la marca aún no entregó tarifa.",
-  basePriceUnit: 1390,
+    "Sublimación full color sobre el accesorio. En este catálogo viene incluida en el precio del producto (Bandanas) — no se cobra aparte.",
+  basePriceUnit: 0,
   extraPositionPrice: 0,
   setupFee: 0,
-  extraLeadDays: 4,
+  extraLeadDays: 0,
   availableAreaIds: ["pecho_centro", "espalda", "tazon_cara"],
 };
 
@@ -599,7 +599,7 @@ export const mockCorporateProducts: CorporateProduct[] = [
     intro: "Mandil largo en 100% poliéster, liviano y resistente para cocina y atención. Variante específica del Mandil Largo cuando se prefiere poliéster puro.",
     material: "100% poliéster", tallas: "Única", plazo: "10 a 15 días confección / 3 a 7 días si hay stock", leadDays: 12, modalidad: "Fabricación a medida", baseCostUsd: 3,
     colors: ["Negro", "Café", "Rojo", "Azul", "Blanco", "Verde", "Gris"],
-    priceHigh: 9900, priceLow: 6990, techniques: [SERIGRAFIA_1C, BORDADO, TRANSFER_DTF], areas: AREAS_DELANTAL,
+    pricing: tramos({ 10: 7990, 25: 7500, 50: 6990, 100: 5990 }), techniques: [SERIGRAFIA_1C, BORDADO, TRANSFER_DTF], areas: AREAS_DELANTAL,
   }),
   product({
     key: "GCHEF", handle: "gorro-chef",
@@ -608,7 +608,7 @@ export const mockCorporateProducts: CorporateProduct[] = [
     material: "Polycron", tallas: "Única", plazo: "10 a 15 días", leadDays: 15, modalidad: "Fabricación a medida", baseCostUsd: 3,
     nota: "Un color o bicolor a elección",
     colors: ["Blanco", "Negro"],
-    priceHigh: 7990, priceLow: 5500, techniques: [SERIGRAFIA_1C, BORDADO, TRANSFER_DTF], areas: [PECHO_CENTRO],
+    pricing: tramos({ 10: 5990, 25: 5500, 50: 4900, 100: 4500, 250: 3990 }), techniques: [SERIGRAFIA_1C, BORDADO, TRANSFER_DTF], areas: [PECHO_CENTRO],
   }),
   product({
     key: "COFIA", handle: "cofia",
@@ -617,7 +617,7 @@ export const mockCorporateProducts: CorporateProduct[] = [
     material: "A confirmar al cotizar", tallas: "Única", plazo: "10 a 15 días confección / 3 a 6 días si hay stock", leadDays: 12, modalidad: "Fabricación a medida", baseCostUsd: 2,
     nota: "Un color o bicolor a elección",
     colors: ["Blanco", "Negro"],
-    priceHigh: 6990, priceLow: 3990, techniques: [SERIGRAFIA_1C, BORDADO, TRANSFER_DTF], areas: [PECHO_CENTRO],
+    pricing: tramos({ 10: 4990, 25: 4500, 50: 3990, 100: 3500 }), techniques: [SERIGRAFIA_1C, BORDADO, TRANSFER_DTF], areas: [PECHO_CENTRO],
   }),
 
   // === Jockey extra (variante para estampado) =============================
@@ -626,10 +626,10 @@ export const mockCorporateProducts: CorporateProduct[] = [
     key: "JOCKGAB", handle: "jockey-gabardina-estampado",
     title: "Jockey Gabardina para Estampado", category: "Jockeys, Gorros y Accesorios", catTag: "gorros",
     intro: "Jockey 6 paneles en gabardina, con frente liso pensado especialmente para estampado o bordado prolijo. Variante específica para campañas con logo grande.",
-    material: "Gabardina", tallas: "Única", plazo: "A confirmar al cotizar", leadDays: 7, modalidad: "Stock express", minimo: 12, baseCostUsd: 3,
+    material: "Gabardina", tallas: "Única", plazo: "A confirmar al cotizar", leadDays: 7, modalidad: "Stock express", baseCostUsd: 3,
     nota: "Disponible en todos los colores",
     colors: ["Beige", "Negro", "Blanco", "Azul marino", "Gris", "Rojo"],
-    priceHigh: 6900, priceLow: 3990, techniques: [SERIGRAFIA_1C, BORDADO, TRANSFER_DTF], areas: AREAS_GORRO,
+    pricing: tramos({ 10: 4500, 25: 3500, 50: 3000, 100: 2500, 250: 2000 }), techniques: [SERIGRAFIA_1C, BORDADO, TRANSFER_DTF], areas: AREAS_GORRO,
   }),
 
   // === Pantalones =========================================================
@@ -705,7 +705,7 @@ export const mockCorporateProducts: CorporateProduct[] = [
     material: "Gabardina con forro polar", tallas: "Cintura 40 a 60", plazo: "3 a 7 días", leadDays: 7, modalidad: "Stock express", baseCostUsd: 10,
     nota: "Hombre y mujer (calce distinto)",
     colors: ["Azul marino", "Negro"],
-    priceHigh: 16500, priceLow: 14500, techniques: [SERIGRAFIA_1C, BORDADO, TRANSFER_DTF], areas: [PECHO_IZQ],
+    pricing: tramos({ 10: 15500, 25: 14500, 50: 13990, 100: 12990 }), techniques: [SERIGRAFIA_1C, BORDADO, TRANSFER_DTF], areas: [PECHO_IZQ],
   }),
 ];
 

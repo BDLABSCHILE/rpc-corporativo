@@ -161,6 +161,10 @@ async function repriceLines(lines: CartLine[]): Promise<RepriceResult> {
   const productCache = new Map<string, CorporateProduct | null>();
   const repriced: CartLine[] = [];
 
+  // Descuento por VOLUMEN aplica sobre el TOTAL del pedido (confirmado por
+  // RPC). El tramo de cada línea se calcula con esta suma, no con su quantity.
+  const cartTotalQty = lines.reduce((sum, l) => sum + l.quantity, 0);
+
   for (const line of lines) {
     let product = productCache.get(line.productHandle);
     if (product === undefined) {
@@ -208,6 +212,8 @@ async function repriceLines(lines: CartLine[]): Promise<RepriceResult> {
         // printPositions es siempre 1 en este flujo.
         technique,
         printPositions: 1,
+        // Descuento por TOTAL del pedido (ver comentario en repriceLines).
+        cartTotalQty,
       });
     } catch (err) {
       console.error(

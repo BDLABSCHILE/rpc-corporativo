@@ -12,6 +12,17 @@ export type PricingInput = {
   technique: PrintTechnique;
   /** Cantidad de zonas de impresión donde se aplica el logo. ≥ 1. */
   printPositions: number;
+  /**
+   * Cantidad TOTAL de unidades del pedido (sumando todas las líneas del
+   * carrito). Si viene, define el tramo de descuento por volumen que se le
+   * aplica a ESTA línea — confirmado por RPC: "el descuento aplica por total
+   * del pedido, no por producto" (ej: 5 poleras + 5 polerones = 10 u totales
+   * y ambos productos entran al tramo de 10 u, no al tramo de 5).
+   *
+   * Si NO viene (ej. PDP mirando un solo producto), se usa `quantity` y se
+   * cae al comportamiento anterior.
+   */
+  cartTotalQty?: number;
 };
 
 /**
@@ -28,7 +39,7 @@ export type PricingInput = {
  * Útil para llamarla desde Server Components y desde tests con Vitest.
  */
 export function calculateLinePricing(input: PricingInput): LinePricing {
-  const { product, quantity, technique, printPositions } = input;
+  const { product, quantity, technique, printPositions, cartTotalQty } = input;
 
   if (quantity <= 0) {
     throw new RangeError("La cantidad debe ser positiva.");
@@ -48,7 +59,9 @@ export function calculateLinePricing(input: PricingInput): LinePricing {
     );
   }
 
-  const appliedBreak = findApplicableBreak(sortedBreaks, quantity);
+  // Cantidad que define el tramo: total del pedido (si se pasó) o de la línea.
+  const qtyForBreak = cartTotalQty ?? quantity;
+  const appliedBreak = findApplicableBreak(sortedBreaks, qtyForBreak);
   const nextBreak = findNextBreak(sortedBreaks, appliedBreak);
 
   const unitPriceNet = appliedBreak.unitPriceNet;
@@ -66,13 +79,10 @@ export function calculateLinePricing(input: PricingInput): LinePricing {
     quantity * Math.max(0, baselineBreak.unitPriceNet - unitPriceNet);
   const savingsVsBaselineGross = savingsVsBaseline * (1 + IVA_RATE);
 
+  // Ahorro si el TOTAL del pedido subiera al próximo tramo. Sobre esta línea
+  // específica, el ahorro es lineal a su quantity (no a la del próximo break).
   const nextSavingsNet = nextBreak
-    ? savingsAtNextBreak({
-        currentBreak: appliedBreak,
-        nextBreak,
-        customizationUnitPrice,
-        setupFee,
-      })
+    ? quantity * Math.max(0, appliedBreak.unitPriceNet - nextBreak.unitPriceNet)
     : 0;
 
   return {
@@ -131,26 +141,3 @@ function findNextBreak(
   return sortedBreaks[idx + 1];
 }
 
-/**
- * Ahorro AT (en el momento) si el cliente subiera la cantidad al próximo break.
- * Comparamos el costo total con la cantidad actual vs el costo total con
- * la cantidad mínima del próximo break (ambos con el precio del nuevo break).
- *
- * Esto es útil para mostrar: "Sube a 100 unidades y ahorras $X totales".
- * El "ahorro" puede ser negativo (sube unidades = sube total). El consumer
- * de este número debe decidir cómo presentarlo.
- */
-function savingsAtNextBreak(args: {
-  currentBreak: VolumeBreak;
-  nextBreak: VolumeBreak;
-  customizationUnitPrice: number;
-  setupFee: number;
-}): number {
-  const { currentBreak, nextBreak, customizationUnitPrice, setupFee } = args;
-  const qtyAtNext = nextBreak.minQty;
-  const totalAtCurrent =
-    qtyAtNext * (currentBreak.unitPriceNet + customizationUnitPrice) + setupFee;
-  const totalAtNext =
-    qtyAtNext * (nextBreak.unitPriceNet + customizationUnitPrice) + setupFee;
-  return Math.max(0, totalAtCurrent - totalAtNext);
-}

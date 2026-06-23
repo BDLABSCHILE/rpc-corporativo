@@ -6,8 +6,10 @@
 > reemplazarla con la marca. Ordenado por prioridad.
 >
 > Última actualización: 2026-06-23 · catálogo de **47 productos reales** en 7
-> categorías + **reglas comerciales y precios de técnicas CONFIRMADOS por la
-> marca** en la matriz devuelta el 2026-06-23.
+> categorías + **TODAS las reglas comerciales, precios de técnicas y tramos
+> por cantidad CONFIRMADOS por la marca** (matriz devuelta 2026-06-23 +
+> follow-up WhatsApp con los 5 productos faltantes y las 4 reglas
+> pendientes). El cotizador ya opera con datos 100% reales.
 
 ---
 
@@ -56,39 +58,39 @@ invisible, fondo gris de estudio). Se ven profesionales y consistentes, pero
 - Cada producto muestra hoy un solo color "hero"; las fotos por color quedan
   pendientes.
 
-### 2. Tramos exactos por producto (la marca no llenó esta columna)
-La marca **no completó los tramos por cantidad** producto a producto
-(25 u / 50 u / 250 u / 500 u / 1.000 u quedaron en blanco). Solo entregó tope
-del rango (10 u) y piso (100 u). Hoy interpolamos los intermedios con la regla
-"sobre 50 baja harto".
-- **Pedir:** los tramos reales si quieren precios por volumen 100% exactos.
-  Si no, podemos seguir con la interpolación (es buena aproximación).
+### 2. ✅ Tramos exactos por producto — RESUELTO
+La marca devolvió la planilla `Precios.xlsx` el 2026-06-23 con los tramos
+10 / 25 / 50 / 100 / 250 u para todos los productos. Cargados al sitio
+producto a producto. Tramos 500 u y 1.000 u: la marca no los cotiza.
 
-### 3. Sublimación: precio y mínimo
-La marca **no entregó precio ni mínimo** para sublimación. La técnica está
-publicada (la usa Bandanas), con precio de referencia $1.390 y nota "se confirma
-al cotizar".
+### 3. ✅ Sublimación — RESUELTO
+La marca aclaró que la sublimación **viene incluida** en el precio del
+producto (Bandanas) — no se cobra aparte. La técnica quedó con `basePriceUnit:
+0` y descripción "sublimación incluida".
 
-### 4. Setup de serigrafía
-La marca confirmó setup para **bordado** (gratis sobre 50 u) pero **dejó en
-blanco** el de serigrafía. Hoy lo asumimos en $0. Confirmar.
+### 4. ✅ Setup de serigrafía — RESUELTO
+NO se cobra setup en serigrafía. El sitio ya tiene `setupFee: 0`. Confirmado.
 
-### 5. Recargo por logo complejo (degradados, mucho detalle)
-Quedó en blanco. Confirmar si suma $ extra y de qué orden.
+### 5. ✅ Logo complejo — RESUELTO
+La marca aclaró: "Se hace en DTF y el precio es similar". O sea, si el cliente
+quiere un logo con degradados/detalle, se deriva a la técnica DTF (que ya cobra
+sus tarifas). NO hay recargo extra por complejidad.
 
-### 6. Descuento por volumen — ¿por producto o por pedido total?
-Quedó en blanco. Hoy aplicamos por producto.
+### 6. ✅ Descuento por volumen: por TOTAL del pedido — RESUELTO
+La marca confirmó: el descuento aplica sobre la cantidad TOTAL del pedido (no
+por producto). Implementado en `lib/quote/pricing.ts` con el parámetro
+`cartTotalQty`: en el cotizador, el tramo de cada línea se decide sumando todas
+las líneas. Si pides 5 poleras + 5 polerones, ambos cotizan en el tramo de 10 u.
 
 ### 7. UI pendiente: selector de tamaño del logo
 El sitio cobra el precio **insignia** por defecto. Para reflejar carta /
 gigantografía hay que agregar un selector en el configurador (1 hora de trabajo
-cuando decidamos hacerlo).
+cuando decidamos hacerlo). No es bloqueante para lanzar.
 
-### 8. Los 5 productos del último incremento (#43–#47) no fueron evaluados
+### 8. ✅ Los 5 productos del último incremento — RESUELTOS
 Gorro de Chef, Cofia, Mandil Largo Poliéster, Jockey Gabardina para Estampado y
-Pantalón Cargo Forro Polar **no estaban en la matriz que devolvieron** (porque
-les mandé la versión anterior). Cargados con sus rangos, pero la marca aún no
-los validó.
+Pantalón Cargo Forro Polar — la marca los cotizó el 2026-06-23 vía WhatsApp.
+Cargados al sitio con sus tramos reales.
 
 ---
 

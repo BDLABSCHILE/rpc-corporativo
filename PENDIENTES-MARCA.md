@@ -7,15 +7,14 @@
 >
 > Última actualización: 2026-06-23.
 >
-> ✅ **La marca devolvió la matriz** con las reglas comerciales y los precios de
-> técnicas confirmados (IVA neto, rango sin logo, descuento desde 50 u, precios
-> por tamaño insignia/carta/gigantografía, despacho, pago, devoluciones…). Eso
-> está cargado en el sitio. Esta lista se acortó muchísimo respecto de la
-> versión anterior — quedan los puntos que aún no respondieron.
+> ✅ **Precios y reglas comerciales 100% cargados.** La marca devolvió la
+> matriz con todos los tramos por producto y, en un segundo intercambio,
+> resolvió las 4 reglas que estaban en blanco y los 5 productos del último
+> incremento. El cotizador opera con datos reales.
 
 ---
 
-## 🔴 1. Imprescindible para activar la web en vivo
+## 🔴 1. Lo único imprescindible para activar la web en vivo
 
 1. **Correo de cotizaciones y contacto.** Hoy los formularios funcionan pero NO
    envían correo (modo prueba). Para activarlos necesitamos:
@@ -23,16 +22,6 @@
    - **A qué casilla** deben llegar las cotizaciones y los mensajes de contacto.
 2. **Dominio.** Confirmar para apuntar **ropapublicitariachile.cl** al sitio nuevo
    (hoy vive en una URL temporal de Vercel). Requiere acceso al DNS del dominio.
-3. **Precios — lo que aún falta cerrar:**
-   - **Tramos exactos por producto** (25 / 50 / 250 / 500 / 1.000 u). La marca
-     no llenó esa columna producto a producto; hoy los interpolamos con buena
-     aproximación. Si quieren totales 100% reales, hay que pedirlos.
-   - **Sublimación**: precio y mínimo (en blanco en la matriz devuelta).
-   - **Setup de serigrafía**: confirmar si hay cargo de setup y desde qué cantidad
-     se exime (el bordado ya lo confirmaron: gratis sobre 50 u).
-   - **Recargo por logo complejo** (degradados / mucho detalle): cuánto suma.
-   - **Descuento por volumen**: confirmar si aplica por producto (lo que
-     asumimos hoy) o por pedido total.
 
 ---
 
