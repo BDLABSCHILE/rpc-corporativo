@@ -558,6 +558,44 @@ export const mockCorporateProducts: CorporateProduct[] = [
     colors: ["Negro", "Rojo", "Blanco", "Café", "Verde"],
     priceHigh: 10990, priceLow: 6990, techniques: [SERIGRAFIA_1C, BORDADO, TRANSFER_DTF], areas: AREAS_DELANTAL,
   }),
+  product({
+    key: "MANDLP", handle: "mandil-largo-poliester",
+    title: "Mandil Largo Poliéster", category: "Delantales y Uniformes", catTag: "uniformes",
+    intro: "Mandil largo en 100% poliéster, liviano y resistente para cocina y atención. Variante específica del Mandil Largo cuando se prefiere poliéster puro.",
+    material: "100% poliéster", tallas: "Única", plazo: "10 a 15 días confección / 3 a 7 días si hay stock", leadDays: 12, modalidad: "Fabricación a medida", baseCostUsd: 3,
+    colors: ["Negro", "Café", "Rojo", "Azul", "Blanco", "Verde", "Gris"],
+    priceHigh: 9900, priceLow: 6990, techniques: [SERIGRAFIA_1C, BORDADO, TRANSFER_DTF], areas: AREAS_DELANTAL,
+  }),
+  product({
+    key: "GCHEF", handle: "gorro-chef",
+    title: "Gorro de Chef", category: "Delantales y Uniformes", catTag: "uniformes",
+    intro: "Gorro alto de chef en Polycron, el complemento clásico del uniforme de cocina. Acepta un color o combinación bicolor.",
+    material: "Polycron", tallas: "Única", plazo: "10 a 15 días", leadDays: 15, modalidad: "Fabricación a medida", baseCostUsd: 3,
+    nota: "Un color o bicolor a elección",
+    colors: ["Blanco", "Negro"],
+    priceHigh: 7990, priceLow: 5500, techniques: [SERIGRAFIA_1C, BORDADO, TRANSFER_DTF], areas: [PECHO_CENTRO],
+  }),
+  product({
+    key: "COFIA", handle: "cofia",
+    title: "Cofia", category: "Delantales y Uniformes", catTag: "uniformes",
+    intro: "Cofia redonda con elástico, esencial en cocinas y faenas con normas de higiene. Disponible en un solo color o combinación bicolor.",
+    material: "A confirmar al cotizar", tallas: "Única", plazo: "10 a 15 días confección / 3 a 6 días si hay stock", leadDays: 12, modalidad: "Fabricación a medida", baseCostUsd: 2,
+    nota: "Un color o bicolor a elección",
+    colors: ["Blanco", "Negro"],
+    priceHigh: 6990, priceLow: 3990, techniques: [SERIGRAFIA_1C, BORDADO, TRANSFER_DTF], areas: [PECHO_CENTRO],
+  }),
+
+  // === Jockey extra (variante para estampado) =============================
+  // Va dentro del bloque Jockeys, pero se carga acá por orden de levantamiento.
+  product({
+    key: "JOCKGAB", handle: "jockey-gabardina-estampado",
+    title: "Jockey Gabardina para Estampado", category: "Jockeys, Gorros y Accesorios", catTag: "gorros",
+    intro: "Jockey 6 paneles en gabardina, con frente liso pensado especialmente para estampado o bordado prolijo. Variante específica para campañas con logo grande.",
+    material: "Gabardina", tallas: "Única", plazo: "A confirmar al cotizar", leadDays: 7, modalidad: "Stock express", minimo: 12, baseCostUsd: 3,
+    nota: "Disponible en todos los colores",
+    colors: ["Beige", "Negro", "Blanco", "Azul marino", "Gris", "Rojo"],
+    priceHigh: 6900, priceLow: 3990, techniques: [SERIGRAFIA_1C, BORDADO, TRANSFER_DTF], areas: AREAS_GORRO,
+  }),
 
   // === Pantalones =========================================================
   // Levantamiento del 2026-06-22: tres modelos. Categoría "Otro" en el formulario;
@@ -624,6 +662,15 @@ export const mockCorporateProducts: CorporateProduct[] = [
     nota: "Modelo hombre",
     colors: ["Gris", "Negro", "Azul marino", "Beige"],
     priceHigh: 17500, priceLow: 14500, techniques: [SERIGRAFIA_1C, BORDADO, TRANSFER_DTF], areas: [PECHO_IZQ],
+  }),
+  product({
+    key: "PFOPOLAR", handle: "pantalon-cargo-forro-polar",
+    title: "Pantalón Cargo Forro Polar", category: "Pantalones", catTag: "pantalones",
+    intro: "Pantalón cargo gabardina con forro polar interior: el aliado de invierno para faena, terreno y outdoor. Calienta sin restar movilidad.",
+    material: "Gabardina con forro polar", tallas: "Cintura 40 a 60", plazo: "3 a 7 días", leadDays: 7, modalidad: "Stock express", baseCostUsd: 10,
+    nota: "Hombre y mujer (calce distinto)",
+    colors: ["Azul marino", "Negro"],
+    priceHigh: 16500, priceLow: 14500, techniques: [SERIGRAFIA_1C, BORDADO, TRANSFER_DTF], areas: [PECHO_IZQ],
   }),
 ];
 
