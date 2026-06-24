@@ -12,6 +12,7 @@ import {
   type ColorOption,
 } from "@/components/configurator/ColorSwatches";
 import { ProductWorks } from "@/components/works/ProductWorks";
+import { worksForProduct } from "@/lib/works/works";
 import { splitModelColor } from "@/lib/utils/product-title";
 
 // La PDP siempre dinámica: stock + metafields cambian, y queremos que el
@@ -96,6 +97,7 @@ export default async function PDPPage({ params }: Props) {
         <ProductConfigurator
           product={product}
           inventoryByVariantId={inventoryByVariantId}
+          works={worksForProduct(product.handle)}
         />
       </div>
 
