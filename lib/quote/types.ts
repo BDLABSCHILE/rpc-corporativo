@@ -1,4 +1,4 @@
-import type { PrintTechniqueId } from "@/lib/shopify/types";
+import type { LogoSizeTierId, PrintTechniqueId } from "@/lib/shopify/types";
 
 export type QuoteLine = {
   id: string;
@@ -57,6 +57,22 @@ export type LinePricing = {
   savingsVsBaseline: number;
   /** Mismo ahorro pero con IVA 19% — lo que se muestra al usuario por default. */
   savingsVsBaselineGross: number;
+  /**
+   * Tramo de tamaño del logo que define `customizationUnitPrice`. null cuando
+   * la técnica no tiene precios por tamaño (ej. sublimación) o no se conoce el
+   * tamaño del logo (se usó `basePriceUnit`).
+   */
+  appliedSizeTier: {
+    id: LogoSizeTierId;
+    label: string;
+    priceUnit: number;
+  } | null;
+  /**
+   * El tamaño del logo supera el tramo más grande cotizado para esta técnica
+   * (ej. serigrafía sobre carta): se cobra el tramo mayor y el equipo confirma
+   * el precio final al cotizar.
+   */
+  sizeNeedsQuoteReview: boolean;
 };
 
 export type QuoteCustomer = {

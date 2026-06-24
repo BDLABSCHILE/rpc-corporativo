@@ -214,6 +214,9 @@ async function repriceLines(lines: CartLine[]): Promise<RepriceResult> {
         printPositions: 1,
         // Descuento por TOTAL del pedido (ver comentario en repriceLines).
         cartTotalQty,
+        // Tamaño del logo que eligió el cliente → tramo de precio por tamaño.
+        // Si la línea es vieja y no lo trae, cae al tramo base (insignia).
+        logoLongSideCm: line.logoLongSideCm ?? null,
       });
     } catch (err) {
       console.error(

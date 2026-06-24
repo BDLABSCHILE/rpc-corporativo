@@ -75,6 +75,14 @@ export function ProductConfigurator({
     setLogoFromStore(false);
   }, []);
 
+  // Lado más largo del logo en cm (lo reporta el LivePreview al redimensionar).
+  // Define el tramo de precio por tamaño. null = sin logo / sin tamaño conocido.
+  const [logoLongSideCm, setLogoLongSideCm] = useState<number | null>(null);
+  const handleLogoSizeChange = useCallback(
+    (cm: number | null) => setLogoLongSideCm(cm),
+    [],
+  );
+
   // Ref al LivePreview para capturar el mockup compuesto (producto + logo)
   // al momento de agregar la línea al carrito. Ver LivePreviewHandle.
   const previewRef = useRef<LivePreviewHandle | null>(null);
@@ -109,11 +117,14 @@ export function ProductConfigurator({
         quantity,
         technique: activeTechnique,
         printPositions: 1,
+        // Solo pasa el tamaño cuando hay logo; sin logo cae al tramo base
+        // (insignia) como estimación de partida.
+        logoLongSideCm: logo ? logoLongSideCm : null,
       });
     } catch {
       return null;
     }
-  }, [product, quantity, activeTechnique]);
+  }, [product, quantity, activeTechnique, logo, logoLongSideCm]);
 
   const stockAnalysis = useMemo(() => {
     if (!activeTechnique) return null;
@@ -172,6 +183,7 @@ export function ProductConfigurator({
           allImages={product.images.length > 0 ? product.images : [product.featuredImage]}
           area={selectedArea}
           logoUrl={logo?.previewUrl ?? null}
+          onLogoSizeChange={handleLogoSizeChange}
           tintColor={tintForColor(
             selectedVariant?.selectedOptions.find((o) => o.name === "Color")?.value,
           )}
@@ -262,6 +274,7 @@ export function ProductConfigurator({
           occasion={occasion}
           pricing={pricing}
           logo={logo}
+          logoLongSideCm={logo ? logoLongSideCm : null}
           captureMockup={() => previewRef.current?.captureMockup() ?? null}
         />
       </div>

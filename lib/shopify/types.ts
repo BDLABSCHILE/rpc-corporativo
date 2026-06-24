@@ -58,12 +58,38 @@ export type PrintTechniqueId =
   | "laser"
   | "sublimacion";
 
+export type LogoSizeTierId = "insignia" | "carta" | "gigantografia";
+
+/**
+ * Tramo de precio por TAMAÑO del logo. El tramo se elige por el lado más largo
+ * del logo en cm (definido por la zona y lo que el cliente ajusta en el
+ * preview). Precios entregados por la marca (matriz 2026-06).
+ */
+export type LogoSizeTier = {
+  id: LogoSizeTierId;
+  /** "Insignia (5–12 cm)", "Carta (~28 cm)", "Gigantografía". */
+  label: string;
+  /** Lado más largo máximo (cm) para este tramo. null = sin tope (tramo final). */
+  maxLongSideCm: number | null;
+  /** Precio unitario neto (CLP) de la personalización en este tamaño. */
+  priceUnit: number;
+};
+
 export type PrintTechnique = {
   id: PrintTechniqueId;
   label: string;
   description: string;
-  /** Costo unitario base de la técnica (CLP neto). */
+  /**
+   * Costo unitario base de la técnica (CLP neto). Es el precio del tramo más
+   * chico (insignia) — fallback cuando no se conoce el tamaño del logo.
+   */
   basePriceUnit: number;
+  /**
+   * Precio por tamaño del logo (insignia/carta/gigantografía). Ordenado asc por
+   * `maxLongSideCm`. Si falta, el precio es `basePriceUnit` sin importar el
+   * tamaño (ej. sublimación incluida).
+   */
+  sizeTiers?: LogoSizeTier[];
   /** Costo adicional por cada zona extra después de la primera. */
   extraPositionPrice: number;
   /** Setup fee fijo (ej. pantallas de serigrafía). 0 si no aplica. */

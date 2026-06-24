@@ -40,6 +40,12 @@ type Props = {
    * horneadas dan volumen. Null = sin tinte.
    */
   tintColor?: string | null;
+  /**
+   * Reporta el lado más largo del logo en cm (o null si no hay logo/área).
+   * Lo usa el configurador para elegir el tramo de precio por tamaño. Debe ser
+   * estable (useCallback) para no re-disparar el efecto que lo llama.
+   */
+  onLogoSizeChange?: (longSideCm: number | null) => void;
 };
 
 /**
@@ -137,6 +143,30 @@ function clampBoxToRect(
 }
 
 /**
+ * Topa el tamaño del logo al máximo de la zona (en px del Stage), preservando
+ * el aspecto. NO toca la posición. Se usa al soltar un transform para que el
+ * logo nunca quede más grande que el máximo en cm que definió la marca.
+ */
+function clampSizeToMax(
+  box: LogoBox,
+  maxPx: { w: number; h: number } | null,
+): LogoBox {
+  if (!maxPx) return box;
+  const aspect = box.width / box.height || 1;
+  let width = box.width;
+  let height = box.height;
+  if (width > maxPx.w) {
+    width = maxPx.w;
+    height = width / aspect;
+  }
+  if (height > maxPx.h) {
+    height = maxPx.h;
+    width = height * aspect;
+  }
+  return { ...box, width, height };
+}
+
+/**
  * Posición inicial del logo: centrado dentro del área imprimible, al 70% de
  * su tamaño (sin pasar el máximo en cm) para que caiga cómodo dentro de la
  * guía y el cliente lo ajuste desde ahí. Sin área conocida, cae al centro
@@ -180,7 +210,10 @@ function initialLogoBox(
 }
 
 export const LivePreview = forwardRef<LivePreviewHandle, Props>(
-  function LivePreview({ productImage, allImages, area, logoUrl, tintColor }, ref) {
+  function LivePreview(
+    { productImage, allImages, area, logoUrl, tintColor, onLogoSizeChange },
+    ref,
+  ) {
   const logoImg = useHtmlImage(logoUrl);
   const containerRef = useRef<HTMLDivElement>(null);
   const [containerSize, setContainerSize] = useState<number>(CANVAS_SIZE);
@@ -294,6 +327,18 @@ export const LivePreview = forwardRef<LivePreviewHandle, Props>(
       transformerRef.current.getLayer()?.batchDraw();
     }
   }, [logoBox, logoImg]);
+
+  // Reporta el lado más largo del logo en cm al configurador, para elegir el
+  // tramo de precio por tamaño. Se recalcula al redimensionar el logo o al
+  // cambiar de zona (cambia pxPerCm). onLogoSizeChange debe ser estable.
+  useEffect(() => {
+    if (!onLogoSizeChange) return;
+    if (!area || !logoBox) {
+      onLogoSizeChange(null);
+      return;
+    }
+    onLogoSizeChange(Math.max(logoBox.width, logoBox.height) / area.pxPerCm);
+  }, [logoBox, area, onLogoSizeChange]);
 
   const scale = containerSize / CANVAS_SIZE;
 
@@ -503,7 +548,10 @@ export const LivePreview = forwardRef<LivePreviewHandle, Props>(
                       height: Math.max(20, node.height() * scaleY),
                       rotation: node.rotation(),
                     };
-                    setLogoBox(clampToCanvas(next));
+                    // Tope duro: el logo no puede superar el máximo en cm de la
+                    // zona (lo que la marca definió como imprimible). Al soltar
+                    // se reajusta al máximo si el cliente lo agrandó de más.
+                    setLogoBox(clampToCanvas(clampSizeToMax(next, maxLogoPx)));
                   }}
                 />
                 <Transformer
@@ -523,11 +571,11 @@ export const LivePreview = forwardRef<LivePreviewHandle, Props>(
                     "bottom-right",
                   ]}
                   boundBoxFunc={(oldBox, newBox) => {
-                    // Mínimo legible para no colapsar el logo a 0. El tamaño
-                    // máximo del área se muestra en el badge como referencia
-                    // (máx X×Y cm) pero NO se aplica como restricción: el
-                    // cliente puede mover y dimensionar libremente para
-                    // previsualizar; en producción se respeta el máximo real.
+                    // Mínimo legible para no colapsar el logo a 0. El tope
+                    // máximo (cm de la zona) se aplica al soltar en
+                    // onTransformEnd vía clampSizeToMax — ahí trabajamos en el
+                    // sistema de coordenadas del Stage (900px) donde el límite
+                    // en px es inequívoco.
                     if (newBox.width < 20 || newBox.height < 20) return oldBox;
                     return newBox;
                   }}

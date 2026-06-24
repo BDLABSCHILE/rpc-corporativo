@@ -1,4 +1,10 @@
-import type { CorporateProduct, PrintArea, PrintTechnique, ShopifyImage } from "./types";
+import type {
+  CorporateProduct,
+  LogoSizeTier,
+  PrintArea,
+  PrintTechnique,
+  ShopifyImage,
+} from "./types";
 
 /**
  * Mock data del catálogo de Ropa Publicitaria Chile.
@@ -21,15 +27,32 @@ import type { CorporateProduct, PrintArea, PrintTechnique, ShopifyImage } from "
 
 // --- Técnicas de personalización ---------------------------------------------
 // Precios CONFIRMADOS por la marca el 2026-06-23 en la matriz devuelta. El
-// `basePriceUnit` corresponde al **tamaño insignia** (5–12 cm, el caso default
-// que ofrece RPC). El sitio aún no expone selector de tamaño (insignia / carta
-// / gigantografía); los recargos por tamaños mayores quedan documentados en la
-// descripción y los agregamos al cotizador cuando hagamos esa pasada de UI.
+// precio de personalización depende del TAMAÑO del logo: el cotizador elige el
+// tramo (insignia 5–12 cm / carta ~28 cm / gigantografía >33 cm) por el lado
+// más largo del logo en el preview. `basePriceUnit` = tramo insignia (fallback
+// cuando no se conoce el tamaño); `sizeTiers` lleva la tabla completa.
 //
 // Reglas confirmadas: precio NETO (+19% IVA al final), descuento de volumen a
 // partir de 50u, cada logo en zona extra se cobra, urgencia 2 días, despacho
 // gratis sobre 25u en RM. Setup de bordado: una vez por logo, gratis sobre
 // 50u (RPC no entregó el monto del setup; lo dejamos en $0 hasta tenerlo).
+//
+// Cortes entre tramos: insignia ≤12 cm, carta 12–33 cm, gigantografía >33 cm
+// (derivados de los rangos que dio la marca). Las técnicas sin gigantografía
+// (serigrafía, vinilo) marcan el logo sobre carta como "a confirmar al cotizar".
+
+/** Tramo de precio por tamaño del logo. `maxLongSideCm` null = sin tope. */
+function sizeTier(
+  id: LogoSizeTier["id"],
+  label: string,
+  maxLongSideCm: number | null,
+  priceUnit: number,
+): LogoSizeTier {
+  return { id, label, maxLongSideCm, priceUnit };
+}
+
+const TIER_INSIGNIA_MAX = 12;
+const TIER_CARTA_MAX = 33;
 
 const BORDADO: PrintTechnique = {
   id: "bordado",
@@ -37,6 +60,11 @@ const BORDADO: PrintTechnique = {
   description:
     "El acabado más durable y premium. Precios por tamaño: insignia (5-12 cm) $2.500, carta (~28 cm) $5.000, gigantografía (sobre 33 cm) $7.000. La matriz del logo se cobra una vez y queda gratis sobre 50 u.",
   basePriceUnit: 2500,
+  sizeTiers: [
+    sizeTier("insignia", "Insignia (5–12 cm)", TIER_INSIGNIA_MAX, 2500),
+    sizeTier("carta", "Carta (~28 cm)", TIER_CARTA_MAX, 5000),
+    sizeTier("gigantografia", "Gigantografía (>33 cm)", null, 7000),
+  ],
   extraPositionPrice: 2500,
   setupFee: 0,
   extraLeadDays: 7,
@@ -49,6 +77,10 @@ const SERIGRAFIA_1C: PrintTechnique = {
   description:
     "Económica y resistente para tirajes grandes. 1 a 2 colores planos. Precios por tamaño: insignia (5-12 cm) $1.000, carta (~28 cm) $2.000. Mínimo 20 unidades.",
   basePriceUnit: 1000,
+  sizeTiers: [
+    sizeTier("insignia", "Insignia (5–12 cm)", TIER_INSIGNIA_MAX, 1000),
+    sizeTier("carta", "Carta (~28 cm)", TIER_CARTA_MAX, 2000),
+  ],
   extraPositionPrice: 1000,
   setupFee: 0,
   extraLeadDays: 5,
@@ -61,6 +93,10 @@ const SERIGRAFIA_FULL: PrintTechnique = {
   description:
     "Hasta 5 colores para artes con más fidelidad en tirajes grandes. Precios por tamaño: insignia (5-12 cm) $2.000, carta (~28 cm) $3.000. Mínimo 20 unidades.",
   basePriceUnit: 2000,
+  sizeTiers: [
+    sizeTier("insignia", "Insignia (5–12 cm)", TIER_INSIGNIA_MAX, 2000),
+    sizeTier("carta", "Carta (~28 cm)", TIER_CARTA_MAX, 3000),
+  ],
   extraPositionPrice: 2000,
   setupFee: 0,
   extraLeadDays: 8,
@@ -73,6 +109,11 @@ const TRANSFER_DTF: PrintTechnique = {
   description:
     "Full color con gran detalle en cualquier tela, sin setup. Precios por tamaño: insignia (5-12 cm) $2.500, carta (~28 cm) $4.500, gigantografía (sobre 33 cm) $6.500. Mínimo 10 unidades.",
   basePriceUnit: 2500,
+  sizeTiers: [
+    sizeTier("insignia", "Insignia (5–12 cm)", TIER_INSIGNIA_MAX, 2500),
+    sizeTier("carta", "Carta (~28 cm)", TIER_CARTA_MAX, 4500),
+    sizeTier("gigantografia", "Gigantografía (>33 cm)", null, 6500),
+  ],
   extraPositionPrice: 2500,
   setupFee: 0,
   extraLeadDays: 3,
@@ -85,6 +126,10 @@ const VINILO: PrintTechnique = {
   description:
     "Corte de vinilo termoadhesivo aplicado por calor — ideal para números, nombres y logos planos. Precios por tamaño: insignia (5-12 cm) $2.800, carta (~28 cm) $5.000.",
   basePriceUnit: 2800,
+  sizeTiers: [
+    sizeTier("insignia", "Insignia (5–12 cm)", TIER_INSIGNIA_MAX, 2800),
+    sizeTier("carta", "Carta (~28 cm)", TIER_CARTA_MAX, 5000),
+  ],
   extraPositionPrice: 2800,
   setupFee: 0,
   extraLeadDays: 3,

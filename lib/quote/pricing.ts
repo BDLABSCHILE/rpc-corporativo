@@ -1,5 +1,6 @@
 import type {
   CorporateProduct,
+  LogoSizeTier,
   PrintTechnique,
   VolumeBreak,
 } from "@/lib/shopify/types";
@@ -12,6 +13,13 @@ export type PricingInput = {
   technique: PrintTechnique;
   /** Cantidad de zonas de impresión donde se aplica el logo. ≥ 1. */
   printPositions: number;
+  /**
+   * Lado más largo del logo en cm (lo que el cliente ajustó en el preview).
+   * Define el tramo de precio por tamaño de la técnica (insignia/carta/
+   * gigantografía). Si NO viene, o la técnica no tiene `sizeTiers`, se usa
+   * `technique.basePriceUnit` (tramo insignia) como fallback.
+   */
+  logoLongSideCm?: number | null;
   /**
    * Cantidad TOTAL de unidades del pedido (sumando todas las líneas del
    * carrito). Si viene, define el tramo de descuento por volumen que se le
@@ -39,7 +47,14 @@ export type PricingInput = {
  * Útil para llamarla desde Server Components y desde tests con Vitest.
  */
 export function calculateLinePricing(input: PricingInput): LinePricing {
-  const { product, quantity, technique, printPositions, cartTotalQty } = input;
+  const {
+    product,
+    quantity,
+    technique,
+    printPositions,
+    cartTotalQty,
+    logoLongSideCm,
+  } = input;
 
   if (quantity <= 0) {
     throw new RangeError("La cantidad debe ser positiva.");
@@ -66,8 +81,16 @@ export function calculateLinePricing(input: PricingInput): LinePricing {
 
   const unitPriceNet = appliedBreak.unitPriceNet;
   const extraPositions = Math.max(0, printPositions - 1);
+
+  // Precio de personalización según el TAMAÑO del logo. Si la técnica tiene
+  // tramos y conocemos el tamaño, usamos el precio del tramo; si no, caemos al
+  // basePriceUnit (= tramo insignia) para no romper el cálculo.
+  const sizeSelection = selectSizeTier(technique.sizeTiers, logoLongSideCm);
+  const customizationBase = sizeSelection
+    ? sizeSelection.tier.priceUnit
+    : technique.basePriceUnit;
   const customizationUnitPrice =
-    technique.basePriceUnit + extraPositions * technique.extraPositionPrice;
+    customizationBase + extraPositions * technique.extraPositionPrice;
   const setupFee = technique.setupFee;
 
   const subtotalNet =
@@ -106,7 +129,46 @@ export function calculateLinePricing(input: PricingInput): LinePricing {
       : null,
     savingsVsBaseline,
     savingsVsBaselineGross,
+    appliedSizeTier: sizeSelection
+      ? {
+          id: sizeSelection.tier.id,
+          label: sizeSelection.tier.label,
+          priceUnit: sizeSelection.tier.priceUnit,
+        }
+      : null,
+    sizeNeedsQuoteReview: sizeSelection?.needsReview ?? false,
   };
+}
+
+/**
+ * Elige el tramo de tamaño según el lado más largo del logo (cm). Devuelve null
+ * cuando la técnica no tiene tramos o no se conoce el tamaño → el caller cae a
+ * `basePriceUnit`.
+ *
+ * `needsReview` es true cuando el logo es más grande que el tramo más grande
+ * cotizado y NO hay tramo abierto (ej. serigrafía/vinilo sobre carta): se cobra
+ * el tramo mayor y el equipo confirma el precio al cotizar.
+ */
+function selectSizeTier(
+  tiers: LogoSizeTier[] | undefined,
+  logoLongSideCm: number | null | undefined,
+): { tier: LogoSizeTier; needsReview: boolean } | null {
+  if (!tiers || tiers.length === 0) return null;
+  if (logoLongSideCm == null) return null;
+
+  const sorted = [...tiers].sort((a, b) => {
+    if (a.maxLongSideCm === null) return 1;
+    if (b.maxLongSideCm === null) return -1;
+    return a.maxLongSideCm - b.maxLongSideCm;
+  });
+
+  for (const tier of sorted) {
+    if (tier.maxLongSideCm === null || logoLongSideCm <= tier.maxLongSideCm) {
+      return { tier, needsReview: false };
+    }
+  }
+  // Supera todos los tramos finitos y no hay tramo abierto: cobra el mayor.
+  return { tier: sorted[sorted.length - 1]!, needsReview: true };
 }
 
 /**

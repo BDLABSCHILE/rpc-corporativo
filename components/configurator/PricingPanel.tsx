@@ -148,7 +148,28 @@ export function PricingPanel({
             {formatCLP(pricing.appliedBreak.unitPriceNet)} c/u
           </span>
         </p>
+
+        {pricing.appliedSizeTier && (
+          <p className="mt-1 font-rpc-body text-xs tracking-normal text-rpc-text/70">
+            Personalización tamaño{" "}
+            <span className="font-semibold text-rpc-text">
+              {pricing.appliedSizeTier.label}
+            </span>{" "}
+            · {formatCLP(pricing.appliedSizeTier.priceUnit)} c/u
+          </p>
+        )}
       </div>
+
+      {pricing.sizeNeedsQuoteReview && (
+        <div className="mt-4 flex items-start gap-2 rounded-rpc-button border border-rpc-accent/40 bg-rpc-accent/10 px-3 py-2.5 font-rpc-body text-xs tracking-normal text-rpc-text/80">
+          <span
+            aria-hidden
+            className="mt-0.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-rpc-accent"
+          />
+          A este tamaño, en esta técnica, el precio final lo confirma el equipo
+          al cotizar.
+        </div>
+      )}
 
       {pricing.savingsVsBaselineGross > 0 && (
         <div className="mt-5 inline-flex items-center gap-2 rounded-rpc-button border border-rpc-info/40 bg-rpc-info/10 px-3 py-1.5 text-[10px] uppercase tracking-[0.2em] text-rpc-info-dark">

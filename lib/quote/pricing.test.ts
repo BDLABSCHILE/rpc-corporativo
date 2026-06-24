@@ -253,6 +253,107 @@ describe("calculateLinePricing", () => {
     });
   });
 
+  describe("precio por tamaño del logo (sizeTiers)", () => {
+    const TECH_BORDADO_SIZED: PrintTechnique = {
+      id: "bordado",
+      label: "Bordado",
+      description: "",
+      basePriceUnit: 2500,
+      sizeTiers: [
+        { id: "insignia", label: "Insignia", maxLongSideCm: 12, priceUnit: 2500 },
+        { id: "carta", label: "Carta", maxLongSideCm: 33, priceUnit: 5000 },
+        { id: "gigantografia", label: "Gigantografía", maxLongSideCm: null, priceUnit: 7000 },
+      ],
+      extraPositionPrice: 2500,
+      setupFee: 0,
+      extraLeadDays: 7,
+      availableAreaIds: [],
+    };
+
+    const TECH_SERI_SIZED: PrintTechnique = {
+      id: "serigrafia_1c",
+      label: "Serigrafía 1 color",
+      description: "",
+      basePriceUnit: 1000,
+      sizeTiers: [
+        { id: "insignia", label: "Insignia", maxLongSideCm: 12, priceUnit: 1000 },
+        { id: "carta", label: "Carta", maxLongSideCm: 33, priceUnit: 2000 },
+      ],
+      extraPositionPrice: 1000,
+      setupFee: 0,
+      extraLeadDays: 5,
+      availableAreaIds: [],
+    };
+
+    function price(technique: PrintTechnique, logoLongSideCm: number | null) {
+      return calculateLinePricing({
+        product: makeProduct(),
+        quantity: 100,
+        technique,
+        printPositions: 1,
+        logoLongSideCm,
+      });
+    }
+
+    it("logo chico → tramo insignia", () => {
+      const r = price(TECH_BORDADO_SIZED, 10);
+      expect(r.appliedSizeTier?.id).toBe("insignia");
+      expect(r.customizationUnitPrice).toBe(2500);
+      expect(r.sizeNeedsQuoteReview).toBe(false);
+    });
+
+    it("logo mediano → tramo carta", () => {
+      const r = price(TECH_BORDADO_SIZED, 28);
+      expect(r.appliedSizeTier?.id).toBe("carta");
+      expect(r.customizationUnitPrice).toBe(5000);
+    });
+
+    it("logo grande → tramo gigantografía (tramo abierto)", () => {
+      const r = price(TECH_BORDADO_SIZED, 45);
+      expect(r.appliedSizeTier?.id).toBe("gigantografia");
+      expect(r.customizationUnitPrice).toBe(7000);
+      expect(r.sizeNeedsQuoteReview).toBe(false);
+    });
+
+    it("respeta los cortes exactos (12 = insignia, 12.1 = carta, 33 = carta)", () => {
+      expect(price(TECH_BORDADO_SIZED, 12).appliedSizeTier?.id).toBe("insignia");
+      expect(price(TECH_BORDADO_SIZED, 12.1).appliedSizeTier?.id).toBe("carta");
+      expect(price(TECH_BORDADO_SIZED, 33).appliedSizeTier?.id).toBe("carta");
+      expect(price(TECH_BORDADO_SIZED, 33.1).appliedSizeTier?.id).toBe("gigantografia");
+    });
+
+    it("sin tamaño conocido → cae al basePriceUnit y appliedSizeTier null", () => {
+      const r = price(TECH_BORDADO_SIZED, null);
+      expect(r.appliedSizeTier).toBeNull();
+      expect(r.customizationUnitPrice).toBe(2500);
+    });
+
+    it("técnica sin sizeTiers → usa basePriceUnit (comportamiento anterior)", () => {
+      const r = price(TECH_DTF, 40);
+      expect(r.appliedSizeTier).toBeNull();
+      expect(r.customizationUnitPrice).toBe(1200);
+    });
+
+    it("sobre carta sin tramo gigantografía (serigrafía) → cobra carta y marca revisión", () => {
+      const r = price(TECH_SERI_SIZED, 40);
+      expect(r.appliedSizeTier?.id).toBe("carta");
+      expect(r.customizationUnitPrice).toBe(2000);
+      expect(r.sizeNeedsQuoteReview).toBe(true);
+    });
+
+    it("el tramo de tamaño se combina con posiciones extra", () => {
+      const r = calculateLinePricing({
+        product: makeProduct(),
+        quantity: 100,
+        technique: TECH_BORDADO_SIZED,
+        printPositions: 2,
+        logoLongSideCm: 28, // carta = 5000
+      });
+      // carta 5000 + 1 posición extra * 2500 = 7500
+      expect(r.customizationUnitPrice).toBe(7500);
+    });
+  });
+
   describe("validaciones", () => {
     it("lanza si quantity es 0 o negativo", () => {
       expect(() =>

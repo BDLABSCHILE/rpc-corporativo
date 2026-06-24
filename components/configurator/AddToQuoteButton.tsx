@@ -19,6 +19,8 @@ type Props = {
   pricing: LinePricing | null;
   /** Logo del cliente (base64 + metadata). Null si no subió logo. */
   logo: LogoState;
+  /** Lado más largo del logo en cm (define el tramo de precio por tamaño). */
+  logoLongSideCm: number | null;
   /** Captura el mockup compuesto (producto + logo) del LivePreview. Devuelve
       DataURL PNG o null si CORS bloquea o no hay logo. */
   captureMockup: () => string | null;
@@ -36,6 +38,7 @@ export function AddToQuoteButton({
   occasion,
   pricing,
   logo,
+  logoLongSideCm,
   captureMockup,
 }: Props) {
   const [state, setState] = useState<State>("idle");
@@ -76,6 +79,7 @@ export function AddToQuoteButton({
         logoDataUrl: logo?.dataUrl ?? null,
         logoFileName: logo?.fileName ?? null,
         logoMimeType: logo?.mimeType ?? null,
+        logoLongSideCm: logo ? logoLongSideCm : null,
         mockupDataUrl,
       });
       setState("added");

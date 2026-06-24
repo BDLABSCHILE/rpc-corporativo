@@ -52,6 +52,12 @@ export type CartLine = {
   /** MIME type del logo (image/svg+xml, image/png, etc.) para naming + content-type. */
   logoMimeType: string | null;
   /**
+   * Lado más largo del logo en cm al agregar la línea. Define el tramo de
+   * precio por tamaño y se reusa en el recálculo server-side (submit-action).
+   * Opcional: líneas viejas sin este campo caen al tramo base (insignia).
+   */
+  logoLongSideCm?: number | null;
+  /**
    * Mockup compuesto — captura PNG del LivePreview con el logo aplicado sobre
    * el producto (posición + escala que el cliente eligió). Se genera vía
    * konva stage.toDataURL al hacer "agregar a cotización".
