@@ -6,6 +6,7 @@ import {
   DiamondIcon,
   PencilIcon,
 } from "@/components/icons";
+import { CLIENTS } from "@/lib/brand/clients";
 
 export const metadata: Metadata = {
   title: "Clientes",
@@ -22,32 +23,6 @@ export const metadata: Metadata = {
  * grid tipográfico, más 3 tipos de proyecto descritos en genérico honesto,
  * sin cifras ni contextos que no podemos verificar.
  */
-
-const CLIENTS: readonly string[] = [
-  "Banco de Chile",
-  "Entel",
-  "LATAM",
-  "Copec",
-  "Mercado Libre",
-  "Ripley",
-  "Natura",
-  "LEGO",
-  "Land Rover",
-  "Jaguar",
-  "Syngenta",
-  "Carozzi",
-  "Mega",
-  "Turbus",
-  "Colmena",
-  "Sodimac",
-  "Bosca",
-  "Viña Santa Carolina",
-  "Red de Salud UC Christus",
-  "Facultad de Medicina UC",
-  "Universidad Mayor",
-  "The Grange School",
-  "TECHO",
-];
 
 type ProjectType = {
   title: string;
@@ -92,22 +67,34 @@ export default function ClientesPage() {
           </p>
 
           {/*
-            Grid tipográfico: los nombres en Archivo, sin logos. Honesto y
-            editorial — la prueba social está en la lista misma, no en
-            archivos de logo que no tenemos autorizados.
+            Muro de logos reales (mismos assets que el home). Grid con
+            hairlines: gap-px sobre fondo border simula la grilla. En grises,
+            a color al hover. Las marcas sin logo limpio caen a texto.
           */}
-          <ul className="mt-12 grid grid-cols-2 gap-x-6 gap-y-6 sm:grid-cols-3 lg:mt-16 lg:grid-cols-4 lg:gap-y-8">
-            {CLIENTS.map((name) => (
-              <li
-                key={name}
-                className="border-t border-rpc-border pt-3 font-rpc-heading text-sm leading-snug text-rpc-text sm:text-base lg:text-lg"
+          <div className="mt-12 grid grid-cols-2 gap-px overflow-hidden rounded-rpc-card border border-rpc-border bg-rpc-border sm:grid-cols-3 lg:mt-16 lg:grid-cols-4">
+            {CLIENTS.map((client) => (
+              <div
+                key={client.name}
+                className="group flex h-24 items-center justify-center bg-rpc-bg px-6"
               >
-                {name}
-              </li>
+                {client.logo ? (
+                  // eslint-disable-next-line @next/next/no-img-element -- logos estáticos (svg/png) servidos desde /public; next/image no aporta y exige flag para SVG
+                  <img
+                    src={`/brand/clients/${client.logo}`}
+                    alt={client.name}
+                    loading="lazy"
+                    className="max-h-10 w-auto max-w-[78%] object-contain opacity-70 grayscale transition duration-300 group-hover:opacity-100 group-hover:grayscale-0"
+                  />
+                ) : (
+                  <span className="text-center font-rpc-heading text-sm font-bold tracking-tight text-rpc-text/45 transition group-hover:text-rpc-text sm:text-base">
+                    {client.name}
+                  </span>
+                )}
+              </div>
             ))}
-          </ul>
-          <p className="mt-10 font-rpc-body text-sm normal-case tracking-normal text-rpc-text/55">
-            …y muchas más.
+          </div>
+          <p className="mt-6 font-rpc-body text-sm normal-case tracking-normal text-rpc-text/55">
+            …y muchas marcas más.
           </p>
         </div>
       </section>
