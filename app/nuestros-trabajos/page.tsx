@@ -51,10 +51,6 @@ export default async function NuestrosTrabajosPage() {
     }
   }
 
-  const clientCount = new Set(
-    REAL_WORKS.map((w) => w.client).filter(Boolean),
-  ).size;
-
   return (
     <>
       {/* Header */}
@@ -64,20 +60,20 @@ export default async function NuestrosTrabajosPage() {
             Nuestros trabajos
           </p>
           <h1 className="mt-4 max-w-4xl text-3xl leading-[1.05] sm:mt-6 sm:text-4xl lg:text-5xl">
-            Prendas reales, con la marca de cada equipo puesta.
+            Más de 500 empresas ya visten su marca con nosotros.
           </h1>
           <p className="mt-6 max-w-2xl font-rpc-body text-base normal-case tracking-normal text-rpc-text/75 sm:mt-8 sm:text-lg">
-            No son renders. Son trabajos que produjimos y personalizamos para
-            marcas chilenas —bordado, serigrafía y transfer DTF sobre poleras,
-            polerones, softshell y uniformes. Así se ve tu logo cuando llega
-            hecho.
+            Acá te mostramos solo algunos ejemplos: prendas reales que
+            produjimos y personalizamos con bordado, serigrafía y transfer DTF
+            —poleras, polerones, softshell, gorros y uniformes. No son renders;
+            es la marca de cada equipo puesta sobre la prenda terminada.
           </p>
 
-          {/* Mini-stats de confianza */}
+          {/* Mini-stats de confianza — claims aprobados por la marca. */}
           <dl className="mt-10 flex flex-wrap gap-x-12 gap-y-6 sm:mt-12">
+            <Stat value="+500" label="empresas confían en nosotros" />
             <Stat value="+40" label="años de oficio" />
-            <Stat value={`${clientCount}`} label="marcas en esta muestra" />
-            <Stat value={`${REAL_WORKS.length}`} label="trabajos abajo" />
+            <Stat value="<24 h" label="respondemos tu cotización" />
           </dl>
         </div>
       </section>
