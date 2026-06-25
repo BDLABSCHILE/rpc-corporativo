@@ -463,7 +463,11 @@ export const LivePreview = forwardRef<LivePreviewHandle, Props>(
           );
           ctx.restore();
 
-          return canvas.toDataURL("image/png");
+          // JPEG (no PNG): el mockup lleva fondo relleno, no necesita
+          // transparencia, y JPEG pesa ~10× menos. Clave porque este dataUrl
+          // viaja en el Server Action al cotizar (ver bodySizeLimit en
+          // next.config) — un PNG de la foto reventaba el límite de tamaño.
+          return canvas.toDataURL("image/jpeg", 0.85);
         } catch (err) {
           // Si Shopify CDN no devuelve CORS, toDataURL lanza SecurityError.
           // En ese caso devolvemos null y el flujo sigue sin mockup adjunto.

@@ -469,7 +469,7 @@ function buildLineAttachments(lines: CartLine[]): ResendAttachment[] {
       const buf = dataUrlToBuffer(line.mockupDataUrl);
       if (buf) {
         attachments.push({
-          filename: `L${lineNumber}-mockup-${line.productHandle}.png`,
+          filename: `L${lineNumber}-mockup-${line.productHandle}.jpg`,
           content: buf,
         });
       }
