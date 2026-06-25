@@ -162,7 +162,7 @@ export default function ComoFuncionaPage() {
             icon={<ConfigureIcon className="h-7 w-7 text-rpc-text" />}
             body="Con tu aprobación, partimos. Si es un producto en stock, tu pedido pasa directo a personalización en Chile. Si es ropa de cocina o uniformes que fabricamos a medida, la producción corre en nuestro taller con seguimiento del equipo de principio a fin."
             highlights={[
-              "Bordado, serigrafía, transfer DTF y sublimación",
+              "Bordado, serigrafía, DTF y sublimación",
               "Más de 40 años de oficio detrás de cada prenda",
               "Cada ficha del catálogo indica el plazo de su flujo",
             ]}
@@ -206,7 +206,7 @@ export default function ComoFuncionaPage() {
               detail="En 1 color o full color. Económica y resistente para tirajes grandes: poleras de evento, bolsas y activaciones."
             />
             <TechniqueCard
-              name="Transfer DTF"
+              name="DTF"
               detail="Full color con gran detalle en cualquier tela. Recomendado para tirajes pequeños y medianos."
             />
             <TechniqueCard

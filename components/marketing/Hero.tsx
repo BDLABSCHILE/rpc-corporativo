@@ -29,7 +29,7 @@ const CATEGORIES = [
   "Delantales y Uniformes",
 ] as const;
 
-const TECHNIQUES = ["Bordado", "Serigrafía", "Transfer DTF", "Sublimación"] as const;
+const TECHNIQUES = ["Bordado", "Serigrafía", "DTF", "Sublimación"] as const;
 
 export function Hero() {
   return (

@@ -32,7 +32,7 @@ export function WorksTeaser() {
             </h2>
             <p className="mt-4 max-w-xl text-base leading-relaxed text-rpc-text/70">
               No son renders: son prendas que produjimos y personalizamos con
-              bordado, serigrafía y transfer DTF para equipos chilenos.
+              bordado, serigrafía y DTF para equipos chilenos.
             </p>
           </div>
           <Link

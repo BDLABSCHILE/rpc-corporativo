@@ -11,7 +11,7 @@ const FAQS = [
   },
   {
     q: "¿Qué técnica de personalización me conviene?",
-    a: "Trabajamos bordado, serigrafía (1 color y full color), transfer DTF, vinilo textil y sublimación. La elección depende de la prenda, del diseño y de la cantidad: el bordado da un acabado premium en camisas y polerones; la serigrafía rinde muy bien en volúmenes altos; el DTF permite full color con detalle fino; el vinilo es ideal para nombres y números; y la sublimación integra el color a la tela. Cada ficha muestra las técnicas disponibles, y al cotizar te recomendamos la que mejor calza con tu caso.",
+    a: "Trabajamos bordado, serigrafía (1 color y full color), DTF, vinilo textil y sublimación. La elección depende de la prenda, del diseño y de la cantidad: el bordado da un acabado premium en camisas y polerones; la serigrafía rinde muy bien en volúmenes altos; el DTF permite full color con detalle fino; el vinilo es ideal para nombres y números; y la sublimación integra el color a la tela. Cada ficha muestra las técnicas disponibles, y al cotizar te recomendamos la que mejor calza con tu caso.",
   },
   {
     q: "¿Puedo mezclar tallas y colores en un mismo pedido?",

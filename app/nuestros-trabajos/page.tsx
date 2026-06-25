@@ -10,7 +10,7 @@ import { CtaFooter } from "@/components/marketing/CtaFooter";
 export const metadata: Metadata = {
   title: "Nuestros trabajos",
   description:
-    "Trabajos reales de Ropa Publicitaria Chile: poleras, polerones, softshell y uniformes personalizados con bordado, serigrafía y transfer DTF para Claro, Edenred, Funpark, IBM Transportes y más marcas chilenas.",
+    "Trabajos reales de Ropa Publicitaria Chile: poleras, polerones, softshell y uniformes personalizados con bordado, serigrafía y DTF para Claro, Edenred, Funpark, IBM Transportes y más marcas chilenas.",
 };
 
 /**
@@ -32,7 +32,7 @@ const TECHNIQUES: readonly { name: string; blurb: string }[] = [
     blurb: "El mejor costo por unidad en tiradas grandes de pocos colores. Estampado firme sobre algodón.",
   },
   {
-    name: "Transfer DTF",
+    name: "DTF",
     blurb: "Full color, degradés e ilustraciones sin recargo por tono. Perfecto para diseños complejos.",
   },
 ];
@@ -64,7 +64,7 @@ export default async function NuestrosTrabajosPage() {
           </h1>
           <p className="mt-6 max-w-2xl font-rpc-body text-base normal-case tracking-normal text-rpc-text/75 sm:mt-8 sm:text-lg">
             Acá te mostramos solo algunos ejemplos: prendas reales que
-            produjimos y personalizamos con bordado, serigrafía y transfer DTF
+            produjimos y personalizamos con bordado, serigrafía y DTF
             —poleras, polerones, softshell, gorros y uniformes. No son renders;
             es la marca de cada equipo puesta sobre la prenda terminada.
           </p>

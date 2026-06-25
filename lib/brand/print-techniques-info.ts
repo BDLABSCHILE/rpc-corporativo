@@ -54,16 +54,16 @@ export const TECHNIQUE_INFO: readonly TechniqueDetail[] = [
     matchKeys: ["serigrafia-full-color", "serigrafia_full", "serigrafía full color", "full color"],
     headline: "Serigrafía full color",
     description:
-      "Variante de serigrafía con varias capas de tinta para reproducir logos con hasta 5 colores. Cada color es una pasada distinta y el resultado es premium: colores planos vivos y precisión cromática.",
+      "Variante de serigrafía con varias capas de tinta para reproducir logos con hasta 4 colores. Cada color es una pasada distinta y el resultado es premium: colores planos vivos y precisión cromática.",
     features: [
-      "Hasta 5 colores planos por logo",
+      "Hasta 4 colores planos por logo",
       "Excelente fidelidad de color",
       "Tacto firme y resistente",
       "Precios por tamaño: insignia (5–12 cm) $2.000, carta (~28 cm) $3.000 por prenda",
       "Mínimo 20 unidades",
     ],
     bestFor:
-      "Logos con 2 a 5 colores sólidos, sin degradados. Marcas con identidad cromática fuerte.",
+      "Logos con 2 a 4 colores sólidos, sin degradados. Marcas con identidad cromática fuerte.",
     limitations:
       "No reproduce degradados, fotos ni detalles muy finos. Para eso, DTF.",
   },
@@ -86,7 +86,7 @@ export const TECHNIQUE_INFO: readonly TechniqueDetail[] = [
   },
   {
     matchKeys: ["dtf", "transfer_dtf", "transfer-dtf", "transfer dtf"],
-    headline: "Transfer DTF",
+    headline: "DTF",
     description:
       "Direct-To-Film: imprime tu diseño en una película especial que se transfiere por calor a la tela. Permite full color, degradados, fotos y detalles finos. Es la técnica más versátil para artes complejos.",
     features: [

@@ -11,7 +11,7 @@
  * Solo se listan handles que existen en el catálogo (mock.ts).
  */
 
-export type WorkTechnique = "Bordado" | "Serigrafía" | "Transfer DTF" | "Estampado";
+export type WorkTechnique = "Bordado" | "Serigrafía" | "DTF" | "Estampado";
 
 export type RealWork = {
   /** Slug estable = nombre del archivo en public/trabajos/. */
@@ -142,9 +142,9 @@ export const REAL_WORKS: readonly RealWork[] = [
     client: null,
     summary: "Polerones canguro en seis colores, estampado DTF",
     detail:
-      "Una misma tanda de polerones canguro en seis colores con estampado DTF full color en espalda y pecho. El transfer DTF rinde degradés e ilustraciones con muchos colores sin recargo por tono.",
+      "Una misma tanda de polerones canguro en seis colores con estampado DTF full color en espalda y pecho. El DTF rinde degradés e ilustraciones con muchos colores sin recargo por tono.",
     garments: ["Polerón canguro"],
-    techniques: ["Transfer DTF"],
+    techniques: ["DTF"],
     image: "/trabajos/dtf-canguros-colores.webp",
     width: 1200,
     height: 1833,
@@ -274,7 +274,7 @@ export const REAL_WORKS: readonly RealWork[] = [
     detail:
       "Merch de la gira «Corazón Salvaje» de Denisse Malebrán: poleras negras con estampado full color en DTF —ilustración a la espalda y foto a todo color al frente. El DTF rinde fotografías sin perder detalle.",
     garments: ["Polera cuello redondo"],
-    techniques: ["Transfer DTF"],
+    techniques: ["DTF"],
     image: "/trabajos/denisse-malebran-corazon-salvaje.webp",
     width: 1200,
     height: 1111,
@@ -525,7 +525,7 @@ export const REAL_WORKS: readonly RealWork[] = [
     detail:
       "Polerón canguro blanco para Klog.co: el logo al pecho, una ilustración a todo color en el bolsillo y un gran diseño en DTF a la espalda con el logo «KLOG.CO». El DTF rinde full color y degradés sin recargo por tono.",
     garments: ["Polerón canguro"],
-    techniques: ["Transfer DTF"],
+    techniques: ["DTF"],
     image: "/trabajos/klog-poleron-dtf.webp",
     width: 1200,
     height: 905,

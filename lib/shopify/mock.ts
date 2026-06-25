@@ -58,14 +58,14 @@ const BORDADO: PrintTechnique = {
   id: "bordado",
   label: "Bordado",
   description:
-    "El acabado más durable y premium. Precios por tamaño: insignia (5-12 cm) $2.500, carta (~28 cm) $5.000, gigantografía (sobre 33 cm) $7.000. La matriz del logo se cobra una vez y queda gratis sobre 50 u.",
-  basePriceUnit: 2500,
+    "El acabado más durable y premium. Precios por tamaño: insignia (5-12 cm) $3.000, carta (~28 cm) $5.000, gigantografía (sobre 33 cm) $7.000. La matriz del logo se cobra una vez y queda gratis sobre 50 u.",
+  basePriceUnit: 3000,
   sizeTiers: [
-    sizeTier("insignia", "Insignia (5–12 cm)", TIER_INSIGNIA_MAX, 2500),
+    sizeTier("insignia", "Insignia (5–12 cm)", TIER_INSIGNIA_MAX, 3000),
     sizeTier("carta", "Carta (~28 cm)", TIER_CARTA_MAX, 5000),
     sizeTier("gigantografia", "Gigantografía (>33 cm)", null, 7000),
   ],
-  extraPositionPrice: 2500,
+  extraPositionPrice: 3000,
   setupFee: 0,
   extraLeadDays: 7,
   availableAreaIds: ["pecho_izq", "pecho_centro", "manga", "gorro_frente", "gorro_lateral"],
@@ -91,7 +91,7 @@ const SERIGRAFIA_FULL: PrintTechnique = {
   id: "serigrafia_full",
   label: "Serigrafía full color",
   description:
-    "Hasta 5 colores para artes con más fidelidad en tirajes grandes. Precios por tamaño: insignia (5-12 cm) $2.000, carta (~28 cm) $3.000. Mínimo 20 unidades.",
+    "Hasta 4 colores para artes con más fidelidad en tirajes grandes. Precios por tamaño: insignia (5-12 cm) $2.000, carta (~28 cm) $3.000. Mínimo 20 unidades.",
   basePriceUnit: 2000,
   sizeTiers: [
     sizeTier("insignia", "Insignia (5–12 cm)", TIER_INSIGNIA_MAX, 2000),
@@ -105,7 +105,7 @@ const SERIGRAFIA_FULL: PrintTechnique = {
 
 const TRANSFER_DTF: PrintTechnique = {
   id: "transfer_dtf",
-  label: "Transfer DTF",
+  label: "DTF",
   description:
     "Full color con gran detalle en cualquier tela, sin setup. Precios por tamaño: insignia (5-12 cm) $2.500, carta (~28 cm) $4.500, gigantografía (sobre 33 cm) $6.500. Mínimo 10 unidades.",
   basePriceUnit: 2500,
@@ -447,7 +447,7 @@ export const mockCorporateProducts: CorporateProduct[] = [
     title: "Polar Sin Mangas", category: "Polerones y Polar", catTag: "polerones",
     intro: "Chaleco polar sin mangas, la capa intermedia perfecta para uniformes de invierno. Abriga el torso sin restar movilidad.",
     material: "100% poliéster", tallas: "XS a 2XL", plazo: "A confirmar al cotizar", leadDays: 7, modalidad: "Stock", baseCostUsd: 10,
-    colors: ["Verde", "Negro", "Azul marino", "Gris"],
+    colors: ["Negro", "Azul marino", "Gris"],
     pricing: tramos({ 10: 10990, 25: 10500, 50: 9990, 100: 9500 }), techniques: [BORDADO], areas: [PECHO_IZQ, PECHO_CENTRO],
   }),
   product({
