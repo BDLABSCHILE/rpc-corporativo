@@ -376,7 +376,7 @@ export const mockCorporateProducts: CorporateProduct[] = [
   product({
     key: "PIQMC", handle: "polera-pique-cuello-botones-manga-corta",
     title: "Polera Piqué Cuello y Botones M/C", category: "Poleras", catTag: "poleras",
-    intro: "La clásica polo piqué de uniforme corporativo en manga corta. Cuello y puños tejidos y el lienzo perfecto para tu logo al pecho.",
+    intro: "La clásica polera piqué de uniforme corporativo en manga corta. Cuello y puños tejidos y el lienzo perfecto para tu logo al pecho.",
     material: "80% algodón · 20% poliéster (piqué)", tallas: "S a 3XL", plazo: "5 a 7 días", leadDays: 7,
     modalidad: "Stock", nota: "Elige versión hombre o mujer",
     colors: ["Azul marino", "Negro", "Rojo", "Blanco", "Azulino", "Gris", "Amarillo", "Naranjo", "Verde"],
@@ -385,7 +385,7 @@ export const mockCorporateProducts: CorporateProduct[] = [
   product({
     key: "PIQML", handle: "polera-pique-cuello-botones-manga-larga",
     title: "Polera Piqué Cuello y Botones M/L", category: "Poleras", catTag: "poleras",
-    intro: "La polo piqué de uniforme en manga larga, para climas fríos o un look más formal. Cuello y puños tejidos, lista para tu marca.",
+    intro: "La polera piqué de uniforme en manga larga, para climas fríos o un look más formal. Cuello y puños tejidos, lista para tu marca.",
     material: "80% algodón · 20% poliéster (piqué)", tallas: "S a 3XL", plazo: "5 a 7 días", leadDays: 7,
     modalidad: "Stock", nota: "Elige versión hombre o mujer",
     colors: ["Negro", "Gris", "Blanco", "Azul marino", "Azulino", "Rojo"],
@@ -418,7 +418,7 @@ export const mockCorporateProducts: CorporateProduct[] = [
   product({
     key: "DRYFB", handle: "polera-dry-fit-cuello-botones",
     title: "Polera Dry-Fit Cuello y Botones", category: "Poleras", catTag: "poleras",
-    intro: "Polo deportiva dry fit con cuello y botones: el punto medio entre lo técnico y lo formal, para terreno y staff en movimiento.",
+    intro: "Polera deportiva dry fit con cuello y botones: el punto medio entre lo técnico y lo formal, para terreno y staff en movimiento.",
     material: "100% poliéster (dry fit)", tallas: "S a 2XL", plazo: "A confirmar al cotizar", leadDays: 7, modalidad: "Stock",
     colors: ["Rojo", "Negro", "Gris", "Blanco", "Naranjo", "Calypso", "Azul marino", "Azulino"],
     pricing: tramos({ 10: 9990, 25: 9500, 50: 8990, 100: 8700, 250: 8300 }), techniques: [SERIGRAFIA_1C, BORDADO, TRANSFER_DTF], areas: AREAS_PRENDA,
@@ -452,7 +452,7 @@ export const mockCorporateProducts: CorporateProduct[] = [
   }),
   product({
     key: "POLO", handle: "poleron-polo-cuello-redondo",
-    title: "Polerón Polo Cuello Redondo", category: "Polerones y Polar", catTag: "polerones",
+    title: "Polerón Cuello Redondo", category: "Polerones y Polar", catTag: "polerones",
     intro: "Polerón cuello redondo en mezcla algodón-poliéster, suave por dentro y resistente al uso diario. El básico de invierno que une comodidad y marca.",
     material: "70% algodón · 30% poliéster", tallas: "XS a 3XL", plazo: "A confirmar al cotizar", leadDays: 7, modalidad: "Stock", baseCostUsd: 10,
     colors: ["Gris", "Negro", "Azul marino", "Azulino", "Blanco", "Rojo", "Naranjo", "Beige", "Lila", "Rosado", "Verde"],

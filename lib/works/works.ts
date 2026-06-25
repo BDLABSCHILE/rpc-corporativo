@@ -85,10 +85,10 @@ export const REAL_WORKS: readonly RealWork[] = [
   {
     slug: "agendapro-pique-poleron",
     client: "AgendaPro",
-    summary: "Polo bordado y polerón con doble estampado",
+    summary: "Polera bordada y polerón con doble estampado",
     detail:
-      "Para AgendaPro: polera piqué azul marino con el logo bordado y polerón polo con doble estampado —logo al pecho y mensaje de marca («Gestiona citas, clientes y pagos en un solo lugar» + el sitio). Prenda que además vende.",
-    garments: ["Polera piqué", "Polerón polo"],
+      "Para AgendaPro: polera piqué azul marino con el logo bordado y polerón con doble estampado —logo al pecho y mensaje de marca («Gestiona citas, clientes y pagos en un solo lugar» + el sitio). Prenda que además vende.",
+    garments: ["Polera piqué", "Polerón"],
     techniques: ["Bordado", "Estampado"],
     image: "/trabajos/agendapro-pique-poleron.webp",
     width: 750,
@@ -116,8 +116,8 @@ export const REAL_WORKS: readonly RealWork[] = [
     client: "Edenred",
     summary: "Polerón rojo con estampado al pecho y espalda",
     detail:
-      "Polerón polo rojo para Edenred con doble serigrafía: logo al pecho y mensaje de campaña a la espalda («Impulsamos la alegría de vivir»). Ropa corporativa que además comunica.",
-    garments: ["Polerón polo cuello redondo"],
+      "Polerón rojo para Edenred con doble serigrafía: logo al pecho y mensaje de campaña a la espalda («Impulsamos la alegría de vivir»). Ropa corporativa que además comunica.",
+    garments: ["Polerón cuello redondo"],
     techniques: ["Serigrafía"],
     image: "/trabajos/edenred-poleron-polo.webp",
     width: 1200,
@@ -192,10 +192,10 @@ export const REAL_WORKS: readonly RealWork[] = [
   {
     slug: "del-cerro-polar-sin-manga",
     client: "Hotel y Restaurante del Cerro",
-    summary: "Chaleco polar negro con dos bordados dorados",
+    summary: "Polar sin manga negro con dos bordados dorados",
     detail:
-      "Chaleco polar sin mangas para Hotel y Restaurante del Cerro, con dos logos bordados en hilo dorado al pecho. Dos marcas de una misma casa, juntas en una sola prenda.",
-    garments: ["Polar sin mangas"],
+      "Polar sin manga negro para Hotel y Restaurante del Cerro, con dos logos bordados en hilo dorado al pecho. Dos marcas de una misma casa, juntas en una sola prenda.",
+    garments: ["Polar sin manga"],
     techniques: ["Bordado"],
     image: "/trabajos/del-cerro-polar-sin-manga.webp",
     width: 1200,
@@ -283,9 +283,9 @@ export const REAL_WORKS: readonly RealWork[] = [
   {
     slug: "ignamar-savory",
     client: "Ignamar",
-    summary: "Polos y camisas para la distribuidora de Savory",
+    summary: "Poleras y camisas para la distribuidora de Savory",
     detail:
-      "Vestuario para Ignamar, distribuidora de Nestlé Savory: polos piqué (negro, gris) y camisas outdoor y de jeans con el logo del búho bordado, más el parche de Savory. Para equipos de venta y reparto en terreno.",
+      "Vestuario para Ignamar, distribuidora de Nestlé Savory: poleras piqué (negro, gris) y camisas outdoor y de jeans con el logo del búho bordado, más el parche de Savory. Para equipos de venta y reparto en terreno.",
     garments: ["Polera piqué", "Camisa outdoor", "Camisa de jeans"],
     techniques: ["Bordado"],
     image: "/trabajos/ignamar-savory.webp",
@@ -300,10 +300,10 @@ export const REAL_WORKS: readonly RealWork[] = [
   {
     slug: "cardinale-polar-pique",
     client: "Cardinale",
-    summary: "Chaleco polar y polo negros con bordado",
+    summary: "Polar sin manga y polera negros con bordado",
     detail:
-      "Para Cardinale («Zapateros desde 1964»): chaleco polar sin mangas y polera piqué negros, con el nombre bordado al pecho. Sobrio y a tono con una marca de tradición.",
-    garments: ["Polar sin mangas", "Polera piqué"],
+      "Para Cardinale («Zapateros desde 1964»): polar sin manga y polera piqué negros, con el nombre bordado al pecho. Sobrio y a tono con una marca de tradición.",
+    garments: ["Polar sin manga", "Polera piqué"],
     techniques: ["Bordado"],
     image: "/trabajos/cardinale-polar-pique.webp",
     width: 1200,
@@ -468,10 +468,10 @@ export const REAL_WORKS: readonly RealWork[] = [
   {
     slug: "owens-corning-cargo-chaleco",
     client: "Owens Corning",
-    summary: "Pantalón cargo y chalecos de trabajo bordados",
+    summary: "Pantalón cargo y parka sin manga con logo bordado",
     detail:
-      "Vestuario de terreno para Owens Corning: pantalón cargo forro polar y chalecos sin manga acolchados, con la marca y su mascota bordadas. Ropa de trabajo abrigada y resistente para el día a día.",
-    garments: ["Pantalón cargo", "Chaleco sin manga"],
+      "Vestuario de terreno para Owens Corning: pantalón cargo forro polar y parka sin manga acolchada, con la marca y su mascota bordadas. Ropa de trabajo abrigada y resistente para el día a día.",
+    garments: ["Pantalón cargo", "Parka sin manga"],
     techniques: ["Bordado"],
     image: "/trabajos/owens-corning-cargo-chaleco.webp",
     width: 1200,
