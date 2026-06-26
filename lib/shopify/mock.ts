@@ -9,7 +9,7 @@ import type {
 /**
  * Mock data del catálogo de Ropa Publicitaria Chile.
  *
- * Activado con USE_MOCK_PRODUCTS=true. Los 35 productos son los REALES del
+ * Activado con USE_MOCK_PRODUCTS=true. Los productos son los REALES del
  * levantamiento de catálogo de la clienta (2026-06-18): Poleras, Polerones y
  * Polar, Camisas y Blusas, Ropa Técnica y Cortavientos, Jockeys/Gorros/
  * Accesorios y Delantales y Uniformes. Colores, tallas, materialidades,
@@ -303,6 +303,13 @@ const VENDOR = "Ropa Publicitaria Chile";
 type ProductInput = {
   key: string;
   handle: string;
+  /**
+   * Override de la foto: sirve /products/<imageHandle>.webp en vez de la del
+   * propio handle. Es un STAND-IN temporal para productos cuya foto real
+   * todavía no llega (toman la del producto más parecido). Quitar este campo
+   * apenas exista public/products/<handle>.webp.
+   */
+  imageHandle?: string;
   title: string;
   category: string;
   catTag: string;
@@ -327,6 +334,7 @@ type ProductInput = {
 
 function product(o: ProductInput): CorporateProduct {
   const minimo = o.minimo ?? 10;
+  const imageHandle = o.imageHandle ?? o.handle;
   const modalidadTag = o.modalidad === "Fabricación a medida" ? "fabricacion" : "stock-express";
 
   const volumePricing =
@@ -356,9 +364,9 @@ function product(o: ProductInput): CorporateProduct {
       modalidad: o.modalidad,
       nota: o.nota,
     }),
-    featuredImage: localImage(o.handle, o.title),
-    images: [localImage(o.handle, o.title)],
-    variants: makeVariants(o.key, retailClp, specsFromColors(o.key, o.colors), o.handle),
+    featuredImage: localImage(imageHandle, o.title),
+    images: [localImage(imageHandle, o.title)],
+    variants: makeVariants(o.key, retailClp, specsFromColors(o.key, o.colors), imageHandle),
     minQty: minimo,
     leadTimeDaysReorder: o.leadDays,
     baseCostUsd: o.baseCostUsd ?? 6,
@@ -369,7 +377,7 @@ function product(o: ProductInput): CorporateProduct {
   };
 }
 
-// --- Catálogo (35 productos reales) ------------------------------------------
+// --- Catálogo (productos reales del levantamiento) ---------------------------
 
 export const mockCorporateProducts: CorporateProduct[] = [
   // === Poleras =============================================================
@@ -559,6 +567,51 @@ export const mockCorporateProducts: CorporateProduct[] = [
     nota: "Elige hombre, mujer o unisex",
     colors: ["Azul marino", "Azulino", "Blanco", "Verde", "Rojo", "Negro"],
     pricing: tramos({ 10: 15990, 25: 15500, 50: 14990, 100: 14500 }), techniques: [BORDADO, SERIGRAFIA_1C, TRANSFER_DTF], areas: AREAS_SOFTSHELL,
+  }),
+  // Parkas (levantamiento 2026-06-26). FOTOS PENDIENTES: usan imageHandle de la
+  // prenda técnica más parecida como stand-in temporal. Precios por RANGO
+  // (rangePricing) hasta tener los tramos exactos por cantidad.
+  product({
+    key: "PKSMM", handle: "parka-sin-manga-mujer", imageHandle: "softshell-sin-manga",
+    title: "Parka Sin Mangas Mujer", category: "Ropa Técnica y Cortavientos", catTag: "tecnica",
+    intro: "Parka sin mangas de mujer en nylon, liviana y cortaviento para sumar abrigo al torso sin restar movilidad. Capa ideal sobre el uniforme.",
+    material: "100% nylon", tallas: "S a 2XL", plazo: "5 a 7 días", leadDays: 7, modalidad: "Stock", baseCostUsd: 14,
+    nota: "Disponible hombre y mujer",
+    colors: ["Azul marino", "Gris", "Negro", "Rojo"],
+    priceHigh: 25500, priceLow: 20500, techniques: [SERIGRAFIA_1C, BORDADO, TRANSFER_DTF], areas: [PECHO_IZQ, PECHO_CENTRO, ESPALDA_SOFTSHELL],
+  }),
+  product({
+    key: "PKSMH", handle: "parka-sin-manga-hombre", imageHandle: "softshell-sin-manga",
+    title: "Parka Sin Mangas Hombre", category: "Ropa Técnica y Cortavientos", catTag: "tecnica",
+    intro: "Parka sin mangas de hombre en nylon, liviana y cortaviento. Abrigo para el torso que deja los brazos libres, lista para llevar tu logo.",
+    material: "100% nylon", tallas: "S a 2XL", plazo: "5 a 7 días", leadDays: 7, modalidad: "Stock", baseCostUsd: 14,
+    colors: ["Negro", "Azul marino", "Rojo", "Gris"],
+    priceHigh: 25500, priceLow: 20500, techniques: [SERIGRAFIA_1C, BORDADO, TRANSFER_DTF], areas: [PECHO_IZQ, PECHO_CENTRO, ESPALDA_SOFTSHELL],
+  }),
+  product({
+    key: "PKTREF", handle: "parka-termica-reflectante", imageHandle: "softshell-hombre",
+    title: "Parka Térmica con Reflectante", category: "Ropa Técnica y Cortavientos", catTag: "tecnica",
+    intro: "Parka térmica en poliéster con cinta reflectante, pensada para terreno y trabajo en baja luz. Abriga y da visibilidad al equipo.",
+    material: "100% poliéster", tallas: "S a 3XL", plazo: "3 a 7 días", leadDays: 7, modalidad: "Stock", baseCostUsd: 13,
+    colors: ["Azul", "Negro"],
+    priceHigh: 24000, priceLow: 18000, techniques: [SERIGRAFIA_1C, BORDADO, TRANSFER_DTF], areas: AREAS_SOFTSHELL,
+  }),
+  product({
+    key: "PK31H", handle: "parka-3-en-1-hombre", imageHandle: "softshell-hombre",
+    title: "Parka 3 en 1 Hombre", category: "Ropa Técnica y Cortavientos", catTag: "tecnica",
+    intro: "Parka 3 en 1 de hombre: capa exterior térmica e impermeable más un polar interior independiente que se usa solo o combinado. Tres prendas en una para cualquier clima.",
+    material: "Parka térmica impermeable + polar interior independiente (cortaviento)", tallas: "S a 3XL", plazo: "5 a 7 días", leadDays: 7, modalidad: "Stock", baseCostUsd: 26,
+    colors: ["Azul marino", "Rojo", "Negro", "Gris"],
+    priceHigh: 50000, priceLow: 35000, techniques: [SERIGRAFIA_1C, BORDADO, TRANSFER_DTF], areas: AREAS_SOFTSHELL,
+  }),
+  product({
+    key: "PK31M", handle: "parka-3-en-1-mujer", imageHandle: "softshell-mujer",
+    title: "Parka 3 en 1 Mujer", category: "Ropa Técnica y Cortavientos", catTag: "tecnica",
+    intro: "Parka 3 en 1 de mujer: capa exterior térmica e impermeable más un polar interior independiente, para usar por separado o juntos según el clima.",
+    material: "Parka térmica impermeable + polar interior independiente", tallas: "S a 2XL", plazo: "5 a 7 días", leadDays: 7, modalidad: "Stock", baseCostUsd: 26,
+    nota: "Disponible hombre y mujer",
+    colors: ["Azul marino", "Rojo", "Gris", "Negro"],
+    priceHigh: 50000, priceLow: 35000, techniques: [SERIGRAFIA_1C, BORDADO, TRANSFER_DTF], areas: AREAS_SOFTSHELL,
   }),
 
   // === Jockeys, Gorros y Accesorios ========================================
