@@ -40,6 +40,54 @@ export type RealWork = {
  */
 export const REAL_WORKS: readonly RealWork[] = [
   {
+    slug: "team-chile-comite-olimpico",
+    client: "Team Chile",
+    summary: "Kit deportivo Team Chile: poleras, short y cortavientos",
+    detail:
+      "Kit deportivo para Team Chile, con los sellos del Comité Olímpico de Chile y del IND (Instituto Nacional de Deportes): poleras dry-fit roja y blanca con «TEAMCHILE» estampado, short deportivo, cortavientos blanco y polera piqué, cada prenda con los escudos a todo color. Una delegación completa vestida con la misma identidad.",
+    garments: [
+      "Polera dry-fit",
+      "Short deportivo",
+      "Cortavientos",
+      "Polera piqué cuello y botones",
+    ],
+    techniques: ["Estampado", "DTF"],
+    image: "/trabajos/team-chile-comite-olimpico.webp",
+    width: 1200,
+    height: 872,
+    productHandles: [
+      "polera-dry-fit-cuello-redondo",
+      "cortavientos",
+      "polera-pique-cuello-botones-manga-corta",
+    ],
+  },
+  {
+    slug: "latam-visioner-seguridad",
+    client: "LATAM",
+    summary: "Visioner de alta visibilidad con estampado de campaña",
+    detail:
+      "Visioner naranja de alta visibilidad para LATAM, con cinta reflectante, cierre y bolsillo, estampado con «Espíritu de Servicio · Espírito de Serviço 2022» y el logo de la aerolínea. Prenda de seguridad para equipos de tierra, que identifica a la marca de lejos.",
+    garments: ["Visioner de alta visibilidad"],
+    techniques: ["Estampado"],
+    image: "/trabajos/latam-visioner-seguridad.webp",
+    width: 1200,
+    height: 1501,
+    productHandles: [],
+  },
+  {
+    slug: "tvn-ahora-caigo",
+    client: "TVN",
+    summary: "Polerones del staff de «¡Ahora Caigo!», estampado full color",
+    detail:
+      "Polerones canguro negros para el staff del programa «¡Ahora Caigo!» de TVN: el logo del show a todo color en la espalda, «STAFF» y el isotipo al frente, las frases «CAE-CAE!!» y «MUERE-MUERE!!» en las mangas y el logo de TVN abajo. El estampado DTF rinde el degradé y el brillo del logo sobre negro.",
+    garments: ["Polerón canguro"],
+    techniques: ["DTF"],
+    image: "/trabajos/tvn-ahora-caigo.webp",
+    width: 1200,
+    height: 1497,
+    productHandles: ["poleron-canguro"],
+  },
+  {
     slug: "claro-poleras-pique",
     client: "Claro",
     summary: "Poleras piqué rojas con logo bordado",
