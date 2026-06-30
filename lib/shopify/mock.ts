@@ -717,7 +717,7 @@ export const mockCorporateProducts: CorporateProduct[] = [
     pricing: tramos({ 10: 19990, 25: 18990, 50: 17990, 100: 16990, 250: 15990 }), techniques: [SERIGRAFIA_1C, BORDADO, TRANSFER_DTF], areas: [PECHO_IZQ, PECHO_CENTRO, MANGA],
   }),
   product({
-    key: "MANDB", handle: "mandil-corto-basico",
+    key: "MANDB", handle: "mandil-corto-basico", untinted: true,
     title: "Mandil Corto Básico", category: "Delantales y Uniformes", catTag: "uniformes",
     intro: "Mandil corto básico de poliéster, liviano para servicio, barismo y atención. Práctico y económico.",
     material: "Poliéster", tallas: "Única", plazo: "5 a 7 días", leadDays: 7, modalidad: "Stock", baseCostUsd: 3,
