@@ -778,14 +778,14 @@ export const mockCorporateProducts: CorporateProduct[] = [
   product({
     key: "MANDL", handle: "mandil-largo", colorPhotos: true,
     title: "Mandil Largo", category: "Delantales y Uniformes", catTag: "uniformes",
-    intro: "Mandil largo de poliéster o gabardina, cobertura completa para cocina y faena.",
-    material: "Poliéster o gabardina", tallas: "Única", plazo: "3 a 5 días en stock / 10 días confección", leadDays: 10, modalidad: "Fabricación a medida", baseCostUsd: 4,
+    intro: "Mandil largo de Polycron o gabardina, más firme y resistente, cobertura completa para cocina y faena. La versión en poliéster va aparte.",
+    material: "Polycron o gabardina", tallas: "Única", plazo: "3 a 5 días en stock / 10 días confección", leadDays: 10, modalidad: "Fabricación a medida", baseCostUsd: 4,
     nota: "El precio depende de la tela",
     colors: ["Negro", "Rojo", "Blanco", "Café", "Verde"],
     pricing: tramos({ 10: 8990, 25: 8500, 50: 7990, 100: 7500, 250: 6990 }), techniques: [SERIGRAFIA_1C, BORDADO, TRANSFER_DTF], areas: AREAS_DELANTAL,
   }),
   product({
-    key: "MANDLP", handle: "mandil-largo-poliester",
+    key: "MANDLP", handle: "mandil-largo-poliester", colorPhotos: true,
     title: "Mandil Largo Poliéster", category: "Delantales y Uniformes", catTag: "uniformes",
     intro: "Mandil largo en 100% poliéster, liviano y resistente para cocina y atención. Variante específica del Mandil Largo cuando se prefiere poliéster puro.",
     material: "100% poliéster", tallas: "Única", plazo: "10 a 15 días confección / 3 a 7 días si hay stock", leadDays: 12, modalidad: "Fabricación a medida", baseCostUsd: 3,
