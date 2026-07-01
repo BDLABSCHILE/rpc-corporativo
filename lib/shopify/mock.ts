@@ -234,11 +234,27 @@ const AREAS_PRENDA = AREAS_POLERA;
 
 type VariantSpec = { color: string; sku: string };
 
+/** Slug de color para nombres de archivo por color: "Azul marino" → "azul-marino". */
+function colorSlug(color: string): string {
+  return color
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+}
+
+/** Handle de la foto POR COLOR: /products/<handle>__<colorslug>.webp */
+function colorImageHandle(handle: string, color: string): string {
+  return `${handle}__${colorSlug(color)}`;
+}
+
 function makeVariants(
   productKey: string,
   retailClp: number,
   specs: VariantSpec[],
   handle: string,
+  colorPhotos: boolean,
 ) {
   return specs.map(({ color, sku }) => ({
     id: `rpc_var_${productKey}_${sku.toLowerCase()}`,
@@ -246,7 +262,10 @@ function makeVariants(
     sku,
     selectedOptions: [{ name: "Color", value: color }],
     priceRetail: { amount: retailClp, currencyCode: "CLP" as const },
-    image: localImage(handle, color),
+    // Con colorPhotos, cada variante apunta a su foto de color propia; el
+    // ProductConfigurator ya muestra selectedVariant.image en las zonas
+    // frontales, así el selector cambia la prenda al color elegido.
+    image: localImage(colorPhotos ? colorImageHandle(handle, color) : handle, color),
     availableForSale: true,
   }));
 }
@@ -316,6 +335,12 @@ type ProductInput = {
    * tal cual y los swatches solo registran el color elegido en la cotización.
    */
   untinted?: boolean;
+  /**
+   * `true` cuando hay una foto REAL por color en
+   * /products/<handle>__<colorslug>.webp. Cada variante apunta a la suya y el
+   * selector cambia la imagen al color elegido. Implica untinted.
+   */
+  colorPhotos?: boolean;
   title: string;
   category: string;
   catTag: string;
@@ -341,6 +366,13 @@ type ProductInput = {
 function product(o: ProductInput): CorporateProduct {
   const minimo = o.minimo ?? 10;
   const imageHandle = o.imageHandle ?? o.handle;
+  const colorPhotos = o.colorPhotos ?? false;
+  // colorPhotos implica untinted (las fotos ya son del color real).
+  const untinted = o.untinted || colorPhotos;
+  // Hero (card + featured) = foto del primer color cuando hay fotos por color.
+  const heroImageHandle = colorPhotos
+    ? colorImageHandle(imageHandle, o.colors[0]!)
+    : imageHandle;
   const modalidadTag = o.modalidad === "Fabricación a medida" ? "fabricacion" : "stock-express";
 
   const volumePricing =
@@ -370,16 +402,16 @@ function product(o: ProductInput): CorporateProduct {
       modalidad: o.modalidad,
       nota: o.nota,
     }),
-    featuredImage: localImage(imageHandle, o.title),
-    images: [localImage(imageHandle, o.title)],
-    variants: makeVariants(o.key, retailClp, specsFromColors(o.key, o.colors), imageHandle),
+    featuredImage: localImage(heroImageHandle, o.title),
+    images: [localImage(heroImageHandle, o.title)],
+    variants: makeVariants(o.key, retailClp, specsFromColors(o.key, o.colors), imageHandle, colorPhotos),
     minQty: minimo,
     leadTimeDaysReorder: o.leadDays,
     baseCostUsd: o.baseCostUsd ?? 6,
     volumePricing,
     printAreas: o.areas,
     printTechniques: o.techniques,
-    tintable: o.untinted ? false : undefined,
+    tintable: untinted ? false : undefined,
     tags: ["CORPORATIVO", o.catTag, modalidadTag],
   };
 }
@@ -744,7 +776,7 @@ export const mockCorporateProducts: CorporateProduct[] = [
     pricing: tramos({ 10: 7990, 25: 7500, 50: 6990, 100: 6500, 250: 5990 }), techniques: [SERIGRAFIA_1C, BORDADO, TRANSFER_DTF], areas: [PECHO_CENTRO],
   }),
   product({
-    key: "MANDL", handle: "mandil-largo", untinted: true,
+    key: "MANDL", handle: "mandil-largo", colorPhotos: true,
     title: "Mandil Largo", category: "Delantales y Uniformes", catTag: "uniformes",
     intro: "Mandil largo de poliéster o gabardina, cobertura completa para cocina y faena.",
     material: "Poliéster o gabardina", tallas: "Única", plazo: "3 a 5 días en stock / 10 días confección", leadDays: 10, modalidad: "Fabricación a medida", baseCostUsd: 4,
