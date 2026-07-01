@@ -622,7 +622,7 @@ export const mockCorporateProducts: CorporateProduct[] = [
   // prenda técnica más parecida como stand-in temporal. Precios por RANGO
   // (rangePricing) hasta tener los tramos exactos por cantidad.
   product({
-    key: "PKSMM", handle: "parka-sin-manga-mujer", untinted: true,
+    key: "PKSMM", handle: "parka-sin-manga-mujer", colorPhotos: true,
     title: "Parka Sin Mangas Mujer", category: "Ropa Técnica y Cortavientos", catTag: "tecnica",
     intro: "Parka sin mangas de mujer en nylon, liviana y cortaviento para sumar abrigo al torso sin restar movilidad. Capa ideal sobre el uniforme.",
     material: "100% nylon", tallas: "S a 2XL", plazo: "5 a 7 días", leadDays: 7, modalidad: "Stock", baseCostUsd: 14,
@@ -631,7 +631,7 @@ export const mockCorporateProducts: CorporateProduct[] = [
     priceHigh: 25500, priceLow: 20500, techniques: [SERIGRAFIA_1C, BORDADO, TRANSFER_DTF], areas: [PECHO_IZQ, PECHO_CENTRO, ESPALDA_SOFTSHELL],
   }),
   product({
-    key: "PKSMH", handle: "parka-sin-manga-hombre", untinted: true,
+    key: "PKSMH", handle: "parka-sin-manga-hombre", colorPhotos: true,
     title: "Parka Sin Mangas Hombre", category: "Ropa Técnica y Cortavientos", catTag: "tecnica",
     intro: "Parka sin mangas de hombre en nylon, liviana y cortaviento. Abrigo para el torso que deja los brazos libres, lista para llevar tu logo.",
     material: "100% nylon", tallas: "S a 2XL", plazo: "5 a 7 días", leadDays: 7, modalidad: "Stock", baseCostUsd: 14,
@@ -639,7 +639,7 @@ export const mockCorporateProducts: CorporateProduct[] = [
     priceHigh: 25500, priceLow: 20500, techniques: [SERIGRAFIA_1C, BORDADO, TRANSFER_DTF], areas: [PECHO_IZQ, PECHO_CENTRO, ESPALDA_SOFTSHELL],
   }),
   product({
-    key: "PKTREF", handle: "parka-termica-reflectante", untinted: true,
+    key: "PKTREF", handle: "parka-termica-reflectante", colorPhotos: true,
     title: "Parka Térmica con Reflectante", category: "Ropa Técnica y Cortavientos", catTag: "tecnica",
     intro: "Parka térmica en poliéster con cinta reflectante, pensada para terreno y trabajo en baja luz. Abriga y da visibilidad al equipo.",
     material: "100% poliéster", tallas: "S a 3XL", plazo: "3 a 7 días", leadDays: 7, modalidad: "Stock", baseCostUsd: 13,
@@ -647,7 +647,7 @@ export const mockCorporateProducts: CorporateProduct[] = [
     priceHigh: 24000, priceLow: 18000, techniques: [SERIGRAFIA_1C, BORDADO, TRANSFER_DTF], areas: AREAS_SOFTSHELL,
   }),
   product({
-    key: "PK31H", handle: "parka-3-en-1-hombre", untinted: true,
+    key: "PK31H", handle: "parka-3-en-1-hombre", colorPhotos: true,
     title: "Parka 3 en 1 Hombre", category: "Ropa Técnica y Cortavientos", catTag: "tecnica",
     intro: "Parka 3 en 1 de hombre: capa exterior térmica e impermeable más un polar interior independiente que se usa solo o combinado. Tres prendas en una para cualquier clima.",
     material: "Parka térmica impermeable + polar interior independiente (cortaviento)", tallas: "S a 3XL", plazo: "5 a 7 días", leadDays: 7, modalidad: "Stock", baseCostUsd: 26,
@@ -655,7 +655,7 @@ export const mockCorporateProducts: CorporateProduct[] = [
     priceHigh: 50000, priceLow: 35000, techniques: [SERIGRAFIA_1C, BORDADO, TRANSFER_DTF], areas: AREAS_SOFTSHELL,
   }),
   product({
-    key: "PK31M", handle: "parka-3-en-1-mujer", untinted: true,
+    key: "PK31M", handle: "parka-3-en-1-mujer", colorPhotos: true,
     title: "Parka 3 en 1 Mujer", category: "Ropa Técnica y Cortavientos", catTag: "tecnica",
     intro: "Parka 3 en 1 de mujer: capa exterior térmica e impermeable más un polar interior independiente, para usar por separado o juntos según el clima.",
     material: "Parka térmica impermeable + polar interior independiente", tallas: "S a 2XL", plazo: "5 a 7 días", leadDays: 7, modalidad: "Stock", baseCostUsd: 26,
@@ -744,7 +744,7 @@ export const mockCorporateProducts: CorporateProduct[] = [
     pricing: tramos({ 10: 6990, 25: 5990, 50: 5500, 100: 4990, 250: 4500 }), techniques: [SERIGRAFIA_1C, BORDADO, TRANSFER_DTF, VINILO], areas: AREAS_DELANTAL,
   }),
   product({
-    key: "PECHJ", handle: "pechera-jeans", untinted: true,
+    key: "PECHJ", handle: "pechera-jeans", colorPhotos: true,
     title: "Pechera Jeans", category: "Delantales y Uniformes", catTag: "uniformes",
     intro: "Pechera de mezclilla (jeans), resistente y con estilo para cafeterías, baristas y retail.",
     material: "Jeans (mezclilla)", tallas: "Única", plazo: "3 a 7 días", leadDays: 7, modalidad: "Stock", baseCostUsd: 5,
@@ -760,7 +760,7 @@ export const mockCorporateProducts: CorporateProduct[] = [
     pricing: tramos({ 10: 19990, 25: 18990, 50: 17990, 100: 16990, 250: 15990 }), techniques: [SERIGRAFIA_1C, BORDADO, TRANSFER_DTF], areas: [PECHO_IZQ, PECHO_CENTRO, MANGA],
   }),
   product({
-    key: "MANDB", handle: "mandil-corto-basico", untinted: true,
+    key: "MANDB", handle: "mandil-corto-basico", colorPhotos: true,
     title: "Mandil Corto Básico", category: "Delantales y Uniformes", catTag: "uniformes",
     intro: "Mandil corto básico de poliéster, liviano para servicio, barismo y atención. Práctico y económico.",
     material: "Poliéster", tallas: "Única", plazo: "5 a 7 días", leadDays: 7, modalidad: "Stock", baseCostUsd: 3,
@@ -768,7 +768,7 @@ export const mockCorporateProducts: CorporateProduct[] = [
     pricing: tramos({ 10: 6990, 25: 6500, 50: 5990, 100: 5500, 250: 4990 }), techniques: [SERIGRAFIA_1C, BORDADO, TRANSFER_DTF], areas: [PECHO_CENTRO],
   }),
   product({
-    key: "MANDG", handle: "mandil-corto-grueso", untinted: true,
+    key: "MANDG", handle: "mandil-corto-grueso", colorPhotos: true,
     title: "Mandil Corto Grueso", category: "Delantales y Uniformes", catTag: "uniformes",
     intro: "Mandil corto en gabardina Polycron, más grueso y resistente para uso intensivo en cocina y servicio.",
     material: "Gabardina / Polycron", tallas: "Única", plazo: "3 a 5 días (10 a 15 si se confecciona)", leadDays: 5, modalidad: "Stock", baseCostUsd: 4,
