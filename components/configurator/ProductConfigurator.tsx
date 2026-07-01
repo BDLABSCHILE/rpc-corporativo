@@ -160,6 +160,24 @@ export function ProductConfigurator({
     return selectedVariant?.image ?? product.featuredImage;
   }, [selectedArea, selectedVariant, product]);
 
+  // Tinte del preview según color de variante.
+  //  - Productos con foto real por color (tintable === false): la cara FRONTAL
+  //    ya es del color real → NO se tiñe. Pero las vistas ghost COMPARTIDAS
+  //    (espalda / lateral, archivos /products/_*.webp) SÍ se tiñen al color
+  //    elegido, para que la espalda muestre el color correcto y no quede fija
+  //    en crema.
+  //  - Productos con base clara (tintable !== false): se tiñe siempre.
+  const selectedColorName = selectedVariant?.selectedOptions.find(
+    (o) => o.name === "Color",
+  )?.value;
+  const isSharedGhostView = previewImage.url.includes("/products/_");
+  const previewTint =
+    product.tintable === false
+      ? isSharedGhostView
+        ? tintForColor(selectedColorName)
+        : null
+      : tintForColor(selectedColorName);
+
   return (
     <div className="grid gap-10 lg:grid-cols-[1.1fr_1fr] lg:gap-16">
       {/* Columna izquierda: preview Konva sticky. Siempre muestra la foto del
@@ -173,13 +191,7 @@ export function ProductConfigurator({
           area={selectedArea}
           logoUrl={logo?.previewUrl ?? null}
           onLogoSizeChange={handleLogoSizeChange}
-          tintColor={
-            product.tintable === false
-              ? null
-              : tintForColor(
-                  selectedVariant?.selectedOptions.find((o) => o.name === "Color")?.value,
-                )
-          }
+          tintColor={previewTint}
         />
       </div>
 

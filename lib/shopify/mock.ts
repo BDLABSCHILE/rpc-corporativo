@@ -481,7 +481,7 @@ export const mockCorporateProducts: CorporateProduct[] = [
 
   // === Polerones y Polar ===================================================
   product({
-    key: "POLARML", handle: "polar-manga-larga", untinted: true,
+    key: "POLARML", handle: "polar-manga-larga", colorPhotos: true,
     title: "Polar Manga Larga", category: "Polerones y Polar", catTag: "polerones",
     intro: "Polar micropolar antipilling 300 g con manga larga, pretina ajustable y puños elasticados. Abrigo liviano para faena, oficina y terreno.",
     material: "100% poliéster · micropolar antipilling 300 g · pretina ajustable y puños elasticados", tallas: "XS a 3XL", plazo: "3 a 7 días", leadDays: 7,
@@ -524,7 +524,7 @@ export const mockCorporateProducts: CorporateProduct[] = [
 
   // === Camisas y Blusas ====================================================
   product({
-    key: "OXFH", handle: "camisa-oxford", untinted: true,
+    key: "OXFH", handle: "camisa-oxford", colorPhotos: true,
     title: "Camisa Oxford", category: "Camisas y Blusas", catTag: "camisas",
     intro: "Camisa Oxford clásica de uniforme ejecutivo. Acabado prolijo y elegante, ideal para bordar el logo al pecho.",
     material: "Tela Oxford", tallas: "S a 3XL", plazo: "A confirmar al cotizar", leadDays: 7, modalidad: "Stock", baseCostUsd: 9,
@@ -532,7 +532,7 @@ export const mockCorporateProducts: CorporateProduct[] = [
     pricing: tramos({ 10: 13990, 25: 13500, 50: 12990, 100: 11500, 250: 10500 }), techniques: [BORDADO, TRANSFER_DTF], areas: AREAS_CAMISA,
   }),
   product({
-    key: "OXFM", handle: "blusa-oxford", untinted: true,
+    key: "OXFM", handle: "blusa-oxford", colorPhotos: true,
     title: "Blusa Oxford", category: "Camisas y Blusas", catTag: "camisas",
     intro: "Blusa Oxford de corte femenino, elegante y cómoda para uniforme corporativo. Calce prolijo para la oficina.",
     material: "Tela Oxford", tallas: "S a 2XL", plazo: "A confirmar al cotizar", leadDays: 7, modalidad: "Stock", baseCostUsd: 9,
@@ -599,7 +599,7 @@ export const mockCorporateProducts: CorporateProduct[] = [
     pricing: tramos({ 10: 21500, 25: 20500, 50: 19500, 100: 18900 }), techniques: [SERIGRAFIA_1C, BORDADO, TRANSFER_DTF], areas: [PECHO_IZQ, PECHO_CENTRO, ESPALDA_SOFTSHELL],
   }),
   product({
-    key: "CORTAV", handle: "cortavientos", untinted: true,
+    key: "CORTAV", handle: "cortavientos", colorPhotos: true,
     title: "Cortavientos", category: "Ropa Técnica y Cortavientos", catTag: "tecnica",
     intro: "Cortavientos liviano en tela taslan, perfecto para activaciones, eventos al aire libre y equipos en movimiento.",
     material: "Taslan", tallas: "XS a 2XL", plazo: "3 a 7 días", leadDays: 7, modalidad: "Stock", baseCostUsd: 10,
